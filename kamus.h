@@ -96,6 +96,17 @@ listlinier.h
 tree.h
 graph.h
 */
+/* ********** TIPE BENTUKAN STAT PEMAIN  ********** */
+typedef struct {
+	char name[12];		//nama pemain
+	int money;			//uang dalam game
+	int life;			//nyawa dalam game
+	int time;			//waktu dalam game
+} Stat;
+	#define Name(P)		(P).name[12]
+	#define Money(P)	(P).money
+	#define Life(P)		(P).life
+	#define Time(P)		(P).time
 
 /* ********** Kamus Umum  ********** */
 extern JAM waktu;			//waktu saat melakukan save
@@ -113,9 +124,6 @@ extern Queue antrian;		//antrian pengunjung
 extern Stack food;			//makanan pada nampan (maks 5 1x jalan)
 extern Stack hand;			//makanan pada tangan (maks 5 1x jalan)
 extern List graf;			//list untuk menyambungkan ruangan
-extern char name[12]		//nama pemain
-extern int money;			//uang dalam game
-extern int life;			//nyawa dalam game
-extern int time;			//waktu dalam game
+extern Stat s;				//status pemain
 
 #endif
