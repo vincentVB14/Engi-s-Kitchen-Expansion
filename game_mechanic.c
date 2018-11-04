@@ -49,7 +49,7 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
   InverseStack(Hand);
   Pop(Hand, &X);
   if(X != Info(P)){
-    CH();
+    EmptyHand(Hand);
   } else{
     while(!IsOneElmt(temp)){
       Pop(Hand, &X);
@@ -58,7 +58,7 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
       } else if(X == Info(Right(P))){
         P = Right(P);
       } else{
-        CH();
+        EmptyHand(Hand);
       }
     }
     if(!IsEmpty(*Hand)){
