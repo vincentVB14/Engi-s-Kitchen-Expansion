@@ -4,6 +4,21 @@ gabungan dari beberapa ADT */
 
 #include "kamus.h"
 
+void NewGame();
+/*Prosedur untuk menginput nama player*/
+/*I.S. Player belum memiliki nama*/
+/*F.S. Player memiliki nama dan memanggil StartGame()*/
+
+void StartGame();
+/*Prosedur untuk memulai permainan*/
+/*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
+/*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
+
+void LoadGame();
+/*Prosedur untuk load permainan dari file eksternal*/
+/*I.S. Permainan belum dimulai*/
+/*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
+
 void TakeFood(Stack * Hand);
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/

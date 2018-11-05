@@ -3,6 +3,33 @@
 
 #include "kamus.h"
 
+void NewGame(char * playername)
+/*Prosedur untuk menginput nama player*/
+/*I.S. Player belum memiliki nama*/
+/*F.S. Player memiliki nama dan memanggil StartGame()*/
+{
+  printf("Masukkan nama player (<12 karakter): ");
+  scanf("%s", playername);
+  printf("Selamat bermain, %s!", playername);
+  StartGame();
+}
+
+void StartGame(char * playername)
+/*Prosedur untuk memulai permainan*/
+/*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
+/*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
+{
+  if(strcmp(playername,"") == 0){
+    printf("Nama player belum ada!\n");
+    NewGame(playername);
+  }
+}
+
+void LoadGame();
+/*Prosedur untuk load permainan dari file eksternal*/
+/*I.S. Permainan belum dimulai*/
+/*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
+
 void TakeFood(Stack * Hand)
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
@@ -44,18 +71,17 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
 /* F.S. Stack Tray terisi dengan daun makanan dari Tree, Stack Hand kosong */
 {
   infotype X;
-  Bintree temp = Resep;
-  AddressTree P = Akar(temp);
+  Bintree P = Resep;
   InverseStack(Hand);
   Pop(Hand, &X);
-  if(X != Info(P)){
+  if(X != Akar(P)){
     EmptyHand(Hand);
   } else{
     while(!IsOneElmt(temp)){
       Pop(Hand, &X);
-      if(X == Info(Left(P))){
+      if(X == Akar(Left(P))){
         P = Left(P);
-      } else if(X == Info(Right(P))){
+      } else if(X == Akar(Right(P))){
         P = Right(P);
       } else{
         EmptyHand(Hand);

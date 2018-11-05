@@ -11,19 +11,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include "boolean.h"
-#include "jam.h"			// digunakan untuk menyimpan waktu saat save
-#include "point.h"			// digunakan untuk merepresentasikan posisi
-#include "array.h"			// digunakan untuk merepresentasikan pesanan (order)
-#include "matriks.h"		// digunakan untuk merepresentasikan ruangan
-#include "mesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
-#include "mesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
-#include "queue.h"			// digunakan untuk merepresentasikan antrian pelanggan
-//#include "prioqueue.h"	// digunakan untuk merepresentasikan antrian pelanggan
-#include "stacks.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan
-#include "listlinier.h"		// digunakan untuk mengimplementasikan graf
-#include "tree.h"			// digunakan untuk merepresentasikan resep
-#include "graph.h"			// digunakan untuk menghubungkan bagian-bagian dari peta agar terbentuk satu peta besar
+#include <windows.h>
+#include "modboolean.h"
+#include "modjam.h"			// digunakan untuk menyimpan waktu saat save
+#include "modpoint.h"			// digunakan untuk merepresentasikan posisi
+#include "modarray.h"			// digunakan untuk merepresentasikan pesanan (order)
+#include "modmatriks.h"		// digunakan untuk merepresentasikan ruangan
+#include "modmesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
+#include "modmesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
+#include "modqueue.h"			// digunakan untuk merepresentasikan antrian pelanggan
+//#include "modprioqueue.h"	// digunakan untuk merepresentasikan antrian pelanggan
+#include "modstacks.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan
+#include "modlistlinier.h"		// digunakan untuk mengimplementasikan graf
+#include "modtree.h"			// digunakan untuk merepresentasikan resep
+#include "modgraph.h"			// digunakan untuk menghubungkan bagian-bagian dari peta agar terbentuk satu peta besar
 
 /* ********** Definisi ********** /
 boolean.h
@@ -116,10 +117,10 @@ extern MATRIKS room1;		//ruangan 1
 extern MATRIKS room2;		//ruangan 2
 extern MATRIKS room3;		//ruangan 3
 extern MATRIKS kitchen;		//ruangan kitchen
-//extern char CC;
-//extern boolean EOP;
-//extern boolean EndKata;
-//extern Kata CKata;
+//extern char CC;			
+//extern boolean EOP;		
+//extern boolean EndKata;	
+//extern Kata CKata;		
 extern Queue antrian;		//antrian pengunjung
 extern Stack food;			//makanan pada nampan (maks 5 1x jalan)
 extern Stack hand;			//makanan pada tangan (maks 5 1x jalan)
