@@ -11,6 +11,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <windows.h>
 #include "boolean.h"
 #include "jam.h"			// digunakan untuk menyimpan waktu saat save
 #include "point.h"			// digunakan untuk merepresentasikan posisi
@@ -116,10 +117,10 @@ extern MATRIKS room1;		//ruangan 1
 extern MATRIKS room2;		//ruangan 2
 extern MATRIKS room3;		//ruangan 3
 extern MATRIKS kitchen;		//ruangan kitchen
-//extern char CC;
-//extern boolean EOP;
-//extern boolean EndKata;
-//extern Kata CKata;
+//extern char CC;			
+//extern boolean EOP;		
+//extern boolean EndKata;	
+//extern Kata CKata;		
 extern Queue antrian;		//antrian pengunjung
 extern Stack food;			//makanan pada nampan (maks 5 1x jalan)
 extern Stack hand;			//makanan pada tangan (maks 5 1x jalan)
