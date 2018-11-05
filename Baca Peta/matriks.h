@@ -42,7 +42,7 @@ typedef struct {
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
-void MakeMATRIKS (int NB, int NK, MATRIKS * M);
+void modMakeMATRIKS (int NB, int NK, MATRIKS * M);
 /* Membentuk sebuah MATRIKS "kosong" yang siap diisi berukuran NB x NK di "ujung kiri" memori */
 /* I.S. NB dan NK adalah valid untuk memori matriks yang dibuat */
 /* F.S. Matriks M sesuai dengan definisi di atas terbentuk */
@@ -57,22 +57,22 @@ void MakeMATRIKS (int NB, int NK, MATRIKS * M);
 #define MElmt5(M,i,j) (M).Mem[(i)][(j)].value4
 
 /* *** Selektor "DUNIA MATRIKS" *** */
-boolean IsIdxValid (int i, int j);
+boolean IsIdxValidMatrix (int i, int j);
 /* Mengirimkan true jika i, j adalah indeks yang valid untuk matriks apa pun */
 
 /* *** Selektor: Untuk sebuah matriks M yang terdefinisi: *** */
-indeks GetFirstIdxBrs (MATRIKS M);
+indeks GetFirstIdxBrsMatrix (MATRIKS M);
 /* Mengirimkan indeks baris terkecil M */
-indeks GetFirstIdxKol (MATRIKS M);
+indeks GetFirstIdxKolMatrix (MATRIKS M);
 /* Mengirimkan indeks kolom terkecil M */
-indeks GetLastIdxBrs (MATRIKS M);
+indeks GetLastIdxBrsMatrix (MATRIKS M);
 /* Mengirimkan indeks baris terbesar M */
-indeks GetLastIdxKol (MATRIKS M);
+indeks GetLastIdxKolMatrix (MATRIKS M);
 /* Mengirimkan indeks kolom terbesar M */
-boolean IsIdxEff (MATRIKS M, indeks i, indeks j);
+boolean IsIdxEffMatrix (MATRIKS M, indeks i, indeks j);
 /* Mengirimkan true jika i, j adalah indeks efektif bagi M */
 
-void TulisMATRIKS (MATRIKS M);
+void modTulisMATRIKS (MATRIKS M);
 /* I.S. M terdefinisi */
 /* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
    dipisahkan sebuah spasi */
@@ -82,5 +82,20 @@ void TulisMATRIKS (MATRIKS M);
 4 5 6
 8 9 10
 */
+
+void modTulisMATRIKSDapur (MATRIKS M);
+/* I.S. M terdefinisi */
+/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
+   dipisahkan sebuah spasi */
+/* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
+/* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
+1 2 3
+4 5 6
+8 9 10
+*/
+
+void MejaKursi (MATRIKS *M);
+/* Mengisi hubungan antara kursi dan meja */
+
 
 #endif
