@@ -6,6 +6,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 #include "modqueue.h"
 
 /* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
@@ -65,7 +66,7 @@ void CreateEmptyQueue (Queue * Q, int Max){
 /* KAMUS LOKAL */
      /* Tidak menggunakan kamus lokal */
 /* ALGORITMA */
-     (*Q).T = (infotype *) malloc ((Max+1) * sizeof(infotype));
+     (*Q).T = (customer *) malloc ((Max+1) * sizeof(customer));
      if ((*Q).T != NULL) {
           MaxEl(*Q) = Max;
           Head(*Q) = Nil;
@@ -88,31 +89,68 @@ void DeAlokasiQueue(Queue * Q){
 }
 
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, infotype X){
+void AddQueue (Queue * Q){
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
 /* KAMUS LOKAL */
-     int n;
-/* ALGORITMA */
-     if (IsEmptyQueue(*Q)){
-          Head(*Q) = Nil + 1;
-          Tail(*Q) = Nil + 1;
-          InfoTail(*Q) = X;
+// KAMUS LOKAL
+     customer temp,X;
+     address i,j;
+
+// ALGORITMA
+     srand(time(NULL));
+     // rand() % (max_number + 1 - minimum_number) + minimum_number
+     InfoJumlah(X) = rand() % (4 + 1 - 1) + 1;
+     InfoSabar(X) = rand() % (60 + 1 - 30) + 30;
+     if (IsEmptyQueue(*Q))
+     {
+      Head(*Q) = 1;
+      Tail(*Q) = 1;
+      InfoTail(*Q) = X;
      }
-     else {
-          if (Tail(*Q) == MaxEl(*Q)){
-               Tail(*Q) = 1;
-               InfoTail(*Q) = X;
-          }
-          else {
-               Tail(*Q)++;
-               InfoTail(*Q) = X;
-          }
+     else
+     {
+      if (Tail(*Q) == MaxEl(*Q))
+      {
+         Tail(*Q) = 1;
+      }
+      else
+      {
+         Tail(*Q)++;
+      }
+      InfoTail(*Q) = X;
+
+      i = Tail(*Q);
+      if (i == 1)
+      {
+         j = MaxEl(*Q);
+      }
+      else
+      {
+         j = i - 1;
+      }
+
+      while (InfoSabar(ElmtQueue(*Q,i)) < InfoSabar(ElmtQueue(*Q,j)) && (i != Head(*Q)))
+      {
+         temp = ElmtQueue(*Q,i);
+         ElmtQueue(*Q,i) = ElmtQueue(*Q,j);
+         ElmtQueue(*Q,j) = temp;
+
+         i--;j--;
+         if (i < 1)
+         {
+           i = MaxEl(*Q);
+         }
+         if (j < 1)
+         {
+           j = MaxEl(*Q);
+         }
+      }
      }
 }
 
-void DelQueue (Queue * Q, infotype * X){
+void DelQueue (Queue * Q, customer * X){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
