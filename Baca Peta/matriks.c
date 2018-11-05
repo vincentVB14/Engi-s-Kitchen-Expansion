@@ -130,7 +130,7 @@ void modTulisMATRIKS (MATRIKS M)
         }
         case ('M'):       // Meja Customer
         {
-          printf(MElmt3(M,i,j));
+          printf("%s", MElmt3(M,i,j));
           break;
         }
         default:          // Useless
@@ -257,6 +257,7 @@ void MejaKursi (MATRIKS *M)
           count++;
           strcpy(MElmt3(*M,i,(j+1)), MElmt3(*M,i,j));
         }
+        printf("count = %d\n", count);
         MElmt4(*M,i,j) = count;
       }
     }

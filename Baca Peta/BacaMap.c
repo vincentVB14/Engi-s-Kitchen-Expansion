@@ -58,9 +58,10 @@ int main() {
 
   // Cetak matriks
   printf("Menulis ruangan\n");
+  MejaKursi(&Ruangan);
   modTulisMATRIKS(Ruangan);
   printf("\n");
-  MejaKursi(&Ruangan);
+
   Player = PosisiPlayer(Ruangan);
   printf("Posisi player di ruangan : ");
   TulisPOINT(Player);
