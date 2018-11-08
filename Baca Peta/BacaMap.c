@@ -21,6 +21,17 @@ void FileKeMatriksDapur(MATRIKS *M, char * filename);
 /* Mengkopi semua isi file ke dalam matriks dapur agar
   dapat diperlakukan sebagai matriks peta */
 
+void GoUP(MATRIKS *M, POINT *Player);
+/* Menaikkan player 1 tile ke atas kalau bisa */
+
+void GoDOWN(MATRIKS *M, POINT *Player);
+/* Menurunkan player 1 tile ke bawah kalau bisa */
+
+void GoLEFT(MATRIKS *M, POINT *Player);
+/* Menggerakkan player 1 tile ke kiri kalau bisa */
+
+void GoRIGHT(MATRIKS *M, POINT *Player);
+/* Menggerakkan player 1 tile ke kanan kalau bisa */
 
 POINT PosisiPlayer(MATRIKS M);
 /* Mencari posisi Player di dalam matriks */
@@ -34,6 +45,7 @@ int main() {
   MATRIKS Ruangan;
   MATRIKS Dapur;
   POINT Player;
+  char s[10];
 
   // ALGORTIMA
 
@@ -68,6 +80,35 @@ int main() {
 
   printf("\nMenulis dapur\n");
   modTulisMATRIKSDapur(Dapur);
+
+  printf ("\nPlaying time....\n");
+  do {
+    scanf("%s", s);
+    if (strcmp(s, "GU") == 0)
+    {
+      GoUP(&Ruangan, &Player);
+    }
+    else if (strcmp(s, "GD") == 0)
+    {
+      GoDOWN(&Ruangan, &Player);
+    }
+    else if (strcmp(s, "GL") == 0)
+    {
+      GoLEFT(&Ruangan, &Player);
+    }
+    else if (strcmp(s, "GR") == 0)
+    {
+      GoRIGHT(&Ruangan, &Player);
+    }
+    else
+    {
+      printf("The fuck with that input?!\n");
+    }
+    printf("\n");
+    TulisPOINT(Player);
+    printf("\n");
+    modTulisMATRIKS(Ruangan);
+  } while(strcmp(s, "STOP") != 0);
 
   return 0;
 }
@@ -266,6 +307,118 @@ void FileKeMatriksDapur(MATRIKS *M, char * filename)
   }
 }
 
+void GoUP(MATRIKS *M, POINT *Player)
+/* Menaikkan player 1 tile ke atas kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Ordinat(*Player) > GetFirstIdxBrsMatrix(*M))
+  {
+    if (MElmt(*M,(i - 1),j) == 'L')
+    {
+      MElmt(*M,(i - 1),j) = 'P';
+      MElmt(*M,i,j) = 'L';
+      Ordinat(*Player) = Ordinat(*Player) - 1;
+    }
+    else
+    {
+      printf("Tidak dapat dieksekusi\n");
+    }
+  }
+  else
+  {
+    printf("Tidak dapat dieksekusi\n");
+  }
+}
+
+void GoDOWN(MATRIKS *M, POINT *Player)
+/* Menurunkan player 1 tile ke bawah kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Ordinat(*Player) < GetLastIdxBrsMatrix(*M))
+  {
+    if (MElmt(*M,(i + 1),j) == 'L')
+    {
+      MElmt(*M,(i + 1),j) = 'P';
+      MElmt(*M,i,j) = 'L';
+      Ordinat(*Player) = Ordinat(*Player) + 1;
+    }
+    else
+    {
+      printf("Tidak dapat dieksekusi\n");
+    }
+  }
+  else
+  {
+    printf("Tidak dapat dieksekusi\n");
+  }
+}
+
+void GoLEFT(MATRIKS *M, POINT *Player)
+/* Menggerakkan player 1 tile ke kiri kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Absis(*Player) > GetFirstIdxKolMatrix(*M))
+  {
+    if (MElmt(*M, i, (j - 1)) == 'L')
+    {
+      MElmt(*M,i, (j - 1)) = 'P';
+      MElmt(*M,i,j) = 'L';
+      Absis(*Player) = Absis(*Player) - 1;
+    }
+    else
+    {
+      printf("Tidak dapat dieksekusi\n");
+    }
+  }
+  else
+  {
+    printf("Tidak dapat dieksekusi\n");
+  }
+}
+
+void GoRIGHT(MATRIKS *M, POINT *Player)
+/* Menggerakkan player 1 tile ke kanan kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Absis(*Player) <  GetLastIdxKolMatrix(*M))
+  {
+    if (MElmt(*M, i, (j + 1)) == 'L')
+    {
+      MElmt(*M,i, (j + 1)) = 'P';
+      MElmt(*M,i,j) = 'L';
+      Absis(*Player) = Absis(*Player) + 1;
+    }
+    else
+    {
+      printf("Tidak dapat dieksekusi\n");
+    }
+  }
+  else
+  {
+    printf("Tidak dapat dieksekusi\n");
+  }
+}
+
 
 POINT PosisiPlayer(MATRIKS M)
 {
@@ -292,7 +445,7 @@ POINT PosisiPlayer(MATRIKS M)
       }
     }
   }
-  P = MakePOINT(i,j);
+  P = MakePOINT(j, i);
   return (P);
 }
 
