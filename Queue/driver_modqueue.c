@@ -68,8 +68,10 @@ int main(){
 
                               case 5:
                                    DelQueue(&Q,&X);
-                                   printf("Jumlah Orang yang dihapus : %d\n",InfoJumlah(X));
-                                   printf("Kesabaran Orang yang dihapus : %d\n",InfoSabar(X));
+                                   if (InfoSabar(X) != Nil){
+                                        printf("Jumlah Orang yang dihapus : %d\n",InfoJumlah(X));
+                                        printf("Kesabaran Orang yang dihapus : %d\n",InfoSabar(X));
+                                   }
                                    printf("Queue :\n");
                                    PrintQueue(Q);
                                    printf("\n");
