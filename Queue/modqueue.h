@@ -14,11 +14,11 @@
 typedef struct{
        int jumlahorang;
        int kesabaran;
-     } infotype;
+ } customer;
 typedef int address;   /* indeks tabel */
 /* Contoh deklarasi variabel bertype Queue : */
 /* Versi I : tabel dinamik, Head dan Tail eksplisit, ukuran disimpan */
-typedef struct { infotype * T;   /* tabel penyimpan elemen */
+typedef struct { customer * T;   /* tabel penyimpan elemen */
                  address HEAD;  /* alamat penghapusan */
                  address TAIL;  /* alamat penambahan */
                  int MaxEl;     /* Max elemen queue */
@@ -37,8 +37,9 @@ typedef struct { infotype * T;   /* tabel penyimpan elemen */
 #define InfoJumlahTail(Q) (Q).T[(Q).TAIL].jumlahorang
 #define InfoSabarTail(Q) (Q).T[(Q).TAIL].kesabaran
 #define InfoJumlah(X) (X).jumlahorang
-#define InfoSabar(X) (X).kesabaran   
+#define InfoSabar(X) (X).kesabaran
 #define MaxEl(Q) (Q).MaxEl
+#define ElmtQueue(Q,X) (Q).T[X]
 
 /* ********* Prototype ********* */
 boolean IsEmptyQueue (Queue Q);
@@ -64,11 +65,11 @@ void DeAlokasiQueue(Queue * Q);
 /* F.S. Q menjadi tidak terdefinisi lagi, MaxEl(Q) diset 0 */
 
 /* *** Primitif Add/Delete *** */
-void AddQueue (Queue * Q, infotype X);
+void AddQueue (Queue * Q);
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
 /* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
-void DelQueue (Queue * Q, infotype * X);
+void DelQueue (Queue * Q, customer * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;

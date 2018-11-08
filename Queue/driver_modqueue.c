@@ -10,7 +10,7 @@ Model Implementasi Versi III dengan circular buffer
 
 Queue Q;
 int Max;
-infotype X;
+customer X;
 
 int main(){
      int choice = 1;
@@ -60,11 +60,7 @@ int main(){
                                    break;
 
                               case 4:
-                                   printf("Input Jumlah Orang : ");
-                                   scanf("%d",&InfoJumlah(X));
-                                   printf("Input Kesabaran orang : ");
-                                   scanf("%d",&InfoSabar(X));
-                                   AddQueue(&Q,X);
+                                   AddQueue(&Q);
                                    printf("Queue :\n");
                                    PrintQueue(Q);
                                    printf("\n");
@@ -72,7 +68,8 @@ int main(){
 
                               case 5:
                                    DelQueue(&Q,&X);
-                                   printf("Nilai X yang dihapus : %d\n",X);
+                                   printf("Jumlah Orang yang dihapus : %d\n",InfoJumlah(X));
+                                   printf("Kesabaran Orang yang dihapus : %d\n",InfoSabar(X));
                                    printf("Queue :\n");
                                    PrintQueue(Q);
                                    printf("\n");
