@@ -99,54 +99,65 @@ void AddQueue (Queue * Q){
      address i,j;
 
 // ALGORITMA
-     srand(time(NULL));
-     // rand() % (max_number + 1 - minimum_number) + minimum_number
-     InfoJumlah(X) = rand() % (4 + 1 - 1) + 1;
-     InfoSabar(X) = rand() % (60 + 1 - 30) + 30;
-     if (IsEmptyQueue(*Q))
-     {
-      Head(*Q) = 1;
-      Tail(*Q) = 1;
-      InfoTail(*Q) = X;
+     if (NBElmtQueue(*Q) == MaxEl(*Q)){
+          printf("Antrian penuh.\n");
      }
-     else
-     {
-      if (Tail(*Q) == MaxEl(*Q))
-      {
-         Tail(*Q) = 1;
-      }
-      else
-      {
-         Tail(*Q)++;
-      }
-      InfoTail(*Q) = X;
+     else {
+          srand(time(NULL));
+          // rand() % (max_number + 1 - minimum_number) + minimum_number
+          InfoJumlah(X) = rand() % (4 + 1 - 1) + 1;
+          if (InfoJumlah(X) == 1){
+               InfoJumlah(X)++;
+          }
+          else if (InfoJumlah(X) == 3){
+               InfoJumlah(X)++;
+          }
+          InfoSabar(X) = rand() % (60 + 1 - 30) + 30;
+          if (IsEmptyQueue(*Q))
+          {
+           Head(*Q) = 1;
+           Tail(*Q) = 1;
+           InfoTail(*Q) = X;
+          }
+          else
+          {
+           if (Tail(*Q) == MaxEl(*Q))
+           {
+              Tail(*Q) = 1;
+           }
+           else
+           {
+              Tail(*Q)++;
+           }
+           InfoTail(*Q) = X;
 
-      i = Tail(*Q);
-      if (i == 1)
-      {
-         j = MaxEl(*Q);
-      }
-      else
-      {
-         j = i - 1;
-      }
+           i = Tail(*Q);
+           if (i == 1)
+           {
+              j = MaxEl(*Q);
+           }
+           else
+           {
+              j = i - 1;
+           }
 
-      while (InfoSabar(ElmtQueue(*Q,i)) < InfoSabar(ElmtQueue(*Q,j)) && (i != Head(*Q)))
-      {
-         temp = ElmtQueue(*Q,i);
-         ElmtQueue(*Q,i) = ElmtQueue(*Q,j);
-         ElmtQueue(*Q,j) = temp;
+           while (InfoSabar(ElmtQueue(*Q,i)) < InfoSabar(ElmtQueue(*Q,j)) && (i != Head(*Q)))
+           {
+              temp = ElmtQueue(*Q,i);
+              ElmtQueue(*Q,i) = ElmtQueue(*Q,j);
+              ElmtQueue(*Q,j) = temp;
 
-         i--;j--;
-         if (i < 1)
-         {
-           i = MaxEl(*Q);
-         }
-         if (j < 1)
-         {
-           j = MaxEl(*Q);
-         }
-      }
+              i--;j--;
+              if (i < 1)
+              {
+                i = MaxEl(*Q);
+              }
+              if (j < 1)
+              {
+                j = MaxEl(*Q);
+              }
+           }
+          }
      }
 }
 
@@ -158,17 +169,24 @@ void DelQueue (Queue * Q, customer * X){
 /* KAMUS LOKAL */
      /* Tidak menggunakan kamus lokal */
 /* ALGORITMA */
-     *X = InfoHead(*Q);
-     if (Head(*Q) == Tail(*Q)){
-          Head(*Q) = Nil;
-          Tail(*Q) = Nil;
+     if (IsEmptyQueue(*Q)){
+          printf("Antrian kosong.\n");
+          InfoJumlah(*X) = Nil;
+          InfoSabar(*X) = Nil;
      }
      else {
-          if (Head(*Q) == MaxEl(*Q)){
-               Head(*Q) = 1;
+          *X = InfoHead(*Q);
+          if (Head(*Q) == Tail(*Q)){
+               Head(*Q) = Nil;
+               Tail(*Q) = Nil;
           }
-          else{
-               Head(*Q)++;
+          else {
+               if (Head(*Q) == MaxEl(*Q)){
+                    Head(*Q) = 1;
+               }
+               else{
+                    Head(*Q)++;
+               }
           }
      }
 }
@@ -186,10 +204,20 @@ void PrintQueue (Queue Q){
      }
      else {
           printf("[");
-          printf("(%d,%d)",InfoJumlahHead(Q),InfoSabarHead(Q));
-          for (int i = Head(Q)+1; i <= Tail(Q); i++){
+          int i = Head(Q);
+          printf("(%d,%d)",Q.T[i].jumlahorang,Q.T[i].kesabaran);
+          while (i != Tail(Q)){
+               if (i >= MaxEl(Q)){
+                    i = 1;
+               }
+               else {
+                    i++;
+               }
                printf(",(%d,%d)",Q.T[i].jumlahorang,Q.T[i].kesabaran);
           }
+          // for (int i = Head(Q)+1; i <= Tail(Q); i++){
+          //      printf(",(%d,%d)",Q.T[i].jumlahorang,Q.T[i].kesabaran);
+          // }
           printf("]");
      }
 }
