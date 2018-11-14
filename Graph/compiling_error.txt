@@ -1,0 +1,6 @@
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\Tester\Engi-s-Kitchen-Expansion\Graph\modgraph.h:19:1: error: expected ';', identifier or '(' before 'void'
+ void CreateGraph (int N, MATRIKS * G);
+ ^~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\Tester\Engi-s-Kitchen-Expansion\Graph\modgraph.h:19:26: error: unknown type name 'MATRIKS'
+ void CreateGraph (int N, MATRIKS * G);
+                          ^~~~~~~
