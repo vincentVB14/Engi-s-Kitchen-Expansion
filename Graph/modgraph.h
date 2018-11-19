@@ -5,7 +5,6 @@
 #define GRAPH_H
 
 #include "boolean.h"
-#include "../Point/modpoint.h"
 #include "../Matriks/modmatriks.h"
 
 #define GNil NULL
@@ -29,72 +28,110 @@ typedef struct {
 typedef struct tElmtGraph {
   Ginfotype infoG;
   Gaddress NextParent;
-  Gaddress2 FirstChild;
+  Gaddress2 Firstchild;
 } Ruangan;
 typedef struct tElmtGraph2 {
   Ginfotype2 info2G;
-  Gaddress2 NextChild;
+  Gaddress2 Nextchild;
 } NextRuangan;
 
 typedef struct {
-	address FirstG;
+	Gaddress GFirst;
+  int currRoom;
 } Graph;
 
 
 // SELEKTOR
 #define Nomor(P) (P)->infoG.nomor
-#define Ruangan(P) (P)->infoG.ruangan
+#define Ruangann(P) (P)->infoG.ruangan
 #define NextP(P) (P)->NextParent
-#define FirstChild(P) (P)->FirstChild
+#define FirstChild(P) (P)->Firstchild
 #define NomorTarget(P2) (P2)->info2G.nomortarget
 #define PrevLoc(P2) (P2)->info2G.prevloc
 #define NextLoc(P2) (P2)->info2G.nextloc
-#define NextChild(P2) (P2)->NextChild
-#define FirstG(L) (L).FirstG
+#define NextChild(P2) (P2)->Nextchild
+#define FirstG(L) (L).GFirst
+#define CurrentRoom(L) (L).currRoom
 
 // KONSTRUKTOR
 void CreateEmptyGraph (Graph *G);
 // Menciptakan graph kosong yang dapat digunakan
 // Keterangan, first dari graph adalah Nil
-boolean IsEmptyGraph (Graph *G);
+boolean IsEmptyGraph (Graph G);
 // Mengirim true jika draf kosong
+boolean IsEmptyParent (Gaddress P);
+// Mengirim true jika P adalah kosong
 
 /****************** Manajemen Memori ******************/
-address AlokasiGraph1 (Ginfotype X);
+Gaddress AlokasiGraph1 (int no, char *filename);
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-address AlokasiGraph2 (Ginfotype2 X);
+Gaddress2 AlokasiGraph2 (int no, POINT Prev, POINT Next);
 /* Mengirimkan address hasil alokasi sebuah elemen */
 /* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
 /* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
 /* Jika alokasi gagal, mengirimkan Nil */
-void Dealokasi (address *P);
+void DealokasiGraph1 (Gaddress *P);
+/* I.S. P terdefinisi */
+/* F.S. P dikembalikan ke sistem */
+/* Melakukan dealokasi/pengembalian address P */
+void DealokasiGraph2 (Gaddress2 *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
 
-/****************** PENCARIAN SEBUAH ELEMEN GRAOH ******************/
-address Search (Graph L, infotype X);
+/****************** PENCARIAN SEBUAH ELEMEN GRAPH ******************/
+Gaddress SearchRuangan (Graph G, int X);
 /* Mencari apakah ada elemen list dengan Info(P)= X */
 /* Jika ada, mengirimkan address elemen tersebut. */
 /* Jika tidak ada, mengirimkan GNil */
 
+Gaddress2 SearchNextRuangan (Gaddress CurrP, POINT Player);
+// Mencari apakah Player bisa pindah ke ruangan lain
+// Jika dapat mengembalikan NextRuangan
+// Jika tidak, mengembalikan GNil
+
 /* PENAMBAHAN DAN PENGHAPUSAN ELEMEN GRAPH */
-void AddRuangan (Graph *G, Ginfotype X);
+void AddRuangan (Graph *G, int no, char *filename);
 /* Menambahkan ruangan ke dalam graf */
 // Melakukan AddLast
-void DelRuangan (Graph *G, Ginfotype *X);
-/* Menghapus ruangan dari dalam graf */
-// Melakukan DelLast
-void AddNextRuangan (Graph *G, Ginfotype2 X);
+void AddNextRuangan (Gaddress *P, int no, POINT Prev, POINT Next);
 /* Menambahkan anak dari ruangan di graf yang berisi info ke next ruangan */
 // Melakukan AddLast
-void DelNextRuangan (Graph *G, Ginfotype2 X);
-/* Menambahkan anak dari ruangan di graf yang berisi info ke next ruangan */
-// Melakukan DelLast
 
-int NextRuangan (Graph *G, int currRuangan) // Masih dipikirkan
+/* PEMBACAAN FILE KE MATRIKS DAN GRAPH */
+void FileToMatriks (Gaddress *P, char * filename);
+/* Mengkopi semua isi file ke dalam matriks agar
+   dapat diperlakukan sebagai matriks peta */
+
+void FileToMatriksDapur(Gaddress *P, char * filename);
+/* Mengkopi semua isi file ke dalam matriks dapur agar
+  dapat diperlakukan sebagai matriks peta */
+
+
+/* PEMBACAAN RUANGAN */
+void BacaPeta (Graph *G, POINT *Player);
+// Prosedur membaca peta dari file eksternal
+
+void PindahRuangan (Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+// Memindahkan player dari suatu ruangan ke ruangan lainnya
+
+void ReduceKesabaranG (Graph *G, int *life);
+// Mengurangi kesabaran seluruh MAP
+
+/* COMMAND LIST GRAPH */
+void GoUP(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menaikkan player 1 tile ke atas kalau bisa */
+
+void GoDOWN(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menurunkan player 1 tile ke bawah kalau bisa */
+
+void GoLEFT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menggerakkan player 1 tile ke kiri kalau bisa */
+
+void GoRIGHT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menggerakkan player 1 tile ke kanan kalau bisa */
 
 #endif

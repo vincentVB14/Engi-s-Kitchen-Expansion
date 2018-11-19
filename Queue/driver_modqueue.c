@@ -5,16 +5,20 @@ Model Implementasi Versi III dengan circular buffer
 */
 
 #include <stdio.h>
+#include <stdlib.h>
 #include "modqueue.h"
 #include "modqueue.c"
 
 Queue Q;
-int Max;
+int Max,Life;
 customer X;
 
 int main(){
+     Life = 3;
      int choice = 1;
-     while (choice != 2 && choice != 6){
+     int choicedel;
+     while (choice != 2 && choice != 7){
+          system("CLS");
           printf("Main Menu\n");
           printf("1. Create an empty Queue\n");
           printf("2. Exit\n");
@@ -29,7 +33,7 @@ int main(){
                     scanf("%d",&Max);
                     CreateEmptyQueue(&Q,Max);
 
-                    while (choice != 6){
+                    while (choice != 7){
                          printf("\n");
                          printf("Functions and Procedures\n");
                          printf("1. IsEmptyQueue\n");
@@ -37,12 +41,19 @@ int main(){
                          printf("3. NBElmtQueue\n");
                          printf("4. AddQueue\n");
                          printf("5. DelQueue\n");
-                         printf("6. Exit\n");
+                         printf("6. Move\n");
+                         printf("7. Exit\n");
+                         printf("Life : %d\n",Life);
                          printf("\n");
 
-                         printf(">> ");
-                         scanf("%d",&choice);
-                         printf("\n");
+                         if (Life <= 0){
+                              choice = 7;
+                         }
+                         else {
+                              printf(">> ");
+                              scanf("%d",&choice);
+                              printf("\n");
+                         }
                          switch (choice) {
                               case 1:
                                    printf("Queue kosong?\n");
@@ -67,16 +78,37 @@ int main(){
                                    break;
 
                               case 5:
-                                   DelQueue(&Q,&X);
+                                   printf("1.) DelQueue2\n");
+                                   printf("2.) DelQueue4\n");
+                                   printf(">> ");
+                                   scanf("%d",&choicedel);
+                                   printf("\n");
+                                   if (choicedel == 1){
+                                        DelQueue2(&Q,&X);
+                                        printf("(%d,%d)\n",InfoJumlah(X),InfoSabar(X));
+                                   }
+                                   else if (choicedel == 2){
+                                        DelQueue4(&Q,&X);
+                                        printf("(%d,%d)\n",InfoJumlah(X),InfoSabar(X));
+                                   }
                                    if (InfoSabar(X) != Nil){
                                         printf("Jumlah Orang yang dihapus : %d\n",InfoJumlah(X));
                                         printf("Kesabaran Orang yang dihapus : %d\n",InfoSabar(X));
+                                   }
+                                   else {
+                                        printf("Tidak ada kelompok orang yang dihapus\n");
                                    }
                                    printf("Queue :\n");
                                    PrintQueue(Q);
                                    printf("\n");
                                    break;
+
                               case 6:
+                                   KurangSabarQueue(&Q,&Life);
+                                   PrintQueue(Q);
+                                   break;
+
+                              case 7:
                                    break;
 
                               default:

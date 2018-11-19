@@ -2,7 +2,7 @@
 // Tanggal : 1 Oktober 2018
 /* File : queue.c */
 /* Body ADT Queue dengan representasi array secara eksplisit dan alokasi dinamik */
-/* Model Implementasi Versi III dengan circular buffer */
+/* Model Implementasi Versi I dengan Priority Queue (Orang dengan kesabaran lebih rendah diutamakan) */
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -45,12 +45,7 @@ int NBElmtQueue (Queue Q){
           count = 1;
           while (position != Tail(Q)){
                count++;
-               if (position != MaxEl(Q)){
-                    position++;
-               }
-               else{
-                    position = 1;
-               }
+               position++;
           }
           return count;
      }
@@ -112,7 +107,7 @@ void AddQueue (Queue * Q){
           else if (InfoJumlah(X) == 3){
                InfoJumlah(X)++;
           }
-          InfoSabar(X) = rand() % (60 + 1 - 30) + 30;
+          InfoSabar(X) = 30;
           if (IsEmptyQueue(*Q))
           {
            Head(*Q) = 1;
@@ -161,6 +156,82 @@ void AddQueue (Queue * Q){
      }
 }
 
+void DelQueue2(Queue * Q, customer * X){
+/* Proses: Menghapus X yang memiliki jumlah orang = 2 pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen yang memiliki jumlah orang = 2 pd I.S., Geser;
+        Q mungkin kosong */
+// KAMUS LOKAL
+     // Tidak menggunakan kamus lokal
+// ALGORITMA
+     InfoJumlah(*X) = Nil;
+     InfoSabar(*X) = Nil;
+     if (IsEmptyQueue(*Q)){
+          printf("Antrian kosong.\n");
+          InfoJumlah(*X) = Nil;
+          InfoSabar(*X) = Nil;
+     }
+     else {
+          if (Head(*Q) == Tail(*Q) && InfoJumlah(ElmtQueue(*Q,Head(*Q))) == 2){
+               *X = InfoHead(*Q);
+               Head(*Q) = Nil;
+               Tail(*Q) = Nil;
+          }
+          else {
+               int i = Head(*Q);
+               while (i < Tail(*Q) && InfoJumlah(ElmtQueue(*Q,i)) != 2){
+                    i++;
+               }
+               if (InfoJumlah(ElmtQueue(*Q,i)) == 2){
+                    *X = ElmtQueue(*Q,i);
+                    while (i < Tail(*Q)){
+                         ElmtQueue(*Q,i) = ElmtQueue(*Q,i+1);
+                         i++;
+                    }
+                    Tail(*Q) = i-1;
+               }
+          }
+     }
+}
+
+void DelQueue4(Queue * Q, customer * X){
+/* Proses: Menghapus X yang memiliki jumlah orang = 4 pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju";
+        Q mungkin kosong */
+// KAMUS LOKAL
+     // Tidak menggunakan kamus lokal
+// ALGORITMA
+     InfoJumlah(*X) = Nil;
+     InfoSabar(*X) = Nil;
+     if (IsEmptyQueue(*Q)){
+          printf("Antrian kosong.\n");
+          InfoJumlah(*X) = Nil;
+          InfoSabar(*X) = Nil;
+     }
+     else {
+          if (Head(*Q) == Tail(*Q) && InfoJumlah(ElmtQueue(*Q,Head(*Q))) == 4){
+               *X = InfoHead(*Q);
+               Head(*Q) = Nil;
+               Tail(*Q) = Nil;
+          }
+          else {
+               int i = Head(*Q);
+               while (i < Tail(*Q) && InfoJumlah(ElmtQueue(*Q,i)) != 4){
+                    i++;
+               }
+               if (InfoJumlah(ElmtQueue(*Q,i)) == 4){
+                    *X = ElmtQueue(*Q,i);
+                    while (i < Tail(*Q)){
+                         ElmtQueue(*Q,i) = ElmtQueue(*Q,i+1);
+                         i++;
+                    }
+                    Tail(*Q) = i-1;
+               }
+          }
+     }
+}
+
 void DelQueue (Queue * Q, customer * X){
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
@@ -181,12 +252,35 @@ void DelQueue (Queue * Q, customer * X){
                Tail(*Q) = Nil;
           }
           else {
-               if (Head(*Q) == MaxEl(*Q)){
-                    Head(*Q) = 1;
+               int i = Head(*Q);
+               while (i < Tail(*Q)){
+                    ElmtQueue(*Q,i) = ElmtQueue(*Q,i+1);
+                    i++;
                }
-               else{
-                    Head(*Q)++;
-               }
+               Tail(*Q) = i-1;
+          }
+     }
+}
+
+void KurangSabarQueue(Queue * Q, int * Life){
+/* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan
+   F.S. Kesabaran customer berkurang satu
+*/
+/* KAMUS LOKAL */
+     customer X;
+/* ALGORITMA */
+     if (IsEmptyQueue(*Q)){
+          // do nothing
+     }
+     else {
+          int i = Head(*Q);
+          while(i <= Tail(*Q)){
+               InfoSabar(ElmtQueue(*Q,i))--;
+               i++;
+          }
+          while (InfoSabarHead(*Q) == 0 && !IsEmptyQueue(*Q)){
+               DelQueue(Q,&X);
+               *Life = *Life - 1;
           }
      }
 }
@@ -207,12 +301,7 @@ void PrintQueue (Queue Q){
           int i = Head(Q);
           printf("(%d,%d)",Q.T[i].jumlahorang,Q.T[i].kesabaran);
           while (i != Tail(Q)){
-               if (i >= MaxEl(Q)){
-                    i = 1;
-               }
-               else {
-                    i++;
-               }
+               i++;
                printf(",(%d,%d)",Q.T[i].jumlahorang,Q.T[i].kesabaran);
           }
           // for (int i = Head(Q)+1; i <= Tail(Q); i++){

@@ -3,12 +3,17 @@
 //#include "modmesinkar.c"
 //#include "modmesinkata.c"
 //#include "modpoint.c"
-//#include "modqueue.c"
-#include "BacaMap.c"
+#include "Queue/modqueue.c"
+#include "Stack/modstackt.c"
+#include "Graph/modgraph.c"
+//#include "game_mechanic.c"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 #include <unistd.h>
+#include <time.h>
+//srand(time(NULL));
+//rand() % (max_number + 1 - minimum_number) + minimum_number
 
 void clrscr()
 {
@@ -36,7 +41,7 @@ void StartGame(char * playername)
   }
 }
 
-void EveryTurn (MATRIKS *M, int *Life, int *Time, Queue*Q)
+void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q)
 // Melakukan apa yang dilakukan pada setiap turn
 // Mengurangi kesabaran setiap orang di meja
 // Menambahkan waktu
@@ -47,56 +52,88 @@ void EveryTurn (MATRIKS *M, int *Life, int *Time, Queue*Q)
 
   // ALGORITMA
   *Time = *Time + 1;
-  ReduceKesabaranM (M, Life);
+  ReduceKesabaranG (G, Life);
+}
+
+void TakeFood(Stack * Hand, MATRIKS room, POINT Player)
+/*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
+/*I.S. Stack Hand terdefinisi, tidak penuh*/
+/*F.S. Top dari Stack Hand berupa makanan di samping player*/
+{
+  POINT Meja_dapur = MejaDapurDekatPlayer(room, Player);
+  if(!IsFullStack(*Hand)){
+    if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
+      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "AyamGoreng") == 0){
+        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Ayam Goreng");
+      }
+      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "EsKrim") == 0){
+        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Es Krim");
+      }
+      printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+      Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+    } else{
+      printf("Tidak ada makanan yang bisa diambil\n");
+    }
+  } else{
+    printf("Tangan sudah penuh\n");
+  }
+}
+
+void EmptyHand(Stack * Hand)
+/*Prosedur untuk mengosongkan Stack Hand*/
+/*I.S. Stack Hand terdefinisi, tidak kosong*/
+/*F.S. Stack Hand kosong*/
+{
+  printf("Membuang makanan di tangan...\n");
+  CreateEmptyStack(Hand);
+}
+
+void EmptyTray(Stack * Tray)
+/*Prosedur untuk mengosongkan Stack Tray*/
+/*I.S. Stack Tray terdefinisi, tidak kosong*/
+/*F.S. Stack Tray kosong*/
+{
+  printf("Membuang makanan di tangan...\n");
+  CreateEmptyStack(Tray);
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////
 
 int main(){
   clrscr();
+  boolean customerchance = (rand() % 100) < 5;
+  boolean validmove;
   int choice;
-  int brs1, brs2, brs3, brs4, kol1, kol2, kol3, kol4;
   int money, life, time;
   char *command;
   char *playername;
-  MATRIKS ruang1;
-  MATRIKS dapur;
+
+  Graph MAP;
+  Gaddress current_room;
+
   POINT player;
-  POINT mejap;
+  POINT mejap; // Masih belum digunakan untuk menunjukkan meja dekat player
+
   Queue antrian;
+
+  Stack Hand;
+  Stack Tray;
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
   playername = (char *) malloc (12 * sizeof(char)); //Alokasi nama player sepanjang 12 karakter
   strcpy(playername,""); //Inisialisasi string nama player
 
+  //Create Empties
   CreateEmptyQueue(&antrian, 5);
-  CountBarisKolom(&brs1, &kol1, "File Eksternal/Ruang1.txt");
-  //CountBarisKolom(&brs2, &kol2, "Ruang2.txt");
-  //CountBarisKolom(&brs3, &kol3, "Ruang3.txt");
-  CountBarisKolom(&brs4, &kol4, "File Eksternal/Dapur.txt");
+  CreateEmptyGraph(&MAP);
+  BacaPeta(&MAP, &player);
+  current_room = SearchRuangan(MAP, CurrentRoom(MAP));
 
-  money = 1000;
-  life = 24;
+  //Nilai awal
+  money = 0;
+  life = 3;
   time = 0;
 
-  // Membuat MATRIKS Ruang dan Dapur
-  if (IsIdxValidMatrix(brs1, kol1))
-  {
-    modMakeMATRIKS(brs1, kol1, &ruang1);
-    modMakeMATRIKS(brs4, kol4, &dapur);
-    printf("Pembentukan matriks berhasil\n");
-  }
-  else
-  {
-    printf("Pembentukan matriks gagal\n");
-  }
 
-  // Kopi semua elemen ke dalam matriks
-  FileKeMatriks(&ruang1, "File Eksternal/Ruang1.txt");
-  FileKeMatriksDapur(&dapur, "File Eksternal/Dapur.txt");
-
-  MejaKursi(&ruang1);
-  player = PosisiPlayer(ruang1);
-  mejap = MakePOINT(0,0);
   clrscr();
   MainMenu();
   //Membaca pilihan dari player
@@ -120,7 +157,7 @@ int main(){
       exit(0);
     }
     default:{
-      printf("Pilihan salah. Exiting program...");
+      printf("Wrong choice. Exiting program...");
       exit(0);
     }
   }
@@ -128,39 +165,29 @@ int main(){
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
       clrscr();
-      mejap = MejaDekatPlayer(ruang1, player);
-      printf("Time = %d\n", time);
-      printf("Meja dekat player : ");
-      TulisPOINT(mejap);
-      printf("\n");
-      Play(playername, money, life, time);
-      //TulisRoom();
-      //TulisPOINT(player);
-      modTulisMATRIKS(ruang1);
+      Play(playername, money, life, time, current_room);
+
       printf(">>> ");
       scanf("%s", command);
       if(strcmp(command, "GU") == 0){
-        GoUP(&ruang1, &player);
-        EveryTurn(&ruang1, &life, &time, &antrian);
+        GoUP(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "GD") == 0){
-        GoDOWN(&ruang1, &player);
-        EveryTurn(&ruang1, &life, &time, &antrian);
+        GoDOWN(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "GL") == 0){
-        GoLEFT(&ruang1, &player);
-        EveryTurn(&ruang1, &life, &time, &antrian);
+        GoLEFT(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "GR") == 0){
-        GoRIGHT(&ruang1, &player);
-        EveryTurn(&ruang1, &life, &time, &antrian);
+        GoRIGHT(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "ORDER") == 0){
 
       } else if(strcmp(command, "PUT") == 0){
 
       } else if(strcmp(command, "TAKE") == 0){
-
+        TakeFood(&Hand, Ruangann(current_room), player);
+        sleep(1.5);
       } else if(strcmp(command, "CH") == 0){
-
+        EmptyHand(&Hand);
       } else if(strcmp(command, "CT") == 0){
-
+        EmptyTray(&Tray);
       } else if(strcmp(command, "PLACE") == 0){
 
       } else if(strcmp(command, "GIVE") == 0){
@@ -176,13 +203,17 @@ int main(){
       } else if(strcmp(command, "EXIT") == 0){
         clrscr();
         printf("GAME OVER\n");
-        Credit();
+        //Credit();
         sleep(1.5);
         exit(0);
       }
+
+      if(strcmp(command, "RECIPE") != 0 && strcmp(command, "SAVE") != 0 && strcmp(command, "LOAD") != 0 && strcmp(command, "LEGEND") != 0){
+        EveryTurn(&MAP, &life, &time, &antrian);
+      }
     }
     printf("GAME OVER\n");
-    Credit();
+    //Credit();
     sleep(1.5);
     exit(0);
   }

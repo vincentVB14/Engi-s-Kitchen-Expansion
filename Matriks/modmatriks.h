@@ -6,6 +6,8 @@
 #define MATRIKS_H
 
 #include "boolean.h"
+#include "../Point/modpoint.h"
+#include "../Mesin/modmesinkata.h"
 
 #define MNil -1
 #define MNil2 "Nil"
@@ -22,11 +24,11 @@ typedef struct {
 	char value2[MCharMax];
 	int value3;
 	int value4;
-} ElType;
+} TabElType;
 
 typedef int indeks; /* indeks baris, kolom */
 typedef struct {
-	ElType Mem[BrsMax+1][KolMax+1];
+	TabElType Mem[BrsMax+1][KolMax+1];
   int NBrsEff; /* banyaknya/ukuran baris yg terdefinisi */
 	int NKolEff; /* banyaknya/ukuran kolom yg terdefinisi */
 } MATRIKS;
@@ -95,5 +97,26 @@ void ReduceKesabaranM (MATRIKS *M, int *life);
 /* Mengurangi kesabaran setiap meja yang mengandung pelanggan */
 /* MElmt5 dari matriks merupakan jumlah kesabaran dari matriks */
 
+void CountBarisKolom (int *Brs, int *Kol, char * filename);
+/* Menghitung jumlah baris dan kolom untuk matriks
+   dengan cara sekali melalui file eksternal */
+
+
+POINT PosisiPlayer(MATRIKS M);
+/* Mencari posisi Player di dalam matriks */
+
+POINT PosisiMeja(MATRIKS M, char* str);
+/* Mencari posisi Meja dengan identitas str */
+
+void DelChar(Kata CKata, int n);
+/* Menghapus beberapa elemen dari string*/
+
+POINT MejaDekatPlayer (MATRIKS M, POINT Player);
+// Mencari meja yang dekat dengan player
+// Mengembalikan nomor meja yang berada di dekat player
+
+POINT MejaDapurDekatPlayer (MATRIKS M, POINT Player);
+// Mencari meja dapur yang dekat dengan player
+// Mengembalikan posisi meja dapur di dekat player
 
 #endif

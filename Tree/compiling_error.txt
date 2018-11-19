@@ -1,0 +1,46 @@
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:20:2: error: unknown type name 'Infotype'
+  Infotype Info;
+  ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:47:15: error: unknown type name 'Infotype'
+ BinTree Tree (Infotype Akar, BinTree L, BinTree R);
+               ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:51:16: error: unknown type name 'Infotype'
+ void MakeTree (Infotype Akar, BinTree L, BinTree R, BinTree *P);
+                ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:67:9: error: conflicting types for 'IsOneElmt'
+ boolean IsOneElmt (BinTree P);
+         ^~~~~~~~~
+In file included from D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:11:0:
+d:\itb\semester 3\algoritma dan struktur data\tugas besar\tubes alstrukdat\list\modlistrek.h:50:5: note: previous declaration of 'IsOneElmt' was here
+ int IsOneElmt(List L);
+     ^~~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:118:32: error: unknown type name 'Infotype'
+ boolean SearchTree (BinTree P, Infotype X);
+                                ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:134:23: error: unknown type name 'Infotype'
+ int Level (BinTree P, Infotype X);
+                       ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:139:34: error: unknown type name 'Infotype'
+ void AddDaunTerkiri (BinTree *P, Infotype X);
+                                  ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:143:27: error: unknown type name 'Infotype'
+ void AddDaun (BinTree *P, Infotype X, Infotype Y, boolean Kiri);
+                           ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:143:39: error: unknown type name 'Infotype'
+ void AddDaun (BinTree *P, Infotype X, Infotype Y, boolean Kiri);
+                                       ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:148:34: error: unknown type name 'Infotype'
+ void DelDaunTerkiri (BinTree *P, Infotype *X);
+                                  ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:153:27: error: unknown type name 'Infotype'
+ void DelDaun (BinTree *P, Infotype X);
+                           ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:181:29: error: unknown type name 'Infotype'
+ boolean BSearch (BinTree P, Infotype X);
+                             ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:184:31: error: unknown type name 'Infotype'
+ BinTree InsSearch (BinTree P, Infotype X);
+                               ^~~~~~~~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALSTRUKDAT\Tree\modpohon.h:188:28: error: unknown type name 'Infotype'
+ void DelBtree (BinTree *P, Infotype X);
+                            ^~~~~~~~

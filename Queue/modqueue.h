@@ -68,12 +68,30 @@ void DeAlokasiQueue(Queue * Q);
 void AddQueue (Queue * Q);
 /* Proses: Menambahkan X pada Q dengan aturan FIFO */
 /* I.S. Q mungkin kosong, tabel penampung elemen Q TIDAK penuh */
-/* F.S. X menjadi TAIL yang baru, TAIL "maju" dengan mekanisme circular buffer */
+/* F.S. X menjadi TAIL yang baru, TAIL "maju" */
+
+void DelQueue2(Queue * Q, customer * X);
+/* Proses: Menghapus X yang memiliki jumlah orang = 2 pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju";
+        Q mungkin kosong */
+
+void DelQueue4(Queue * Q, customer * X);
+/* Proses: Menghapus X yang memiliki jumlah orang = 4 pada Q dengan aturan FIFO */
+/* I.S. Q tidak mungkin kosong */
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju";
+        Q mungkin kosong */
+
 void DelQueue (Queue * Q, customer * X);
 /* Proses: Menghapus X pada Q dengan aturan FIFO */
 /* I.S. Q tidak mungkin kosong */
-/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju" dengan mekanisme circular buffer;
+/* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju";
         Q mungkin kosong */
+
+void KurangSabarQueue(Queue * Q, int * Life);
+/* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan
+   F.S. Kesabaran customer berkurang satu
+*/
 
 void PrintQueue (Queue Q);
 /* I.S. Q terdefinisi, Q mungkin kosong

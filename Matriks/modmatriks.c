@@ -1,6 +1,9 @@
 // BODY dari ADT MATRIKS
 
 #include "modmatriks.h"
+#include "../Point/modpoint.c"
+#include "../Mesin/modmesinkar.c"
+#include "../Mesin/modmesinkata.c"
 #include <stdio.h>
 #include <string.h>
 
@@ -299,5 +302,187 @@ void ReduceKesabaranM (MATRIKS *M, int *life)
         }
       }
     }
+  }
+}
+
+
+void CountBarisKolom (int *Brs, int *Kol, char * filename)
+/* Menghitung jumlah baris dan kolom untuk matriks
+   dengan cara sekali melalui file eksternal */
+{
+  // KAMUS LOKAL
+  int i, j;
+
+  // ALGORITMA
+
+  // Inisialisasi
+  STARTKATA(filename);
+  if (EndKata) {
+    i = 0;
+  } else {
+    i = 1;
+  }
+  j = 0;
+
+  // Menghitung baris dan kolom
+  while (!EndKata) {
+    if (!NewLine) {
+      j++;
+    } else {
+      i++;
+      j = 0;
+    }
+    ADVKATA();
+  }
+  *Brs = i;
+  *Kol = j;
+}
+
+
+
+
+POINT PosisiPlayer(MATRIKS M)
+{
+  // KAMUS LOKAL
+  POINT P;
+  int i,j;
+  boolean found;
+
+  // ALGORITMA
+  i = GetFirstIdxBrsMatrix(M) - 1;
+  j = GetFirstIdxKolMatrix(M) - 1;
+  found = false;
+
+  while (i < GetLastIdxBrsMatrix(M) && !found)
+  {
+    i++;
+    j = GetFirstIdxKolMatrix(M) - 1;
+    while (j < GetLastIdxKolMatrix(M) && !found)
+    {
+      j++;
+      if (MElmt(M,i,j) == 'P')
+      {
+        found = true;
+      }
+    }
+  }
+  if (found)
+  {
+    P = MakePOINT(j, i);
+  }
+  else
+  {
+    P = MakePOINT(0,0);
+  }
+
+  return (P);
+}
+
+POINT PosisiMeja(MATRIKS M, char* str)
+{
+  // KAMUS LOKAL
+  POINT P;
+  int i,j;
+  boolean found;
+
+  // ALGORITMA
+  i = GetFirstIdxBrsMatrix(M) - 1;
+  j = GetFirstIdxKolMatrix(M) - 1;
+  found = false;
+
+  while (i < GetLastIdxBrsMatrix(M) && !found)
+  {
+    i++;
+    j = GetFirstIdxKolMatrix(M) - 1;
+    while (j < GetLastIdxKolMatrix(M) && !found)
+    {
+      j++;
+      if (strcmp(MElmt3(M,i,j),str) == 0)
+      {
+        found = true;
+      }
+    }
+  }
+  P = MakePOINT(j, i);
+  return (P);
+}
+
+void DelChar(Kata CKata, int n)
+/* Menghapus beberapa elemen dari string*/
+{
+  // KAMUS LOKAL
+  int i, j;
+
+  // ALGORITMA
+  i = 0;
+  for (j = n; j < strlen(CKata); j++)
+  {
+    CKata[i] = CKata[j];
+    i++;
+  }
+  CKata[i] = '\0';
+}
+
+POINT MejaDekatPlayer (MATRIKS M, POINT Player)
+// Mencari meja yang dekat dengan player
+// Mengembalikan nomor meja yang berada di dekat player
+{
+  // KAMUS LOKAL
+  indeks i, j;
+  POINT PMeja;
+
+  // ALGORIMA
+  i = Ordinat(Player);
+  j = Absis(Player);
+
+  if (MElmt(M,(i-1),j) == 'X')
+  {
+    return (PosisiMeja(M, MElmt3(M,(i-1),j)));
+  }
+  else if (MElmt(M,(i+1),j) == 'X')
+  {
+    return (PosisiMeja(M, MElmt3(M,(i+1),j)));
+  }
+  else if (MElmt(M,i,(j-1)) == 'X')
+  {
+    return (PosisiMeja(M, MElmt3(M,i,(j-1))));
+  }
+  else if (MElmt(M,i,(j+1)) == 'X')
+  {
+    return (PosisiMeja(M, MElmt3(M,i,(j+1))));
+  }
+  else
+  {
+    return (MakePOINT(0,0));
+  }
+}
+
+POINT MejaDapurDekatPlayer (MATRIKS M, POINT Player)
+// Mencari meja dapur yang dekat dengan player
+// Mengembalikan posisi meja dapur di dekat player
+{
+  // KAMUS LOKAL
+  indeks i,j;
+
+  // ALGORITMA
+  if (MElmt(M,(i-1),j) == 'M')
+  {
+    return (MakePOINT(j,(i-1)));
+  }
+  else if (MElmt(M,(i+1),j) == 'M')
+  {
+    return (MakePOINT(j,(i+1)));
+  }
+  else if (MElmt(M,i,(j-1)) == 'M')
+  {
+    return (MakePOINT((j-1),i));
+  }
+  else if (MElmt(M,i,(j+1)) == 'M')
+  {
+    return (MakePOINT((j+1),i));
+  }
+  else
+  {
+    return (MakePOINT(0,0));
   }
 }

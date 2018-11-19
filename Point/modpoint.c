@@ -26,6 +26,19 @@ POINT MakePOINT (int X, int Y)
   return (P);
 }
 
+POINT CopyPOINT (POINT PCopy)
+/* Membentuk POINT lain yang merupakan POINT yang sama dengan PCopy */
+{
+  // KAMUS LOKAL
+  POINT P;
+
+  // ALGORITMA
+  Absis(P) = Absis(PCopy);
+  Ordinat(P) = Ordinat(PCopy);
+
+  return (P);
+}
+
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */
 void TulisPOINT (POINT P)
 /* Nilai P ditulis ke layar dengan format "(X,Y)"

@@ -26,6 +26,10 @@ typedef struct {
 POINT MakePOINT (int X, int Y);
 /* Membentuk sebuah POINT dari komponen-komponennya */
 
+POINT CopyPOINT (POINT PCopy);
+/* Membentuk POINT lain yang merupakan POINT yang sama dengan PCopy */
+
+
 /* *** KELOMPOK Interaksi dengan I/O device, BACA/TULIS  *** */
 void TulisPOINT (POINT P);
 /* Nilai P ditulis ke layar dengan format "(X,Y)"
