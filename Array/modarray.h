@@ -26,7 +26,7 @@
 typedef int IdxType;  /* type indeks */
 typedef struct {
 	int No;
-	char Food[8];
+	char Food[20];
 	int Kesabaran;
 } ElType;   /* type elemen tabel */
 typedef struct {

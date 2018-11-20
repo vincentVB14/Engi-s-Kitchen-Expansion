@@ -135,11 +135,12 @@ void GiveFood(Stack * Tray)
   }
 }
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O)
+void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T)
 /* Menerima pesanan customer */
 {
 	//Kamus
 	int i;
+	int N;
 
 	//Algoritma
 	if (IsFull(*O))
@@ -150,7 +151,50 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O)
 	{
 		i = GetLastIdx(*O) + 1;
 		No(*O,i) = atoi(MElmt3(*M,Absis(P),Ordinat(P)));
-		// Food(*O,i) = ; --> Random food
+		f = rand() % (8 + 1);
+		switch (f)
+		{
+			case 1 :
+			{
+				strcpy(Food(*O,i),"Banana Split");
+				break;
+			}
+			case 2 :
+			{
+				strcpy(Food(*O,i),"Sundae");
+				break;
+			}
+			case 3 :
+			{
+				strcpy(Food(*O,i),"Nasi Telur Dadar");
+				break;
+			}
+			case 4 :
+			{
+				strcpy(Food(*O,i),"Nasi Ayam Goreng");
+				break;
+			}
+			case 5 :
+			{
+				strcpy(Food(*O,i),"Burger");
+				break;
+			}
+			case 6 :
+			{
+				strcpy(Food(*O,i),"Hot Dog");
+				break;
+			}
+			case 7 :
+			{
+				strcpy(Food(*O,i),"Spaghetti Bolognese");
+				break;
+			}
+			case 8 :
+			{
+				strcpy(Food(*O,i),"Spaghetti Carbonara");
+				break;
+			}
+		}
 		Kesabaran(*O,i) = MElmt5(*M,Absis(P),Ordinat(P));
 		Neff(*O)++;
 	}
