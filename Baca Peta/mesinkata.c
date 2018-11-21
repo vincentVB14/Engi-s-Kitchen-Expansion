@@ -1,5 +1,4 @@
-/* NIM / Nama   : 13517131 / Jan Meyer Saragih
-   Nama file    : mesinkata.c
+/* Nama file    : mesinkata.c
    Topik        : ADT Program
    Tanggal      : 27 September 2018
    Deskripsi    : Mengimplementasikan fungsi-fungsi dari mesinkata.h */
@@ -24,7 +23,7 @@
    }
  }
 
- void STARTKATA()
+ void STARTKATA (char *filename)
  /* I.S. : CC sembarang
     F.S. : EndKata = true, dan CC = MARK;
            atau EndKata = false, CKata adalah kata yang sudah diakuisisi,
@@ -33,7 +32,7 @@
    // KAMUS LOKAL
 
    // ALGORITMA
-   START ();
+   START (filename);
    IgnoreBlank ();
    if (CC == MARK)
    {

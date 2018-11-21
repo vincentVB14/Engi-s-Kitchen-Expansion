@@ -12,19 +12,16 @@
 #include <stdlib.h>
 #include <string.h>
 #include "boolean.h"
-#include "jam.h"			// digunakan untuk menyimpan waktu saat save
-#include "point.h"			// digunakan untuk merepresentasikan posisi
-#include "array.h"			// digunakan untuk merepresentasikan pesanan (order)
-#include "matriks.h"		// digunakan untuk merepresentasikan ruangan
-#include "mesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
-#include "mesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
-#include "queue.h"			// digunakan untuk merepresentasikan antrian pelanggan
-//#include "prioqueue.h"	// digunakan untuk merepresentasikan antrian pelanggan
-#include "stacks.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan
-#include "listlinier.h"		// digunakan untuk mengimplementasikan graf
-#include "tree.h"			// digunakan untuk merepresentasikan resep
-#include "graph.h"			// digunakan untuk menghubungkan bagian-bagian dari peta agar terbentuk satu peta besar
-
+//#include "modjam.h"			// digunakan untuk menyimpan waktu saat save
+#include "Point/modpoint.h"			// digunakan untuk merepresentasikan posisi
+#include "Array/modarray.h"		// digunakan untuk merepresentasikan pesanan (order)
+#include "Matriks/modmatriks.h"
+#include "Mesin/modmesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
+#include "Mesin/modmesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
+#include "Graph/modgraph.h"
+#include "Queue/modqueue.h"			// digunakan untuk merepresentasikan antrian pelanggan
+#include "Stack/modstackt.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan
+//#include "Tree/modpohon.h"			// digunakan untuk merepresentasikan resep
 /* ********** Definisi ********** /
 boolean.h
 	#define true 1
@@ -98,24 +95,24 @@ graph.h
 */
 
 /* ********** Kamus Umum  ********** */
-extern JAM waktu;			//waktu saat melakukan save
-extern POINT pos;			//posisi player
-extern TabInt order;		//pesanan pengunjung
-extern MATRIKS room1;		//ruangan 1
+//extern JAM waktu;			//waktu saat melakukan save
+//extern POINT pos;			//posisi player
+//extern TabInt order;		//pesanan pengunjung
+/*extern MATRIKS room1;		//ruangan 1
 extern MATRIKS room2;		//ruangan 2
 extern MATRIKS room3;		//ruangan 3
-extern MATRIKS kitchen;		//ruangan kitchen
+extern MATRIKS kitchen;		//ruangan kitchen */
 //extern char CC;
 //extern boolean EOP;
 //extern boolean EndKata;
 //extern Kata CKata;
-extern Queue antrian;		//antrian pengunjung
-extern Stack food;			//makanan pada nampan (maks 5 1x jalan)
+//extern Queue antrian;		//antrian pengunjung
+/*extern Stack tray;			//makanan pada nampan (maks 5 1x jalan)
 extern Stack hand;			//makanan pada tangan (maks 5 1x jalan)
 extern List graf;			//list untuk menyambungkan ruangan
 extern char name[12]		//nama pemain
 extern int money;			//uang dalam game
 extern int life;			//nyawa dalam game
-extern int time;			//waktu dalam game
+extern int time;			//waktu dalam game*/
 
 #endif

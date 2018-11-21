@@ -1,0 +1,9 @@
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALKSTRUKDAT 2\Tree\modpohon.c: In function 'BuildTree':
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALKSTRUKDAT 2\Tree\modpohon.c:44:12: warning: passing argument 1 of 'Tree' makes pointer from integer without a cast [-Wint-conversion]
+   *P= Tree(CC, TNil, TNil);
+            ^~
+D:\ITB\Semester 3\Algoritma dan Struktur Data\Tugas Besar\TUBES ALKSTRUKDAT 2\Tree\modpohon.c:7:9: note: expected 'char *' but argument is of type 'char'
+ BinTree Tree(infoTree Akar, BinTree L, BinTree R)
+         ^~~~
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status
