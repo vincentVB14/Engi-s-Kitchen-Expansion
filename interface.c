@@ -138,20 +138,12 @@ void Room (Gaddress P, Graph G)
 			{
 				case ('P'):     // Player
 				{
-					if(CurrentRoom(G) == 4){
-						printf("P");
-					} else{
-						printf("P ");
-					}
+					printf("P ");
 					break;
 				}
 				case ('L'):     // Lantai
 				{
-					if(CurrentRoom(G) == 4){
-						printf(" ");
-					} else{
-						printf("  ");
-					}
+					printf("  ");
 					break;
 				}
 				case ('X'):    // Kursi
@@ -168,16 +160,20 @@ void Room (Gaddress P, Graph G)
 				}
 				case ('M'):       // Meja Customer
 				{
-					if(CurrentRoom(G) == 4){
-						printf("M");
-					} else{
+					if(CurrentRoom(G) == 4)
+					{
+						printf("M ");
+					}
+					else
+					{
 						printf("%-2s", MElmt3(Ruangann(P),i,j));
 					}
 					break;
 				}
 				case ('T'):
 				{
-					printf("T");
+					printf("T ");
+					break;
 				}
 			}
 			if (j != GetLastIdxKolMatrix(Ruangann(P)))
@@ -187,11 +183,7 @@ void Room (Gaddress P, Graph G)
 			else if (i <= GetLastIdxBrsMatrix(Ruangann(P)))
 			{
 				printf(" | *********************** |\n");
-				if(CurrentRoom(G) == 4){
-					printf("|----------------------------------------------------------------------------------|\n");
-				} else{
-					printf("|------------------------------------------------------------------------------------------|\n");
-				}
+				printf("|------------------------------------------------------------------------------------------|\n");
 			}
 		}
 	}
@@ -200,24 +192,24 @@ void Room (Gaddress P, Graph G)
 
 //void Info (Queue Q, TabInt T, TabInt O, TabInt H)
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
-/*
-		s = '-';
-	}
-	printf("| Info : %-73s |", s);
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("| Waiting Customer:                      |  Food Tray:                             |\n");
-	printf("|  1. %-34s |   1. %-34s |\n", Q[1], T[1]);
-	printf("|  2. %-34s |   2. %-34s |\n", Q[2], T[2]);
-	printf("|  3. %-34s |   3. %-34s |\n", Q[3], T[3]);
-	printf("|  4. %-34s |   4. %-34s |\n", Q[4], T[4]);
-	printf("|  5. %-34s |   5. %-34s |\n", Q[5], T[5]);
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("| Waiting Customer:                      |  Food Tray:                             |\n");
-	printf("|  1. %-34s |   1. %-34s |\n", O[1], H[1]);
-	printf("|  2. %-34s |   2. %-34s |\n", O[2], H[2]);
-	printf("|  3. %-34s |   3. %-34s |\n", O[3], H[3]);
-	printf("|  4. %-34s |   4. %-34s |\n", o[4], H[4]);
-	printf("|  5. %-34s |   5. %-34s |\n", O[5], H[5]);
+/*{
+	s = '-';
+	
+	printf("| Info : %-81s |", s);
+	printf("|------------------------------------------------------------------------------------------|\n");
+	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");
+	printf("|  1. %-38s |   1. %-38s |\n", Q[1], T[1]);
+	printf("|  2. %-38s |   2. %-38s |\n", Q[2], T[2]);
+	printf("|  3. %-38s |   3. %-38s |\n", Q[3], T[3]);
+	printf("|  4. %-38s |   4. %-38s |\n", Q[4], T[4]);
+	printf("|  5. %-38s |   5. %-38s |\n", Q[5], T[5]);
+	printf("|------------------------------------------------------------------------------------------|\n");
+	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");
+	printf("|  1. %-38s |   1. %-38s |\n", O[1], H[1]);
+	printf("|  2. %-38s |   2. %-38s |\n", O[2], H[2]);
+	printf("|  3. %-38s |   3. %-38s |\n", O[3], H[3]);
+	printf("|  4. %-38s |   4. %-38s |\n", o[4], H[4]);
+	printf("|  5. %-38s |   5. %-38s |\n", O[5], H[5]);
 }*/
 
 void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
@@ -226,28 +218,23 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 	//Kamus
 
 	//Algoritma
-	if(CurrentRoom(G) == 4){
-		printf("____________________________________________________________________________________\n");
-		printf("| %-12s | Money: %-12d | Life: %-12d | Time: %-12d     |\n", name, money, life, time);
-		printf("|----------------------------------------------------------------------------------|\n");
-		printf("|                                    Dapur                                         |\n");
-		printf("|----------------------------------------------------------------------------------|\n");
-		Room(P, G);
-		printf("|----------------------------------------------------------------------------------|\n");
-		//Info(Q,T,O,H);
-		printf("|__________________________________________________________________________________|\n");
-	} else{
-		printf("____________________________________________________________________________________________\n");
-		printf("| %-12s | Money: %-12d | Life: %-12d | Time: %-12d             |\n", name, money, life, time);
+	
+		printf(" __________________________________________________________________________________________ \n");
+		printf("| %-15s | Money: %-15d | Life: %-15d | Time: %-15d |\n", name, money, life, time);
 		printf("|------------------------------------------------------------------------------------------|\n");
-		printf("|                                      Ruangan  %d                                          |\n", Nomor(P));
+		if(CurrentRoom(G) == 4)
+		{
+			printf("|                                        Dapur                                             |\n");
+		}
+		else
+		{
+			printf("|                                      Ruangan  %d                                          |\n", Nomor(P));
+		}
 		printf("|------------------------------------------------------------------------------------------|\n");
 		Room(P, G);
 		printf("|------------------------------------------------------------------------------------------|\n");
 		//Info(Q,T,O,H);
-		printf("____________________________________________________________________________________________\n");
-	}
-
+		printf("|__________________________________________________________________________________________|\n");
 }
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */
@@ -342,7 +329,7 @@ void Credit (Stat s) */
 	//Kamus
 
 	//Algoritma
-/*	printf("|______________________________________________________________________|\n");
+/*	printf(" ______________________________________________________________________ \n");
 	printf("|                                                                      |\n");
 	printf("|                              STATISTIC                               |\n");
 	printf("|                                                                      |\n");
