@@ -18,6 +18,8 @@
 #include "Matriks/modmatriks.h"
 #include "Mesin/modmesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
 #include "Mesin/modmesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
+#include "Mesin/modmesintree.h"
+#include "Tree/modpohon.h"
 #include "Graph/modgraph.h"
 #include "Queue/modqueue.h"			// digunakan untuk merepresentasikan antrian pelanggan
 #include "Stack/modstackt.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan

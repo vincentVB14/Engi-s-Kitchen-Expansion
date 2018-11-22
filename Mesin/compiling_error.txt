@@ -1,0 +1,12 @@
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x9): undefined reference to `ADV'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x10): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x1b): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x26): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x41): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x51): undefined reference to `ADV'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x58): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x63): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x6e): undefined reference to `CC'
+C:\Users\Meyjan\AppData\Local\Temp\ccY3M8yi.o:modmesintree.c:(.text+0x79): undefined reference to `CC'
+c:/mingw/bin/../lib/gcc/mingw32/6.3.0/../../../libmingw32.a(main.o):(.text.startup+0xa0): undefined reference to `WinMain@16'
+collect2.exe: error: ld returned 1 exit status

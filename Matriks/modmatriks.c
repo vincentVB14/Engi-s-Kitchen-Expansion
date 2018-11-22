@@ -2,8 +2,6 @@
 
 #include "modmatriks.h"
 #include "../Point/modpoint.c"
-#include "../Mesin/modmesinkar.c"
-#include "../Mesin/modmesinkata.c"
 #include <stdio.h>
 #include <string.h>
 

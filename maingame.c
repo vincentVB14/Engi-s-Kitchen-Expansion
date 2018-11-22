@@ -1,11 +1,12 @@
 #include "interface.c"
-//#include "modmatriks.c"
-//#include "modmesinkar.c"
-//#include "modmesinkata.c"
+#include "Mesin/modmesinkar.c"
+#include "Mesin/modmesinkata.c"
+#include "Mesin/modmesintree.c"
 //#include "modpoint.c"
 #include "Queue/modqueue.c"
 #include "Stack/modstackt.c"
 #include "Graph/modgraph.c"
+#include "Tree/modpohon.c"
 //#include "game_mechanic.c"
 #include <stdio.h>
 #include <stdlib.h>
