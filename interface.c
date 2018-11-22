@@ -122,7 +122,7 @@ void MainMenu ()
 }
 
 /* ********** Tampilan Permainan ********** */
-void Room (Gaddress P)
+void Room (Gaddress P, Graph G)
 /* Prosedur untuk tampilan ruangan saat permainan berlangsung */
 {
 	//Kamus
@@ -138,35 +138,46 @@ void Room (Gaddress P)
 			{
 				case ('P'):     // Player
 				{
-					printf("P");
+					if(CurrentRoom(G) == 4){
+						printf("P");
+					} else{
+						printf("P ");
+					}
 					break;
 				}
 				case ('L'):     // Lantai
 				{
-					printf(" ");
+					if(CurrentRoom(G) == 4){
+						printf(" ");
+					} else{
+						printf("  ");
+					}
 					break;
 				}
 				case ('X'):    // Kursi
 				{
 					if (MElmt2(Ruangann(P),i,j))
 					{
-						printf("C");
+						printf("C ");
 					}
 					else
 					{
-						printf("X");
+						printf("X ");
 					}
 					break;
 				}
 				case ('M'):       // Meja Customer
 				{
-					printf("%s", MElmt3(Ruangann(P),i,j));
+					if(CurrentRoom(G) == 4){
+						printf("M");
+					} else{
+						printf("%-2s", MElmt3(Ruangann(P),i,j));
+					}
 					break;
 				}
-				default:          // Useless
+				case ('T'):
 				{
-					printf("Z");
-					break;
+					printf("T");
 				}
 			}
 			if (j != GetLastIdxKolMatrix(Ruangann(P)))
@@ -176,11 +187,15 @@ void Room (Gaddress P)
 			else if (i <= GetLastIdxBrsMatrix(Ruangann(P)))
 			{
 				printf(" | *********************** |\n");
-				printf("|----------------------------------------------------------------------------------|\n");
+				if(CurrentRoom(G) == 4){
+					printf("|----------------------------------------------------------------------------------|\n");
+				} else{
+					printf("|------------------------------------------------------------------------------------------|\n");
+				}
 			}
 		}
 	}
-	printf(" | *********************** |\n");
+	printf("| ********************** |\n");
 }
 
 //void Info (Queue Q, TabInt T, TabInt O, TabInt H)
@@ -205,21 +220,34 @@ void Room (Gaddress P)
 	printf("|  5. %-34s |   5. %-34s |\n", O[5], H[5]);
 }*/
 
-void Play (char *name, int money, int life, int time, Gaddress P)
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 /* Prosedur untuk tampilan saat permainan berlangsung */
 {
 	//Kamus
 
 	//Algoritma
-	printf("____________________________________________________________________________________\n");
-	printf("| %-12s | Money: %-6d | Life: %-2d | Time: %-4d     |\n", name, money, life, time);
-	printf("|----------------------------------------------------------------------------------|\n");
-	printf("|                                    Ruangan  %d                                    |\n", Nomor(P));
-	printf("|----------------------------------------------------------------------------------|\n");
-	Room(P);
-	printf("|----------------------------------------------------------------------------------|\n");
-	//Info(Q,T,O,H);
-	printf("|__________________________________________________________________________________|\n");
+	if(CurrentRoom(G) == 4){
+		printf("____________________________________________________________________________________\n");
+		printf("| %-12s | Money: %-12d | Life: %-12d | Time: %-12d     |\n", name, money, life, time);
+		printf("|----------------------------------------------------------------------------------|\n");
+		printf("|                                    Dapur                                         |\n");
+		printf("|----------------------------------------------------------------------------------|\n");
+		Room(P, G);
+		printf("|----------------------------------------------------------------------------------|\n");
+		//Info(Q,T,O,H);
+		printf("|__________________________________________________________________________________|\n");
+	} else{
+		printf("____________________________________________________________________________________________\n");
+		printf("| %-12s | Money: %-12d | Life: %-12d | Time: %-12d             |\n", name, money, life, time);
+		printf("|------------------------------------------------------------------------------------------|\n");
+		printf("|                                      Ruangan  %d                                          |\n", Nomor(P));
+		printf("|------------------------------------------------------------------------------------------|\n");
+		Room(P, G);
+		printf("|------------------------------------------------------------------------------------------|\n");
+		//Info(Q,T,O,H);
+		printf("____________________________________________________________________________________________\n");
+	}
+
 }
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */
@@ -346,6 +374,6 @@ void Legend ()
 	printf("|                                                                      |\n");
 	printf("| P : player                       |   C  : customer                   |\n");
 	printf("| X : kursi kosong                 |   T  : tray                       |\n");
-	printf("| Ruangann(P) : meja bahan                   |  'n' : meja no 'n' (n = integer)  |\n");
+	printf("| Ruangann(P) : meja bahan         |  'n' : meja no 'n' (n = integer)  |\n");
 	printf("|______________________________________________________________________|\n");
 }
