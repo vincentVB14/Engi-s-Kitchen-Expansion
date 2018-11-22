@@ -208,14 +208,12 @@ void DelOrder (POINT P, TabInt *O)
 	int i;
 
 	//Algoritma
-	if (!IsEmptyArray(*O))
+	if(!IsEmptyArray(*O))
 	{
-		for (i = GetFirstIdxArray(*O); i <= GetLastIdxArray(*O); i++)
-		{
-			if (Kesabaran(*O,i) == 0)
-			{
-				DelEli(O, i, &temp);
-			}
-		}
+		for(i = GetFirstIdxArray(*O); i <= GetLastIdxArray(*O); i++){
+      if(Kesabaran(*O, i) == 0){
+        DelEli(O,i, &temp);
+      }
+    }
 	}
 }

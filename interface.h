@@ -15,11 +15,11 @@ void MainMenu ();
 /* Prosedur untuk tampilan menu sebelum permainan dimulai */
 
 /* ********** Tampilan Permainan ********** */
-void Room (Gaddress P);
+void Room (Gaddress P, Graph G);
 /* Prosedur untuk tampilan ruangan saat permainan berlangsung */
-void Info (Queue Q, TabInt T, TabInt O, TabInt H);
+//void Info (Queue Q, TabInt T, TabInt O, TabInt H);
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
-void Play (char *name, int money, int life, int time, Gaddress P);
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G);
 /* Prosedur untuk tampilan saat permainan berlangsung */
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */

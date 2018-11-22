@@ -463,28 +463,31 @@ void BacaPeta (Graph *G, POINT *Player)
   // ALGORITMA
 
   // Ruangan 1
-  printf("Membaca ruang 1\n");
-  if( access("../File Eksternal/Ruang1.txt", F_OK ) != -1 ) {
+  printf("Membaca ruang 1...\n");
+  /*if( access("../File Eksternal/Ruang1.txt", F_OK ) != -1 ) {
       printf("File 1 ada\n");
   } else {
       printf("File 1 tidak ada\n");
-  }
+  }*/
 
   AddRuangan(G, 1, "File Eksternal/Ruang1.txt");
   P = FirstG(*G);
   FileToMatriks(&P, "File Eksternal/Ruang1.txt");
 
   // Ruangan 2
+  printf("Membaca ruang 2...\n");
   AddRuangan(G, 2, "File Eksternal/Ruang2.txt");
   P = NextP(P);
   FileToMatriks(&P, "File Eksternal/Ruang2.txt");
 
   // Ruangan 3
+  printf("Membaca ruang 3...\n");
   AddRuangan(G, 3, "File Eksternal/Ruang3.txt");
   P = NextP(P);
   FileToMatriks(&P, "File Eksternal/Ruang3.txt");
 
   // Ruangan Dapur
+  printf("Membaca ruang Dapur...\n");
   AddRuangan(G, 4, "File Eksternal/Dapur.txt");
   P = NextP(P);
   FileToMatriksDapur(&P, "File Eksternal/Dapur.txt");

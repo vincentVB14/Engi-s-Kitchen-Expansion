@@ -1,8 +1,8 @@
-Lantai Kursi  Lantai Lantai Lantai Lantai Lantai Lantai
-Kursi  Meja1  Kursi  Lantai Lantai Kursi  Meja2  Kursi
-Lantai Kursi  Lantai Lantai Lantai Lantai Lantai Lantai
-Lantai Lantai Lantai Lantai Lantai Lantai Lantai Lantai
+Lantai Kursi Lantai Lantai Lantai Lantai Kursi Lantai
+Kursi  Meja1 Kursi Lantai Lantai Kursi Meja2 Kursi
+Lantai Kursi  Lantai Lantai Lantai Lantai Kursi Lantai
+Lantai Lantai Lantai Player Lantai Lantai Lantai Lantai
 Lantai Lantai Lantai Lantai Lantai Lantai Lantai Pintu2
-Lantai Kursi  Lantai Lantai Lantai Lantai Lantai Lantai
-Kursi  Meja3  Kursi  Lantai Lantai Kursi  Meja4  Kursi
-Lantai Kursi  Lantai Lantai Pintu4 Lantai Lantai Lantai.
+Lantai Kursi Lantai Lantai Lantai Lantai Kursi Lantai
+Kursi Meja3 Kursi Lantai Lantai Kursi  Meja4 Kursi
+Lantai Kursi Lantai Lantai Pintu4 Lantai Kursi Lantai.

@@ -465,21 +465,24 @@ POINT MejaDapurDekatPlayer (MATRIKS M, POINT Player)
   indeks i,j;
 
   // ALGORITMA
+  i = Ordinat(Player);
+  j = Absis(Player);
+
   if (MElmt(M,(i-1),j) == 'M')
   {
-    return (MakePOINT(j,(i-1)));
+    return (MakePOINT((i-1), j));
   }
   else if (MElmt(M,(i+1),j) == 'M')
   {
-    return (MakePOINT(j,(i+1)));
+    return (MakePOINT((i+1), j));
   }
   else if (MElmt(M,i,(j-1)) == 'M')
   {
-    return (MakePOINT((j-1),i));
+    return (MakePOINT(i,(j-1)));
   }
   else if (MElmt(M,i,(j+1)) == 'M')
   {
-    return (MakePOINT((j+1),i));
+    return (MakePOINT(i,(j+1)));
   }
   else
   {

@@ -39,7 +39,7 @@ void Push (Stack * S, infostack X)
 /* F.S. X menjadi TOP yang baru,TOP bertambah 1 */
 {
   (*S).TOP++;
-  (*S).T[(*S).TOP] = X;
+  InfoTop(*S) = X;
 }
 
 /* ************ Menghapus sebuah elemen Stack ************ */
@@ -48,7 +48,7 @@ void Pop (Stack * S, infostack * X)
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 {
-  *X = (*S).T[(*S).TOP];
+  *X = InfoTop(*S);
   (*S).TOP--;
 }
 

@@ -85,6 +85,7 @@ void EmptyHand(Stack * Hand)
 /*F.S. Stack Hand kosong*/
 {
   printf("Membuang makanan di tangan...\n");
+  sleep(1);
   CreateEmptyStack(Hand);
 }
 
@@ -94,6 +95,7 @@ void EmptyTray(Stack * Tray)
 /*F.S. Stack Tray kosong*/
 {
   printf("Membuang makanan di tangan...\n");
+  sleep(1);
   CreateEmptyStack(Tray);
 }
 
@@ -101,7 +103,7 @@ void EmptyTray(Stack * Tray)
 
 int main(){
   clrscr();
-  boolean customerchance = (rand() % 100) < 5;
+  boolean customer_chance;
   boolean validmove;
   int choice;
   int money, life, time;
@@ -123,19 +125,20 @@ int main(){
   strcpy(playername,""); //Inisialisasi string nama player
 
   //Create Empties
+  CreateEmptyStack(&Hand);
+  CreateEmptyStack(&Tray);
   CreateEmptyQueue(&antrian, 5);
   CreateEmptyGraph(&MAP);
   BacaPeta(&MAP, &player);
   current_room = SearchRuangan(MAP, CurrentRoom(MAP));
-
   //Nilai awal
   money = 0;
   life = 3;
   time = 0;
 
-
   clrscr();
-  MainMenu();
+  //MainMenu();
+  printf(">>> ");
   //Membaca pilihan dari player
   scanf("%d", &choice);
   switch(choice){
@@ -165,7 +168,12 @@ int main(){
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
       clrscr();
-      Play(playername, money, life, time, current_room);
+      customer_chance = (rand() % 100) < 5;
+      if(customer_chance){
+        //AddQueue
+      }
+
+      Play(playername, money, life, time, current_room, MAP);
 
       printf(">>> ");
       scanf("%s", command);
@@ -199,7 +207,8 @@ int main(){
       } else if(strcmp(command, "LOAD") == 0){
 
       } else if(strcmp(command, "LEGEND") == 0){
-
+        Legend();
+        sleep(2);
       } else if(strcmp(command, "EXIT") == 0){
         clrscr();
         printf("GAME OVER\n");

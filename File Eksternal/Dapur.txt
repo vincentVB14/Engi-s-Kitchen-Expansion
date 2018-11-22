@@ -1,8 +1,8 @@
-Lantai Lantai  Lantai Lantai Pintu1 Lantai Lantai Tray
-MPiring  Lantai  Lantai  Lantai Lantai Lantai Lantai Lantai
-MSendok Lantai  Lantai Lantai Lantai Lantai Lantai Lantai
-MGarpu Lantai Lantai Lantai Lantai Lantai Lantai Lantai
-MRoti Lantai MSiomay MBatagor Lantai Lantai Lantai Pintu3
-MJeruk Lantai  MSosis MCeker Lantai Lantai Lantai Lantai
-MNanas  Lantai  Lantai  Lantai Lantai Lantai  Lantai  Lantai
-Lantai Lantai  MMie MMakaroni MKerupuk MBaso Lantai Lantai.
+MPiring Lantai  Lantai Lantai Pintu1 Lantai Lantai Tray
+MSendok  Lantai  Lantai  Lantai Lantai Lantai Lantai Lantai
+MGarpu Lantai  Lantai MNasi MAyamGoreng Lantai Lantai Lantai
+MEsKrim Lantai Lantai MTelur MKeju Lantai Lantai Lantai
+MPisang Lantai Lantai MSosis MBolognese Lantai Lantai Pintu3
+MStroberi Lantai  Lantai MSpaghetti MCarbonara Lantai Lantai Lantai
+MRoti  Lantai  Lantai  Lantai Lantai Lantai  Lantai  Lantai
+MPatty Lantai  Lantai Lantai Lantai Lantai Lantai Lantai.

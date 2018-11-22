@@ -11,7 +11,7 @@
 
 #define MNil -1
 #define MNil2 "Nil"
-#define MCharMax 10
+#define MCharMax 20
 /* Ukuran minimum dan maksimum baris dan kolom */
 #define BrsMin 1
 #define BrsMax 15

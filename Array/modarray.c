@@ -15,18 +15,17 @@ void MakeEmptyArray (TabInt *T)
 {
 	//KAMUS LOKAL
 	int i;
-	
+
 	//ALGORITMA
 	Neff(*T) = 0;
 }
 
-/* ********** SELEKTOR (TAMBAHAN) ********** */
 IdxType GetFirstIdxArray (TabInt T)
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T pertama */
 {
 	//KAMUS LOKAL
-	
+
 	//ALGORITMA
 	return (IdxMin);
 }
@@ -35,9 +34,9 @@ IdxType GetLastIdxArray (TabInt T)
 /* Mengirimkan indeks elemen T terakhir */
 {
 	//KAMUS LOKAL
-	
+
 	//ALGORITMA
-	return (Neff(T));	
+	return (Neff(T));
 }
 
 /* ********** TEST KOSONG/PENUH ********** */
@@ -47,7 +46,7 @@ boolean IsEmptyArray (TabInt T)
 /* *** Test tabel penuh *** */
 {
 	//KAMUS LOKAL
-	
+
 	//ALGORITMA
 	return (Neff(T) == 0);
 }
@@ -55,12 +54,12 @@ boolean IsFullArray (TabInt T)
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 {
 	//KAMUS LOKAL
-	
+
 	//ALGORITMA
 	return (Neff(T) == IdxMax);
 }
 
-void DelEli (TabInt *T, IdxType i, ElType *X)
+void DelEli (TabInt *T, IdxType i, ElType * X)
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
 /* F.S. X adalah nilai elemen ke-i T sebelum penghapusan */
@@ -71,8 +70,7 @@ void DelEli (TabInt *T, IdxType i, ElType *X)
 {
 	//Kamus
 	IdxType j;
-
-	//Algoritma
+ 	//Algoritma
 	*X = Elmt(*T, i);
 	if (IsEmpty(*T) == false)
 	{

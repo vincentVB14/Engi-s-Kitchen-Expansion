@@ -10,7 +10,7 @@
 #include "boolean.h"
 #include "modmesinkar.h"
 
-#define NMax 10
+#define NMax 20
 #define BLANK ' '
 #define ENTER '\n'
 
