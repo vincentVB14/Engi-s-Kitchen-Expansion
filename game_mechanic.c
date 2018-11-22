@@ -143,13 +143,13 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T)
 	int N;
 
 	//Algoritma
-	if (IsFull(*O))
+	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
 	}
 	else
 	{
-		i = GetLastIdx(*O) + 1;
+		i = GetLastIdxArray(*O) + 1;
 		No(*O,i) = atoi(MElmt3(*M,Absis(P),Ordinat(P)));
 		f = rand() % (8 + 1);
 		switch (f)
@@ -208,9 +208,14 @@ void DelOrder (POINT P, TabInt *O)
 	int i;
 
 	//Algoritma
-	i = GetFirstIdx(*O);
-	if (Kesabaran(*O,i) == 0)
+	if (!IsEmptyArray(*O))
 	{
-		DelEli(O, i, &temp);
+		for (i = GetFirstIdxArray(*O); i <= GetLastIdxArray(*O); i++)
+		{
+			if (Kesabaran(*O,i) == 0)
+			{
+				DelEli(O, i, &temp);
+			}
+		}
 	}
 }
