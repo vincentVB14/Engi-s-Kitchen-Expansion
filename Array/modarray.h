@@ -75,6 +75,9 @@ boolean IsEmptyArray (TabInt T);
 boolean IsFullArray (TabInt T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
 
+void BacaIsi (TabInt *T);
+void TulisIsi (TabInt T);
+
 void DelEli (TabInt *T, IdxType i, ElType * X);
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
