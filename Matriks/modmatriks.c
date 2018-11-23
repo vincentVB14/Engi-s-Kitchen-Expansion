@@ -1,7 +1,6 @@
 // BODY dari ADT MATRIKS
 
 #include "modmatriks.h"
-#include "../Point/modpoint.c"
 #include <stdio.h>
 #include <string.h>
 

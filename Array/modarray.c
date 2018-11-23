@@ -72,9 +72,9 @@ void DelEli (TabInt *T, IdxType i, ElType * X)
 	IdxType j;
  	//Algoritma
 	*X = Elmt(*T, i);
-	if (IsEmpty(*T) == false)
+	if (IsEmptyArray(*T) == false)
 	{
-		for(j = i; j < GetLastIdx(*T); j++)
+		for(j = i; j < GetLastIdxArray(*T); j++)
 		{
 			Elmt(*T, j) = Elmt(*T, (j + 1));
 		}

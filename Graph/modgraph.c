@@ -2,9 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <unistd.h>
+#include <string.h>
 #include "modgraph.h"
-#include "../Matriks/modmatriks.c"
 
 // KONSTRUKTOR
 void CreateEmptyGraph (Graph *G)

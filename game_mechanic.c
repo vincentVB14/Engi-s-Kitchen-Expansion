@@ -2,6 +2,9 @@
 /* File ini berisi implementasi dari game_mechanic.h */
 
 #include "game_mechanic.h"
+#include <string.h>
+
+// PENGATURAN AWAL GAME
 
 void NewGame(char * playername)
 /*Prosedur untuk menginput nama player*/
@@ -29,50 +32,47 @@ void LoadGame();
 /*I.S. Permainan belum dimulai*/
 /*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
 
-void CountBarisKolom (int *Brs, int *Kol, char * filename)
-/* Menghitung jumlah baris dan kolom untuk matriks
-   dengan cara sekali melalui file eksternal */
+
+// ATURAN-ATURAN REGULASI GAME
+void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q)
+// Melakukan apa yang dilakukan pada setiap turn
+// Mengurangi kesabaran setiap orang di meja
+// Menambahkan waktu
+// Mengeluarkan setiap pelanggan yang kesabarannya mencapai 0
+// Megurangi kesabaran setiap pelanggan yang menunggu di Queue
 {
   // KAMUS LOKAL
-  int i, j;
 
   // ALGORITMA
-
-  // Inisialisasi
-  printf("Kata = %s", filename);
-  STARTKATA(filename);
-  if (EndKata) {
-    i = 0;
-  } else {
-    i = 1;
-  }
-  j = 0;
-
-  // Menghitung baris dan kolom
-  while (!EndKata) {
-    if (!NewLine) {
-      j++;
-    } else {
-      i++;
-      j = 0;
-    }
-    ADVKATA();
-  }
-  *Brs = i;
-  *Kol = j;
+  *Time = *Time + 1;
+  ReduceKesabaranG (G, Life);
+  KurangSabarQueue (Q, Life);
 }
 
-void TakeFood(Stack * Hand, MATRIKS M, POINT Player)
+
+// ATURAN STACK HAND DAN TRAY DALAM GAME
+
+void TakeFood(Stack * Hand, MATRIKS room, POINT Player)
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
 {
-  POINT Meja_dapur;
-  Meja_dapur = (MejaDapurDekatPlayer(M, Player));
+  POINT Meja_dapur = MejaDapurDekatPlayer(room, Player);
   if(!IsFullStack(*Hand)){
-    if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0) {
-      Push(Hand, MElmt3(M, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+    if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
+      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "AyamGoreng") == 0){
+        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Ayam Goreng");
+      }
+      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "EsKrim") == 0){
+        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Es Krim");
+      }
+      printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+      Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+    } else{
+      printf("Tidak ada makanan yang bisa diambil\n");
     }
+  } else{
+    printf("Tangan sudah penuh\n");
   }
 }
 
@@ -82,6 +82,7 @@ void EmptyHand(Stack * Hand)
 /*F.S. Stack Hand kosong*/
 {
   printf("Membuang makanan di tangan...\n");
+  sleep(1);
   CreateEmptyStack(Hand);
 }
 
@@ -91,6 +92,7 @@ void EmptyTray(Stack * Tray)
 /*F.S. Stack Tray kosong*/
 {
   printf("Membuang makanan di tangan...\n");
+  sleep(1);
   CreateEmptyStack(Tray);
 }
 
@@ -135,12 +137,15 @@ void GiveFood(Stack * Tray)
   }
 }
 
+// ATURAN ARRAY DALAM GAME
+
 void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T)
 /* Menerima pesanan customer */
 {
 	//Kamus
 	int i;
 	int N;
+  int f;
 
 	//Algoritma
 	if (IsFullArray(*O))

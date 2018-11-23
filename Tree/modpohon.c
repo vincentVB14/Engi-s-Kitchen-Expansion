@@ -2,7 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <unistd.h>
 
 /*int main()
 {
@@ -50,12 +49,7 @@ void CreateTreeMakanan (BinTree *P)
   // KAMUS LOKAL
 
   // ALGORITMA
-  START("../File Eksternal/Resep.txt");
-  if( access("../File Eksternal/Resep.txt", F_OK ) != -1 ) {
-      printf("File exist\n");
-  } else {
-      printf("File doesn't exist\n");
-  }
+  START("File Eksternal/Resep.txt");
   BuildTree(P, 1);
   if (CC != MARK)
   {
@@ -92,6 +86,7 @@ Memori pasti cukup, alokasi pasti berhasil. */
     		BuildTree(&Left(*P), (level + 1));
     		IgnoreBlankEnter();
     		BuildTree(&Right(*P), (level + 1));
+        printf("Beres level %d", level);
     		IgnoreBlankEnter();
         if (CC == ')')
         {
@@ -118,6 +113,7 @@ addrNode AlokNode(infoTree X)
   P = (addrNode) malloc (sizeof(Node));
   if (P != TNil)
   {
+    printf("%s\n", TrKata);
     strcpy(Akar(P), TrKata);
     Left(P) = TNil;
     Right(P) = TNil;

@@ -7,7 +7,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-#include "kamus.h"
 #include "interface.h"
 
 /* ********** Tampilan Menu ********** */
@@ -194,7 +193,7 @@ void Room (Gaddress P, Graph G)
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
 /*{
 	s = '-';
-	
+
 	printf("| Info : %-81s |", s);
 	printf("|------------------------------------------------------------------------------------------|\n");
 	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");
@@ -218,7 +217,7 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 	//Kamus
 
 	//Algoritma
-	
+
 		printf(" __________________________________________________________________________________________ \n");
 		printf("| %-15s | Money: %-15d | Life: %-15d | Time: %-15d |\n", name, money, life, time);
 		printf("|------------------------------------------------------------------------------------------|\n");
@@ -249,7 +248,6 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 	char t4[80] = "| | | |_ |  / /\\ \\  | |\\/| ||  __|   | |  | | \\ \\/ /  |  __|  |  _  /  |";
 	char t5[80] = "| | |__| | / ____ \\ | |  | || |____  | |__| |  \\  /   | |____ | | \\ \\  |";
 	char t6[80] = "|  \\_____//_/    \\_\\|_|  |_||______|  \\____/    \\/    |______||_|  \\_\\ |";
-
 	//Algoritma
 	do
 	{
@@ -308,7 +306,6 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 			{
 				printf("|                                                                      |\n");
 			}
-
 			Credit(s);
 			if(i != 6)
 			{

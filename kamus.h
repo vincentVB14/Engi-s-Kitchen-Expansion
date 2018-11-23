@@ -13,16 +13,16 @@
 #include <string.h>
 #include "boolean.h"
 //#include "modjam.h"			// digunakan untuk menyimpan waktu saat save
-#include "Point/modpoint.h"			// digunakan untuk merepresentasikan posisi
 #include "Array/modarray.h"		// digunakan untuk merepresentasikan pesanan (order)
+#include "Graph/modgraph.h"
 #include "Matriks/modmatriks.h"
 #include "Mesin/modmesinkar.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
 #include "Mesin/modmesinkata.h"		// digunakan untuk membaca informasi dari file eksternal, membaca command dari user dan membaca state permainan yang pernah disimpan
 #include "Mesin/modmesintree.h"
-#include "Tree/modpohon.h"
-#include "Graph/modgraph.h"
+#include "Point/modpoint.h"			// digunakan untuk merepresentasikan posisi
 #include "Queue/modqueue.h"			// digunakan untuk merepresentasikan antrian pelanggan
 #include "Stack/modstackt.h"			// digunakan untuk merepresentasikan tumpukan makanan di tangan dan nampan
+#include "Tree/modpohon.h"
 //#include "Tree/modpohon.h"			// digunakan untuk merepresentasikan resep
 /* ********** Definisi ********** /
 boolean.h

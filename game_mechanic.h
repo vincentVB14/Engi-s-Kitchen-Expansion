@@ -19,7 +19,14 @@ void LoadGame();
 /*I.S. Permainan belum dimulai*/
 /*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
 
-void TakeFood(Stack * Hand, MATRIKS M, POINT Player);
+void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q);
+// Melakukan apa yang dilakukan pada setiap turn
+// Mengurangi kesabaran setiap orang di meja
+// Menambahkan waktu
+// Mengeluarkan setiap pelanggan yang kesabarannya mencapai 0
+// Megurangi kesabaran setiap pelanggan yang menunggu di Queue
+
+void TakeFood(Stack * Hand, MATRIKS room, POINT Player);
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
@@ -45,7 +52,7 @@ void GiveFood(Stack * Tray);
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O);
+void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T);
 /* Menerima pesanan customer */
 
 void DelOrder (POINT P, TabInt *O);
