@@ -5,71 +5,88 @@
  * Deskripsi : Driver ADT ARRAY */
 
 #include <stdio.h>
+#include <string.h>
 #include "modarray.c"
 
 int main()
 {
 	//KAMUS
+	int cek;
 	int choice;
+	int i;
 	TabInt T;
 	ElType temp;
 
 	//ALGORITMA
-	printf("1. CreateEmptyArray");
-	printf("2. GetFirstIdxArray");
-	printf("3. GetLastIdxArray");
-	printf("4. IsEmptyArray");
-	printf("5. IsFullArray");
-	printf("6. DelEli");
-	scanf("%d", &choice);
-	switch (choice)
+	cek = 1;
+	CreateEmptyArray(&T);
+	printf("Jumlah isi array : %d\n", Neff(T));
+	printf("Input isi array :\n");
+	BacaIsi(&T);
+	do
 	{
-		case 1:
+		printf("Jumlah isi array : %d\n", Neff(T));
+		printf("1. TulisIsi\n");
+		printf("2. GetFirstIdxArray\n");
+		printf("3. GetLastIdxArray\n");
+		printf("4. IsEmptyArray\n");
+		printf("5. IsFullArray\n");
+		printf("6. DelEli\n");
+		printf("choice = "); scanf("%d", &choice);
+		switch (choice)
 		{
-			CreateEmptyArray(&T);
-			break;
-		}
-		case 2:
-		{
-			print("First Idx : %d\n", GetFirstIdxArray(T));
-			break;
-		}
-		case 3:
-		{
-			print("Last Idx : %d\n", GetLastIdxArray(T));
-			break;
-		}
-		case 4:
-		{
-			if (IsEmptyArray(T))
+			case 1:
 			{
-				printf("kosong\n");
+				TulisIsi(T);
+				break;
 			}
-			else
+			case 2:
 			{
-				printf("isi\n");
+				printf("First Idx : %d\n", GetFirstIdxArray(T));
+				break;
 			}
-			break;
-		}
-		case 5:
-		{
-			if (IsFullArray(T))
+			case 3:
 			{
-				printf("isi\n");
+				printf("Last Idx : %d\n", GetLastIdxArray(T));
+				break;
 			}
-			else
+			case 4:
 			{
-				printf("kosong\n");
+				if (IsEmptyArray(T))
+				{
+					printf("kosong\n");
+				}
+				else if (!IsEmptyArray(T))
+				{
+					printf("isi\n");
+				}
+				break;
 			}
-			break;
+			case 5:
+			{
+				if (IsFullArray(T))
+				{
+					printf("penuh\n");
+				}
+				else if (!IsFullArray(T))
+				{
+					printf("kosong\n");
+				}
+				break;
+			}
+			case 6:
+			{
+				scanf("%d", &i);
+				DelEli(&T, i, &temp);
+				TulisIsi(T);
+				break;
+			}
+			case 8:
+			{
+				cek = 1;
+				break;
+			}
 		}
-		case 6:
-		{
-
-			DelEli(&T, i &temp);
-			printf("elemen terbuang : %d\n", temp);
-			break;
-		}
-	}
+	} while (cek != 0);
 	return 0;
 }

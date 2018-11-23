@@ -69,27 +69,27 @@ void BacaIsi (TabInt *T)
 	//Kamus
 	IdxType i;
 	boolean found;
-	int isi;
+	int no;
 	char food[20];
 	int kesabaran;
 
 	//Algoritma
-	i = GetFirstIdx(*T);
+	i = GetFirstIdxArray(*T);
 	found = false;
-	MakeEmpty(T);
-	while ((found == false) && (NbElmt(*T) < MaxNbEl(*T)))
+	CreateEmptyArray(T);
+	while (!found)
 	{
-		scanf ("%d", &isi);
-		scanf ("%s", &food);
-		scanf ("%d", &kesabaran);
-		if (isi == -9999)
+		if ((no == -9999) || (Neff(*T) == 5))
 		{
 			found = true;
 		}
 		else
 		{
-			No(*T,i) = isi;
-			Food(*T,i) = food;
+			scanf ("%d", &no);
+			scanf ("%s", food);
+			scanf ("%d", &kesabaran);
+			No(*T,i) = no;
+			strcpy(Food(*T,i), food);
 			Kesabaran(*T,i) = kesabaran;
 			Neff(*T) += 1;
 			i++;
@@ -112,20 +112,20 @@ void TulisIsi (TabInt T)
 	IdxType i;
 
 	//Algoritma
-	if (IsEmpty(T) == true)
+	if (IsEmptyArray(T))
 	{
-		printf ("Tabel kosong\n");
+		printf("Tabel kosong\n");
 	}
 	else
 	{
-		for (i = GetFirstIdx(T); i <= GetLastIdx(T); i++)
+		for (i = GetFirstIdxArray(T); i <= GetLastIdxArray(T); i++)
 		{
 			printf("[%d] %-15d. %-15s %-15d\n", i, No(T,i), Food(T,i), Kesabaran(T,i));
 		}
 	}
 }
 
-void DelEli (TabInt *T, IdxType i, ElType * X)
+void DelEli (TabInt *T, IdxType i, ElType *X)
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
 /* F.S. X adalah nilai elemen ke-i T sebelum penghapusan */
@@ -136,6 +136,7 @@ void DelEli (TabInt *T, IdxType i, ElType * X)
 {
 	//Kamus
 	IdxType j;
+	
  	//Algoritma
 	*X = Elmt(*T, i);
 	if (IsEmptyArray(*T) == false)
