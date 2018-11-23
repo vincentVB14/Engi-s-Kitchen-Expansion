@@ -54,7 +54,7 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain);
        sama dengan jumlah customer di Head Queue, maka elemen Queue berkurang 1 .
        Jika tidak, maka Queue tetap dan kursi dibiarkan kosong*/
 
-void GiveFood(Stack * Tray);
+void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
 /*Prosedur untuk memberikan makan paling atas tumpukan*/
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/

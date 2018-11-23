@@ -200,6 +200,55 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain)
   }
 }
 
+void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
+/*Prosedur untuk memberikan makan paling atas tumpukan*/
+/*I.S. Stack Tray terdefinisi, tidak kosong*/
+/*F.S. Makanan paling atas di Stack Tray di-Pop*/
+{
+  POINT P;
+  int i;
+  int j;
+
+  P = MejaDekatPlayer(Ruangann(*F),Player);
+  i = Ordinat(P);
+  j = Absis(P);
+  if (i == 0 && j == 0){
+    printf("Tidak ada meja di dekat anda\n");
+  }
+  else{
+    if (!MElmt2(Ruangann(*F),i,j)){
+      printf("Tidak ada pelanggan di meja tersebut\n");
+    }
+    else {
+      int NoMeja;
+      i = SearchArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P))));
+      if (NoMeja != atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P))))
+      {
+        printf("Pelanggan di meja tersebut belum memesan makanan\n");
+      }
+      else {
+        if (!IsEmptyStack(*Tray))
+        {
+          infostack X;
+          Pop(Tray, &X);
+        }
+        if (strcmp(X,Food(*O,i)) != 0){
+          printf("Meja ini tidak memesan makanan di atas tumpukan tray\n");
+        }
+        else {
+          MElmt2(Ruangann(*F),i,j) = false;
+          MElmt2(Ruangann(*F), i, j - 1) = false;
+          MElmt2(Ruangann(*F), i, j + 1) = false;
+          if (MElmt4(Ruangann(*F),i,j) == 4){
+            MElmt2(Ruangann(*F), i-1, j) = false;
+            MElmt2(Ruangann(*F), i+1, j) = false;
+          }
+        }
+      }
+    }
+  }
+}
+
 // ATURAN ARRAY DALAM GAME
 boolean SearchNoMejaArray (TabInt T, int n)
 /* Mengecek apakah meja tersebut sudah memesan */
