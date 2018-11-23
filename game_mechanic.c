@@ -34,7 +34,7 @@ void LoadGame();
 
 
 // ATURAN-ATURAN REGULASI GAME
-void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q)
+void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q)
 // Melakukan apa yang dilakukan pada setiap turn
 // Mengurangi kesabaran setiap orang di meja
 // Menambahkan waktu
@@ -46,6 +46,7 @@ void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q)
   // ALGORITMA
   *Time = *Time + 1;
   ReduceKesabaranG (G, Life);
+  KurangSabarArray(O, Life);
   KurangSabarQueue (Q, Life);
 }
 
