@@ -243,7 +243,13 @@ void PrintTree2(BinTree P, int h, int count)
   {
     for (i = 0; i < (h * count); i++)
     {
-      printf(" ");
+      if(i == (h * (count-1))){
+        printf("|");
+      } else if(i > (h * (count-1)) && i < (h * count)){
+        printf("-");
+      } else{
+        printf(" ");
+      }
     }
     printf("%s\n", Akar(P));
     PrintTree2(Left(P), h, (count + 1));
