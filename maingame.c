@@ -63,7 +63,7 @@ int main(){
   //Create Empties
   CreateEmptyStack(&Hand);
   CreateEmptyStack(&Tray);
-  CreateEmptyArray(&O);
+  CreateEmptyArray(&Order);
   CreateEmptyQueue(&antrian, 5);
   CreateEmptyGraph(&MAP);
   printf("Reading tree\n");
@@ -132,7 +132,7 @@ int main(){
           printf("Tidak ada customer dekat player\n");
           sleep(2);
         } else{
-          AddOrder(&MAP, mejap, &O);
+          AddOrder(&MAP, mejap, &Order);
         }*/
       } else if(strcmp(command, "PUT") == 0){
 

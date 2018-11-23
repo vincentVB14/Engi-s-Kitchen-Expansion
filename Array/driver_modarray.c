@@ -13,9 +13,9 @@ int main()
 	int choice;
 	TabInt T;
 	ElType temp;
-	
+
 	//ALGORITMA
-	printf("1. MakeEmptyArray");
+	printf("1. CreateEmptyArray");
 	printf("2. GetFirstIdxArray");
 	printf("3. GetLastIdxArray");
 	printf("4. IsEmptyArray");
@@ -26,7 +26,7 @@ int main()
 	{
 		case 1:
 		{
-			MakeEmptyArray(&T);
+			CreateEmptyArray(&T);
 			break;
 		}
 		case 2:
@@ -65,7 +65,7 @@ int main()
 		}
 		case 6:
 		{
-			
+
 			DelEli(&T, i &temp);
 			printf("elemen terbuang : %d\n", temp);
 			break;
