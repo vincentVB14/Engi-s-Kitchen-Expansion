@@ -57,3 +57,6 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O);
 
 void DelOrder (POINT P, TabInt *O);
 /* Menerima pesanan customer */
+
+boolean SearchNoMejaArray (TabInt T, int n);
+/* Mengecek apakah meja tersebut sudah memesan */

@@ -222,3 +222,30 @@ void DelOrder (POINT P, TabInt *O)
     }
 	}
 }
+
+boolean SearchNoMejaArray (TabInt T, int n)
+/* Mengecek apakah meja tersebut sudah memesan */
+{
+	//Kamus
+	IdxType i;
+	boolean found;
+
+	//Algoritma
+	found = false;
+	if (!IsEmptyArray(T))
+	{
+		i = GetFirstIdxArray(T);
+		while ((i <= GetLastIdxArray(T)) && (!found))
+		{
+			if (No(T,i) == n)
+			{
+				found = true;
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+	return (found);
+}
