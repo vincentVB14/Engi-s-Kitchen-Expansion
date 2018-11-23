@@ -49,18 +49,21 @@ int main(){
 
   Queue antrian;
 
+  TabInt Order;
+
   Stack Hand;
   Stack Tray;
 
   BinTree resep;
 
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
-  playername = (char *) malloc (12 * sizeof(char)); //Alokasi nama player sepanjang 12 karakter
+  playername = (char *) malloc (15 * sizeof(char)); //Alokasi nama player sepanjang 15 karakter
   strcpy(playername,""); //Inisialisasi string nama player
 
   //Create Empties
   CreateEmptyStack(&Hand);
   CreateEmptyStack(&Tray);
+  CreateEmptyArray(&O);
   CreateEmptyQueue(&antrian, 5);
   CreateEmptyGraph(&MAP);
   printf("Reading tree\n");
@@ -124,7 +127,7 @@ int main(){
       } else if(strcmp(command, "GR") == 0){
         GoRIGHT(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "ORDER") == 0){
-
+        //AddOrder(&MAP, mejap, &O);
       } else if(strcmp(command, "PUT") == 0){
 
       } else if(strcmp(command, "TAKE") == 0){

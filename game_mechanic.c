@@ -139,7 +139,7 @@ void GiveFood(Stack * Tray)
 
 // ATURAN ARRAY DALAM GAME
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T)
+void AddOrder (MATRIKS *M, POINT P, TabInt *O)
 /* Menerima pesanan customer */
 {
 	//Kamus

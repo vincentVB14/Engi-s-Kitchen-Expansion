@@ -52,7 +52,7 @@ void GiveFood(Stack * Tray);
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O, BinTree T);
+void AddOrder (MATRIKS *M, POINT P, TabInt *O);
 /* Menerima pesanan customer */
 
 void DelOrder (POINT P, TabInt *O);
