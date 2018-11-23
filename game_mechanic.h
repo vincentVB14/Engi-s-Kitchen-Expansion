@@ -26,7 +26,7 @@ void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q);
 // Mengeluarkan setiap pelanggan yang kesabarannya mencapai 0
 // Megurangi kesabaran setiap pelanggan yang menunggu di Queue
 
-void TakeFood(Stack * Hand, MATRIKS room, POINT Player);
+void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep);
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
@@ -54,13 +54,14 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain);
        sama dengan jumlah customer di Head Queue, maka elemen Queue berkurang 1 .
        Jika tidak, maka Queue tetap dan kursi dibiarkan kosong*/
 
-void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
+void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player);
 /*Prosedur untuk memberikan makan paling atas tumpukan*/
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/
 
 boolean SearchNoMejaArray (TabInt T, int n);
 /* Mengecek apakah meja tersebut sudah memesan */
+
 int SearchArray (TabInt T, int n);
 /* Mengembalika no meja untuk give */
 

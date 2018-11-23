@@ -55,7 +55,7 @@ void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q)
 
 // ATURAN STACK HAND DAN TRAY DALAM GAME
 
-void TakeFood(Stack * Hand, MATRIKS room, POINT Player)
+void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
@@ -63,14 +63,39 @@ void TakeFood(Stack * Hand, MATRIKS room, POINT Player)
   POINT Meja_dapur = MejaDapurDekatPlayer(room, Player);
   if(!IsFullStack(*Hand)){
     if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
-      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "AyamGoreng") == 0){
-        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Ayam Goreng");
+      if(IsEmptyStack(*Hand)){
+        if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(resep)) == 0){
+          printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+          Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+        } else{
+          printf("Anda belum mengambil Piring!\n");
+        }
+      } else{
+        Stack Stemp;
+        CopyStack(*Hand, &Stemp); //Copy Stack Hand ke Stack Stemp untuk penyimpanan temporary
+        InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
+        BinTree temp;
+        MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
+        strcpy(Akar(temp), Akar(resep));
+        char * X;
+        X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
+        while(!IsEmptyStack(Stemp)){
+          Pop(&Stemp, &X);
+          if(strcmp(X, Akar(temp)) == 0){
+            if(SearchTree(Left(temp), MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)))){ //Jika yang mau diambil ada di kiri
+              temp = Left(temp);
+            } else{ //Jika tidak, ke kanan
+              temp = Right(temp);
+            }
+          }
+        }
+        if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
+          printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+          Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+        } else{
+          printf("Anda tidak bisa mengambil makanan ini!\n");
+        }
       }
-      if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "EsKrim") == 0){
-        strcpy(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), "Es Krim");
-      }
-      printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
-      Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
     } else{
       printf("Tidak ada makanan yang bisa diambil\n");
     }
@@ -128,17 +153,6 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
     }
   }
 }*/
-
-void GiveFood(Stack * Tray)
-/*Prosedur untuk memberikan makan paling atas tumpukan*/
-/*I.S. Stack Tray terdefinisi, tidak kosong*/
-/*F.S. Makanan paling atas di Stack Tray di-Pop*/
-{
-  if(!IsEmptyStack(*Tray)){
-    infostack X;
-    Pop(Tray, &X);
-  }
-}
 
 // ATURAN QUEUE DALAM GAME
 
@@ -208,7 +222,6 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
   POINT P;
   int i;
   int j;
-
   P = MejaDekatPlayer(Ruangann(*F),Player);
   i = Ordinat(P);
   j = Absis(P);
@@ -221,8 +234,8 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
     }
     else {
       int NoMeja;
-      i = SearchArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P))));
-      if (NoMeja != atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P))))
+      i = SearchArray(*O,atoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
+      if (NoMeja != atoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
       {
         printf("Pelanggan di meja tersebut belum memesan makanan\n");
       }
@@ -231,17 +244,18 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
         {
           infostack X;
           Pop(Tray, &X);
-        }
-        if (strcmp(X,Food(*O,i)) != 0){
-          printf("Meja ini tidak memesan makanan di atas tumpukan tray\n");
-        }
-        else {
-          MElmt2(Ruangann(*F),i,j) = false;
-          MElmt2(Ruangann(*F), i, j - 1) = false;
-          MElmt2(Ruangann(*F), i, j + 1) = false;
-          if (MElmt4(Ruangann(*F),i,j) == 4){
-            MElmt2(Ruangann(*F), i-1, j) = false;
-            MElmt2(Ruangann(*F), i+1, j) = false;
+          if (strcmp(X,Food(*O,i)) != 0){
+            printf("Meja ini tidak memesan makanan di atas tumpukan tray\n");
+            Push(Tray, X);
+          }
+          else {
+            MElmt2(Ruangann(*F),i,j) = false;
+            MElmt2(Ruangann(*F), i, j - 1) = false;
+            MElmt2(Ruangann(*F), i, j + 1) = false;
+            if (MElmt4(Ruangann(*F),i,j) == 4){
+              MElmt2(Ruangann(*F), i-1, j) = false;
+              MElmt2(Ruangann(*F), i+1, j) = false;
+            }
           }
         }
       }
@@ -283,8 +297,7 @@ int SearchArray (TabInt T, int n)
 	//Kamus
 	IdxType i;
 	boolean found;
-
-	//Algoritma
+ 	//Algoritma
 	found = false;
 	if (!IsEmptyArray(T))
 	{
@@ -311,24 +324,26 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 	int i;
 	int N;
 	int f;
+  int e;
+  int g;
 
 	//Algoritma
-	TulisPOINT(P);
+  TulisPOINT(P);
 	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
-		sleep(2);
+    sleep(2);
 	}
 	else if (SearchNoMejaArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)))))
 	{
 		printf("Order sudah dilakukan\n");
-		sleep(2);
+    sleep(2);
 	} else {
 		i = GetLastIdxArray(*O) + 1;
 		No(*O,i) = atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
-		e = rand() % (8 + 1);
+    e = rand() % (8 + 1);
 		f = rand() % (8 + 1);
-		g = (e * f) % 9;
+    g = (e * f) % 9;
 		switch (g)
 		{
 			case 1 :
