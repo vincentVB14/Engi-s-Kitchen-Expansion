@@ -58,6 +58,73 @@ boolean IsFullArray (TabInt T)
 	return (Neff(T) == IdxMax);
 }
 
+void BacaIsi (TabInt *T)
+/* I.S. T sembarang */
+/* F.S. Tabel T terdefinisi */
+/* Proses : membaca elemen T sampai dimasukkan nilai -9999 */
+/* Dibaca elemen satu per satu dan disimpan mulai dari IdxMin */
+/* Pembacaan dihentikan jika pengguna memasukkan nilai -9999 */
+/* Jika dari pertama dimasukkan nilai -9999 maka terbentuk T kosong */
+{
+	//Kamus
+	IdxType i;
+	boolean found;
+	int isi;
+	char food[20];
+	int kesabaran;
+
+	//Algoritma
+	i = GetFirstIdx(*T);
+	found = false;
+	MakeEmpty(T);
+	while ((found == false) && (NbElmt(*T) < MaxNbEl(*T)))
+	{
+		scanf ("%d", &isi);
+		scanf ("%s", &food);
+		scanf ("%d", &kesabaran);
+		if (isi == -9999)
+		{
+			found = true;
+		}
+		else
+		{
+			No(*T,i) = isi;
+			Food(*T,i) = food;
+			Kesabaran(*T,i) = kesabaran;
+			Neff(*T) += 1;
+			i++;
+		}
+	}
+}
+void TulisIsi (TabInt T)
+/* Proses : Menuliskan isi tabel dengan traversal */
+/* I.S. T boleh kosong */
+/* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
+/*      Jika T kosong : Hanya menulis "Tabel kosong" */
+/* Contoh: Jika isi Tabel: [1, 20, 30, 50]
+   Maka tercetak di layar:
+   [1]1
+   [2]20
+   [3]30
+   [4]50 */
+{
+	//Kamus
+	IdxType i;
+
+	//Algoritma
+	if (IsEmpty(T) == true)
+	{
+		printf ("Tabel kosong\n");
+	}
+	else
+	{
+		for (i = GetFirstIdx(T); i <= GetLastIdx(T); i++)
+		{
+			printf("[%d] %-15d. %-15s %-15d\n", i, No(T,i), Food(T,i), Kesabaran(T,i));
+		}
+	}
+}
+
 void DelEli (TabInt *T, IdxType i, ElType * X)
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
