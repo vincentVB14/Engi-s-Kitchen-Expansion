@@ -156,7 +156,7 @@ void ReduceKesabaranM (MATRIKS *M, int *life)
             MElmt2(*M,i,(j+1)) = false;
             MElmt5(*M,i,(j+1)) = MNil;
           }
-          *life--;
+          *life = *life - 1;
         }
       }
     }
