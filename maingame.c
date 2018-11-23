@@ -127,7 +127,13 @@ int main(){
       } else if(strcmp(command, "GR") == 0){
         GoRIGHT(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "ORDER") == 0){
-        //AddOrder(&MAP, mejap, &O);
+        /*mejap = MejaDekatPlayer(MAP, player);
+        if(Ordinat(mejap) == 0)&&(Absis(mejap) == 0)){
+          printf("Tidak ada customer dekat player\n");
+          sleep(2);
+        } else{
+          AddOrder(&MAP, mejap, &O);
+        }*/
       } else if(strcmp(command, "PUT") == 0){
 
       } else if(strcmp(command, "TAKE") == 0){
