@@ -148,3 +148,32 @@ void DelEli (TabInt *T, IdxType i, ElType *X)
 		Neff(*T) -= 1;
 	}
 }
+
+void KurangSabarArray(TabInt *O, int *Life)
+/* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan */
+/* F.S. Kesabaran customer berkurang satu */
+{
+   
+	//KAMUS LOKAL
+	ElType X;
+     
+	//ALGORITMA
+	if (IsEmptyArray(*O))
+	{
+		//do nothing
+	}
+	else
+	{
+		int i = GetFirstIdxArray(*O);
+		while(i <= GetLastIdxArray(*O))
+		{
+			Kesabaran(*O,i)--;
+			if (Kesabaran(*O,i) == 0)
+			{
+				DelEli(O,i,&X);
+				*Life = *Life - 1;
+			}
+			i++;
+		}
+	}
+}

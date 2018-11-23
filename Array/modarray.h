@@ -87,4 +87,8 @@ void DelEli (TabInt *T, IdxType i, ElType * X);
 /* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 /*          Kurangi elemen efektif tabel */
 
+void KurangSabarArray(TabInt *O, int *Life)
+/* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan */
+/* F.S. Kesabaran customer berkurang satu */
+
 #endif
