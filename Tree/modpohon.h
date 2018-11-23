@@ -97,4 +97,7 @@ A
 void PrintTree2(BinTree P, int h, int count);
 // Membantu prosedur printtree
 
+boolean SearchTree(BinTree P, infoTree X);
+/* Mengirimkan true jika ada node dari P yang bernilai X */
+
 #endif

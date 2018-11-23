@@ -113,7 +113,6 @@ addrNode AlokNode(infoTree X)
   P = (addrNode) malloc (sizeof(Node));
   if (P != TNil)
   {
-    printf("%s\n", TrKata);
     strcpy(Akar(P), TrKata);
     Left(P) = TNil;
     Right(P) = TNil;
@@ -254,5 +253,17 @@ void PrintTree2(BinTree P, int h, int count)
     printf("%s\n", Akar(P));
     PrintTree2(Left(P), h, (count + 1));
     PrintTree2(Right(P), h, (count + 1));
+  }
+}
+
+boolean SearchTree(BinTree P, infoTree X)
+/* Mengirimkan true jika ada node dari P yang bernilai X */
+{
+  if(IsTreeEmpty(P)){
+    return false;
+  } else if(strcmp(Akar(P), X) == 0){
+    return true;
+  } else{
+    return SearchTree(Left(P), X) || SearchTree(Right(P), X);
   }
 }
