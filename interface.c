@@ -203,12 +203,12 @@ void Room (Gaddress P, Graph G)
 	printf("|  4. %-38s |   4. %-38s |\n", Q[4], T[4]);
 	printf("|  5. %-38s |   5. %-38s |\n", Q[5], T[5]);
 	printf("|------------------------------------------------------------------------------------------|\n");
-	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");
-	printf("|  1. %-38s |   1. %-38s |\n", O[1], H[1]);
-	printf("|  2. %-38s |   2. %-38s |\n", O[2], H[2]);
-	printf("|  3. %-38s |   3. %-38s |\n", O[3], H[3]);
-	printf("|  4. %-38s |   4. %-38s |\n", o[4], H[4]);
-	printf("|  5. %-38s |   5. %-38s |\n", O[5], H[5]);
+	printf("| Order :                                    |  Hand :                                     |\n");
+	printf("|  1. Meja No %-2d - %-20s [%-2d] |   1. %-38s |\n", No(O,1), Food(O,1), Kesabaran(O,1), H[1]);
+	printf("|  2. Meja No %-2d - %-20s [%-2d] |   2. %-38s |\n", No(O,2), Food(O,2), Kesabaran(O,2), H[2]);
+	printf("|  3. Meja No %-2d - %-20s [%-2d] |   3. %-38s |\n", No(O,3), Food(O,3), Kesabaran(O,3), H[3]);
+	printf("|  4. Meja No %-2d - %-20s [%-2d] |   4. %-38s |\n", No(O,4), Food(O,4), Kesabaran(O,4), H[4]);
+	printf("|  5. Meja No %-2d - %-20s [%-2d] |   5. %-38s |\n", No(O,5), Food(O,5), Kesabaran(O,5), H[5]);
 }*/
 
 void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
