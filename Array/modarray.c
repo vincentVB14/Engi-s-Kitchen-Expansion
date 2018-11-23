@@ -14,7 +14,6 @@ void CreateEmptyArray (TabInt *T)
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {
 	//KAMUS LOKAL
-	int i;
 
 	//ALGORITMA
 	Neff(*T) = 0;
