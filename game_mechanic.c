@@ -145,12 +145,16 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O)
 	//Kamus
 	int i;
 	int N;
-  int f;
+	int f;
 
 	//Algoritma
 	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
+	}
+	else if (SearchNoMejaArray(*O,atoi(MElmt3(*M,Absis(P),Ordinat(P))));
+	{
+		printf("Order sudah dilakukan\n");
 	}
 	else
 	{
