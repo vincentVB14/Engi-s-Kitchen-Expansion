@@ -228,6 +228,33 @@ boolean SearchNoMejaArray (TabInt T, int n)
 	return (found);
 }
 
+int SearchArray (TabInt T, int n)
+/* Mengembalikan no meja untuk give */
+{
+	//Kamus
+	IdxType i;
+	boolean found;
+
+	//Algoritma
+	found = false;
+	if (!IsEmptyArray(T))
+	{
+		i = GetFirstIdxArray(T);
+		while ((i <= GetLastIdxArray(T)) && (!found))
+		{
+			if (No(T,i) == n)
+			{
+				found = true;
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+	return (i);
+}
+
 void AddOrder (Gaddress *M, POINT P, TabInt *O)
 /* Menerima pesanan customer */
 {

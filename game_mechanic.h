@@ -61,6 +61,8 @@ void GiveFood(Stack * Tray);
 
 boolean SearchNoMejaArray (TabInt T, int n);
 /* Mengecek apakah meja tersebut sudah memesan */
+int SearchArray (TabInt T, int n);
+/* Mengembalika no meja untuk give */
 
 void AddOrder (Gaddress *M, POINT P, TabInt *O);
 /* Menerima pesanan customer */
