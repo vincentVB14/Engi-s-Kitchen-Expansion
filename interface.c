@@ -193,7 +193,6 @@ void Room (Gaddress P, Graph G)
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
 /*{
 	s = '-';
-
 	printf("| Info : %-81s |", s);
 	printf("|------------------------------------------------------------------------------------------|\n");
 	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");

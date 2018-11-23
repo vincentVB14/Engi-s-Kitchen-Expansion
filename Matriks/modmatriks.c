@@ -77,145 +77,6 @@ boolean IsIdxEffMatrix (MATRIKS M, indeks i, indeks j)
           j >= GetFirstIdxKolMatrix (M) && j <= GetLastIdxKolMatrix (M));
 }
 
-void modTulisMATRIKS (MATRIKS M)
-/* I.S. M terdefinisi */
-/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
-   dipisahkan sebuah spasi */
-/* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
-/* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
-1 2 3
-4 5 6
-8 9 10
-*/
-{
-  // KAMUS LOKAL
-  indeks i, j;
-
-  // ALGORITMA
-
-  for (i = GetFirstIdxBrsMatrix(M); i <= GetLastIdxBrsMatrix(M); i++)
-  {
-    printf(" ");
-    for (j = GetFirstIdxKolMatrix(M); j <= GetLastIdxKolMatrix(M); j++)
-    {
-      switch(MElmt(M,i,j))
-      {
-        case ('P'):     // Player
-        {
-          printf("P");
-          break;
-        }
-        case ('L'):     // Lantai
-        {
-          printf(" ");
-          break;
-        }
-        case ('X'):    // Kursi
-        {
-          if (MElmt2(M,i,j))
-          {
-            printf("C");
-          }
-          else
-          {
-            printf("X");
-          }
-          break;
-        }
-        case ('M'):       // Meja Customer
-        {
-          printf("%s", MElmt3(M,i,j));
-          break;
-        }
-        default:          // Useless
-        {
-          printf("Z");
-          break;
-        }
-      }
-      if (j != GetLastIdxKolMatrix(M))
-      {
-        printf(" | ");
-      }
-      else if (i != GetLastIdxBrsMatrix(M))
-      {
-        printf("\n");
-        for (int k = 1; k <= NBrsEff(M); k++)
-        {
-          printf("----");
-        }
-        printf("\n");
-      }
-    }
-  }
-  printf("\n");
-}
-
-void modTulisMATRIKSDapur (MATRIKS M)
-/* I.S. M terdefinisi */
-/* F.S. Nilai M(i,j) ditulis ke layar per baris per kolom, masing-masing elemen per baris
-   dipisahkan sebuah spasi */
-/* Proses: Menulis nilai setiap elemen M ke layar dengan traversal per baris dan per kolom */
-/* Contoh: menulis matriks 3x3 (ingat di akhir tiap baris, tidak ada spasi)
-1 2 3
-4 5 6
-8 9 10
-*/
-{
-  // KAMUS LOKAL
-  indeks i, j;
-
-  // ALGORITMA
-
-  for (i = GetFirstIdxBrsMatrix(M); i <= GetLastIdxBrsMatrix(M); i++)
-  {
-    printf(" ");
-    for (j = GetFirstIdxKolMatrix(M); j <= GetLastIdxKolMatrix(M); j++)
-    {
-      switch(MElmt(M,i,j))
-      {
-        case ('P'):
-        {
-          printf("P");
-          break;
-        }
-        case ('L'):
-        {
-          printf(" ");
-          break;
-        }
-        case ('T'):
-        {
-          printf("T");
-          break;
-        }
-        case ('M'):
-        {
-          printf("M");
-          break;
-        }
-        default:
-        {
-          printf("Z");
-          break;
-        }
-      }
-      if (j != GetLastIdxKolMatrix(M))
-      {
-        printf(" | ");
-      }
-      else if (i != GetLastIdxBrsMatrix(M))
-      {
-        printf("\n");
-        for (int k = 1; k <= NBrsEff(M); k++)
-        {
-          printf("----");
-        }
-        printf("\n");
-      }
-    }
-  }
-}
 
 void MejaKursi (MATRIKS *M)
 /* Mengisi hubungan antara kursi dan meja */
@@ -285,12 +146,12 @@ void ReduceKesabaranM (MATRIKS *M, int *life)
             MElmt2(*M,(i+1),j) = false;
             MElmt5(*M,(i+1),j) = MNil;
           }
-          if ((MElmt(*M,i,(j-1)) == 'M') && (MElmt2(*M,i,(j-1))))
+          if ((MElmt(*M,i,(j-1)) == 'X') && (MElmt2(*M,i,(j-1))))
           {
             MElmt2(*M,i,(j-1)) = false;
             MElmt5(*M,i,(j-1)) = MNil;
           }
-          if ((MElmt(*M,i,(j+1)) == 'M') && (MElmt2(*M,i,(j+1))))
+          if ((MElmt(*M,i,(j+1)) == 'X') && (MElmt2(*M,i,(j+1))))
           {
             MElmt2(*M,i,(j+1)) = false;
             MElmt5(*M,i,(j+1)) = MNil;
@@ -394,7 +255,7 @@ POINT PosisiMeja(MATRIKS M, char* str)
     while (j < GetLastIdxKolMatrix(M) && !found)
     {
       j++;
-      if (strcmp(MElmt3(M,i,j),str) == 0)
+      if ((strcmp(MElmt3(M,i,j),str) == 0) &&  MElmt(M,i,j) == 'M')
       {
         found = true;
       }

@@ -121,17 +121,6 @@ void PindahRuangan (Graph *G, Gaddress *P, POINT *Player, boolean *valid);
 void ReduceKesabaranG (Graph *G, int *life);
 // Mengurangi kesabaran seluruh MAP
 
-/* COMMAND LIST GRAPH */
-void GoUP(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
-/* Menaikkan player 1 tile ke atas kalau bisa */
 
-void GoDOWN(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
-/* Menurunkan player 1 tile ke bawah kalau bisa */
-
-void GoLEFT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
-/* Menggerakkan player 1 tile ke kiri kalau bisa */
-
-void GoRIGHT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
-/* Menggerakkan player 1 tile ke kanan kalau bisa */
 
 #endif

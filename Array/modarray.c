@@ -6,6 +6,7 @@
 /* Deskripsi		: Definisi Modul Kamus */
 
 #include "modarray.h"
+#include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */
 /* Konstruktor : create tabel kosong  */
@@ -58,45 +59,7 @@ boolean IsFullArray (TabInt T)
 	return (Neff(T) == IdxMax);
 }
 
-void BacaIsi (TabInt *T)
-/* I.S. T sembarang */
-/* F.S. Tabel T terdefinisi */
-/* Proses : membaca elemen T sampai dimasukkan nilai -9999 */
-/* Dibaca elemen satu per satu dan disimpan mulai dari IdxMin */
-/* Pembacaan dihentikan jika pengguna memasukkan nilai -9999 */
-/* Jika dari pertama dimasukkan nilai -9999 maka terbentuk T kosong */
-{
-	//Kamus
-	IdxType i;
-	boolean found;
-	int no;
-	char food[20];
-	int kesabaran;
-
-	//Algoritma
-	i = GetFirstIdxArray(*T);
-	found = false;
-	CreateEmptyArray(T);
-	while (!found)
-	{
-		if ((no == -9999) || (Neff(*T) == 5))
-		{
-			found = true;
-		}
-		else
-		{
-			scanf ("%d", &no);
-			scanf ("%s", food);
-			scanf ("%d", &kesabaran);
-			No(*T,i) = no;
-			strcpy(Food(*T,i), food);
-			Kesabaran(*T,i) = kesabaran;
-			Neff(*T) += 1;
-			i++;
-		}
-	}
-}
-void TulisIsi (TabInt T)
+void TulisIsiArray (TabInt T)
 /* Proses : Menuliskan isi tabel dengan traversal */
 /* I.S. T boleh kosong */
 /* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
@@ -112,9 +75,9 @@ void TulisIsi (TabInt T)
 	IdxType i;
 
 	//Algoritma
-	if (IsEmptyArray(T))
+	if (IsEmptyArray(T) == true)
 	{
-		printf("Tabel kosong\n");
+		printf ("Tabel kosong\n");
 	}
 	else
 	{
@@ -125,7 +88,7 @@ void TulisIsi (TabInt T)
 	}
 }
 
-void DelEli (TabInt *T, IdxType i, ElType *X)
+void DelEli (TabInt *T, IdxType i, ElType * X)
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
 /* I.S. Tabel tidak kosong, i adalah indeks efektif yang valid */
 /* F.S. X adalah nilai elemen ke-i T sebelum penghapusan */
@@ -136,7 +99,6 @@ void DelEli (TabInt *T, IdxType i, ElType *X)
 {
 	//Kamus
 	IdxType j;
-	
  	//Algoritma
 	*X = Elmt(*T, i);
 	if (IsEmptyArray(*T) == false)
@@ -153,10 +115,10 @@ void KurangSabarArray(TabInt *O, int *Life)
 /* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan */
 /* F.S. Kesabaran customer berkurang satu */
 {
-   
+
 	//KAMUS LOKAL
 	ElType X;
-     
+
 	//ALGORITMA
 	if (IsEmptyArray(*O))
 	{

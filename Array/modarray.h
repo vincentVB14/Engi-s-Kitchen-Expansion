@@ -67,6 +67,18 @@ IdxType GetLastIdxArray (TabInt T);
 /* Prekondisi : Tabel T tidak kosong */
 /* Mengirimkan indeks elemen T terakhir */
 
+void TulisIsiArray (TabInt T);
+/* Proses : Menuliskan isi tabel dengan traversal */
+/* I.S. T boleh kosong */
+/* F.S. Jika T tidak kosong : indeks dan elemen tabel ditulis berderet ke bawah */
+/*      Jika T kosong : Hanya menulis "Tabel kosong" */
+/* Contoh: Jika isi Tabel: [1, 20, 30, 50]
+   Maka tercetak di layar:
+   [1]1
+   [2]20
+   [3]30
+   [4]50 */
+
 /* ********** TEST KOSONG/PENUH ********** */
 /* *** Test tabel kosong *** */
 boolean IsEmptyArray (TabInt T);
@@ -74,9 +86,6 @@ boolean IsEmptyArray (TabInt T);
 /* *** Test tabel penuh *** */
 boolean IsFullArray (TabInt T);
 /* Mengirimkan true jika tabel T penuh, mengirimkan false jika tidak */
-
-void BacaIsi (TabInt *T);
-void TulisIsi (TabInt T);
 
 void DelEli (TabInt *T, IdxType i, ElType * X);
 /* Menghapus elemen ke-i tabel tanpa mengganggu kontiguitas */
@@ -86,8 +95,7 @@ void DelEli (TabInt *T, IdxType i, ElType * X);
 /*      Tabel T mungkin menjadi kosong */
 /* Proses : Geser elemen ke-i+1 s.d. elemen terakhir */
 /*          Kurangi elemen efektif tabel */
-
-void KurangSabarArray(TabInt *O, int *Life)
+void KurangSabarArray(TabInt *O, int *Life);
 /* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan */
 /* F.S. Kesabaran customer berkurang satu */
 

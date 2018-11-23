@@ -19,7 +19,7 @@ void LoadGame();
 /*I.S. Permainan belum dimulai*/
 /*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
 
-void EveryTurn (Graph *G, int *Life, int *Time, Queue*Q);
+void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q);
 // Melakukan apa yang dilakukan pada setiap turn
 // Mengurangi kesabaran setiap orang di meja
 // Menambahkan waktu
@@ -47,16 +47,37 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
 /* I.S. Stack Hand terdefinisi, Bintree Resep terdefinisi*/
 /* F.S. Stack Tray terisi dengan daun makanan dari Tree, Stack Hand kosong */
 
+void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain);
+/* Prosedur untuk mendudukkan customer ke kursi */
+/*I.S. Queue terdefinisi, mungkin kosong*/
+/*F.S. Jika jumlah kursi yang ingin di-assign oleh customer
+       sama dengan jumlah customer di Head Queue, maka elemen Queue berkurang 1 .
+       Jika tidak, maka Queue tetap dan kursi dibiarkan kosong*/
+
 void GiveFood(Stack * Tray);
 /*Prosedur untuk memberikan makan paling atas tumpukan*/
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O);
+boolean SearchNoMejaArray (TabInt T, int n);
+/* Mengecek apakah meja tersebut sudah memesan */
+
+void AddOrder (Gaddress *M, POINT P, TabInt *O);
 /* Menerima pesanan customer */
 
 void DelOrder (POINT P, TabInt *O);
 /* Menerima pesanan customer */
 
-boolean SearchNoMejaArray (TabInt T, int n);
-/* Mengecek apakah meja tersebut sudah memesan */
+// ATURAN GERAKAN DALAM GAME
+
+void GoUP(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menaikkan player 1 tile ke atas kalau bisa */
+
+void GoDOWN(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menurunkan player 1 tile ke bawah kalau bisa */
+
+void GoLEFT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menggerakkan player 1 tile ke kiri kalau bisa */
+
+void GoRIGHT(Graph *G, Gaddress *P, POINT *Player, boolean *valid);
+/* Menggerakkan player 1 tile ke kanan kalau bisa */

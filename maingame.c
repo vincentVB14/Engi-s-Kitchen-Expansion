@@ -109,7 +109,7 @@ int main(){
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
       clrscr();
-      customer_chance = (rand() % 100) < 10;
+      customer_chance = (rand() % 100) < 5;
       if(customer_chance){
         AddQueue(&antrian);
       }
@@ -127,13 +127,16 @@ int main(){
       } else if(strcmp(command, "GR") == 0){
         GoRIGHT(&MAP, &current_room, &player, &validmove);
       } else if(strcmp(command, "ORDER") == 0){
-        /*mejap = MejaDekatPlayer(MAP, player);
-        if(Ordinat(mejap) == 0)&&(Absis(mejap) == 0)){
+        mejap = MejaDekatPlayer(Ruangann(current_room), player);
+        if((Ordinat(mejap) == 0)&&(Absis(mejap) == 0)) {
           printf("Tidak ada customer dekat player\n");
           sleep(2);
+        } else if (!MElmt2(Ruangann(current_room), Ordinat(mejap), Absis(mejap))) {
+          printf("Meja tersebut tidak memiliki pelanggan\n");
+          sleep(2);
         } else{
-          AddOrder(&MAP, mejap, &Order);
-        }*/
+          AddOrder(&current_room, mejap, &Order);
+        }
       } else if(strcmp(command, "PUT") == 0){
 
       } else if(strcmp(command, "TAKE") == 0){
@@ -144,7 +147,7 @@ int main(){
       } else if(strcmp(command, "CT") == 0){
         EmptyTray(&Tray);
       } else if(strcmp(command, "PLACE") == 0){
-
+        PlaceCustomer(&current_room, &antrian, player);
       } else if(strcmp(command, "GIVE") == 0){
 
       } else if(strcmp(command, "RECIPE") == 0){
@@ -172,10 +175,13 @@ int main(){
       } else if (strcmp(command, "PQUEUE") == 0){
         PrintQueue(antrian);
         sleep(5);
+      } else if (strcmp(command, "PARRAY") == 0){
+        TulisIsiArray(Order);
+        sleep(5);
       }
 
       if(strcmp(command, "RECIPE") != 0 && strcmp(command, "SAVE") != 0 && strcmp(command, "LOAD") != 0 && strcmp(command, "LEGEND") != 0){
-        EveryTurn(&MAP, &life, &time, &antrian);
+        EveryTurn(&MAP, &life, &time, &Order, &antrian);
       }
     }
     printf("GAME OVER\n");

@@ -2,7 +2,9 @@
 /* File ini berisi implementasi dari game_mechanic.h */
 
 #include "game_mechanic.h"
-#include <string.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <unistd.h>
 
 // PENGATURAN AWAL GAME
 
@@ -46,8 +48,8 @@ void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q)
   // ALGORITMA
   *Time = *Time + 1;
   ReduceKesabaranG (G, Life);
-  KurangSabarArray(O, Life);
   KurangSabarQueue (Q, Life);
+  KurangSabarArray(O, Life);
 }
 
 
@@ -138,9 +140,95 @@ void GiveFood(Stack * Tray)
   }
 }
 
-// ATURAN ARRAY DALAM GAME
+// ATURAN QUEUE DALAM GAME
 
-void AddOrder (MATRIKS *M, POINT P, TabInt *O)
+void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain)
+/* Prosedur untuk mendudukkan customer ke kursi */
+/*I.S. Queue terdefinisi, mungkin kosong*/
+/*F.S. Jika jumlah kursi yang ingin di-assign oleh customer
+       sama dengan jumlah customer di Head Queue, maka elemen Queue berkurang 1 .
+       Jika tidak, maka Queue tetap dan kursi dibiarkan kosong*/
+{
+  // KAMUS LOKAL
+  POINT P;
+  int i, j;
+  customer X;
+  // ALGORITMA
+  P = MejaDekatPlayer(Ruangann(*F), Pemain);
+  i = Ordinat(P);
+  j = Absis(P);
+  if (i != 0 && j != 0)
+  {
+    if (!MElmt2(Ruangann(*F), i, j))
+    {
+      if (MElmt4(Ruangann(*F), i, j) == 2)
+      {
+        DelQueue2(Q, &X);
+      }
+      else if (MElmt4(Ruangann(*F), i, j) == 4)
+      {
+        DelQueue(Q, &X);
+      }
+      if (InfoJumlah(X) != 0)
+      {
+        int Sabar = rand() % (50 + 1 - 40) + 40;
+        MElmt5(Ruangann(*F), i, j) = Sabar;
+        MElmt2(Ruangann(*F), i, j) = true;
+        MElmt2(Ruangann(*F), i, j - 1) = true;
+        MElmt2(Ruangann(*F), i, j + 1) = true;
+        if (InfoJumlah(X) == 4){
+          MElmt2(Ruangann(*F), i-1, j) = true;
+          MElmt2(Ruangann(*F), i+1, j) = true;
+        }
+      }
+      else
+      {
+        printf("Tidak ada kelompok di antrian dengan jumlah orang sama dengan jumlah kursi\n");
+        sleep(2);
+      }
+    }
+    else
+    {
+      printf("Kursi di meja ini penuh\n");
+      sleep(2);
+    }
+  }
+  else
+  {
+    printf("Tidak ada kursi di sebelah anda\n");
+    sleep(2);
+  }
+}
+
+// ATURAN ARRAY DALAM GAME
+boolean SearchNoMejaArray (TabInt T, int n)
+/* Mengecek apakah meja tersebut sudah memesan */
+{
+	//Kamus
+	IdxType i;
+	boolean found;
+
+	//Algoritma
+	found = false;
+	if (!IsEmptyArray(T))
+	{
+		i = GetFirstIdxArray(T);
+		while ((i <= GetLastIdxArray(T)) && (!found))
+		{
+			if (No(T,i) == n)
+			{
+				found = true;
+			}
+			else
+			{
+				i++;
+			}
+		}
+	}
+	return (found);
+}
+
+void AddOrder (Gaddress *M, POINT P, TabInt *O)
 /* Menerima pesanan customer */
 {
 	//Kamus
@@ -149,18 +237,19 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O)
 	int f;
 
 	//Algoritma
+  TulisPOINT(P);
 	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
+    sleep(2);
 	}
-	else if (SearchNoMejaArray(*O,atoi(MElmt3(*M,Absis(P),Ordinat(P))));
+	else if (SearchNoMejaArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)))))
 	{
 		printf("Order sudah dilakukan\n");
-	}
-	else
-	{
+    sleep(2);
+	} else {
 		i = GetLastIdxArray(*O) + 1;
-		No(*O,i) = atoi(MElmt3(*M,Absis(P),Ordinat(P)));
+		No(*O,i) = atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
 		f = rand() % (8 + 1);
 		switch (f)
 		{
@@ -205,7 +294,7 @@ void AddOrder (MATRIKS *M, POINT P, TabInt *O)
 				break;
 			}
 		}
-		Kesabaran(*O,i) = MElmt5(*M,Absis(P),Ordinat(P));
+		Kesabaran(*O,i) = MElmt5(Ruangann(*M),Ordinat(P),Absis(P));
 		Neff(*O)++;
 	}
 }
@@ -228,29 +317,120 @@ void DelOrder (POINT P, TabInt *O)
 	}
 }
 
-boolean SearchNoMejaArray (TabInt T, int n)
-/* Mengecek apakah meja tersebut sudah memesan */
-{
-	//Kamus
-	IdxType i;
-	boolean found;
+// ATURAN PERGERAKAN DALAM GAME
 
-	//Algoritma
-	found = false;
-	if (!IsEmptyArray(T))
-	{
-		i = GetFirstIdxArray(T);
-		while ((i <= GetLastIdxArray(T)) && (!found))
-		{
-			if (No(T,i) == n)
-			{
-				found = true;
-			}
-			else
-			{
-				i++;
-			}
-		}
-	}
-	return (found);
+void GoUP(Graph *G, Gaddress *P, POINT *Player, boolean *valid)
+/* Menaikkan player 1 tile ke atas kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Ordinat(*Player) > GetFirstIdxBrsMatrix(Ruangann(*P)))
+  {
+    if (MElmt(Ruangann(*P),(i - 1),j) == 'L')
+    {
+      MElmt(Ruangann(*P),(i - 1),j) = 'P';
+      MElmt(Ruangann(*P),i,j) = 'L';
+      Ordinat(*Player) = Ordinat(*Player) - 1;
+      *valid = true;
+    }
+    else
+    {
+      *valid = false;
+    }
+  }
+  else
+  {
+    PindahRuangan(G, P, Player, valid);
+  }
+}
+
+void GoDOWN(Graph *G, Gaddress *P, POINT *Player, boolean *valid)
+/* Menaikkan player 1 tile ke bawah kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Ordinat(*Player) < GetLastIdxBrsMatrix(Ruangann(*P)))
+  {
+    if (MElmt(Ruangann(*P),(i + 1),j) == 'L')
+    {
+      MElmt(Ruangann(*P),(i + 1),j) = 'P';
+      MElmt(Ruangann(*P),i,j) = 'L';
+      Ordinat(*Player) = Ordinat(*Player) + 1;
+      *valid = true;
+    }
+    else
+    {
+      *valid = false;
+    }
+  }
+  else
+  {
+    PindahRuangan(G, P, Player, valid);
+  }
+}
+
+void GoLEFT(Graph *G, Gaddress *P, POINT *Player, boolean *valid)
+/* Menggerakkan player 1 tile ke kiri kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Absis(*Player) > GetFirstIdxKolMatrix(Ruangann(*P)))
+  {
+    if (MElmt(Ruangann(*P), i, (j - 1)) == 'L')
+    {
+      MElmt(Ruangann(*P),i, (j - 1)) = 'P';
+      MElmt(Ruangann(*P),i,j) = 'L';
+      Absis(*Player) = Absis(*Player) - 1;
+      *valid = true;
+    }
+    else
+    {
+      *valid = false;
+    }
+  }
+  else
+  {
+    PindahRuangan(G, P, Player, valid);
+  }
+}
+
+void GoRIGHT(Graph *G, Gaddress *P, POINT *Player, boolean *valid)
+/* Menggerakkan player 1 tile ke kanan kalau bisa */
+{
+  // KAMUS LOKAL
+  indeks i, j;
+
+  // ALGORITMA
+  i = Ordinat(*Player);
+  j = Absis(*Player);
+  if (Absis(*Player) <  GetLastIdxKolMatrix(Ruangann(*P)))
+  {
+    if (MElmt(Ruangann(*P), i, (j + 1)) == 'L')
+    {
+      MElmt(Ruangann(*P),i, (j + 1)) = 'P';
+      MElmt(Ruangann(*P),i,j) = 'L';
+      Absis(*Player) = Absis(*Player) + 1;
+      *valid = true;
+    }
+    else
+    {
+      *valid = false;
+    }
+  }
+  else
+  {
+    PindahRuangan(G, P, Player, valid);
+  }
 }
