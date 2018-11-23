@@ -237,21 +237,23 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 	int f;
 
 	//Algoritma
-  TulisPOINT(P);
+	TulisPOINT(P);
 	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
-    sleep(2);
+		sleep(2);
 	}
 	else if (SearchNoMejaArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)))))
 	{
 		printf("Order sudah dilakukan\n");
-    sleep(2);
+		sleep(2);
 	} else {
 		i = GetLastIdxArray(*O) + 1;
 		No(*O,i) = atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
+		e = rand() % (8 + 1);
 		f = rand() % (8 + 1);
-		switch (f)
+		g = (e * f) % 9;
+		switch (g)
 		{
 			case 1 :
 			{
