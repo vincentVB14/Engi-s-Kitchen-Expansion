@@ -133,7 +133,6 @@ void KurangSabarArray(TabInt *O, int *Life)
 			if (Kesabaran(*O,i) == 0)
 			{
 				DelEli(O,i,&X);
-				*Life = *Life - 1;
 			}
 			i++;
 		}
