@@ -81,7 +81,7 @@ int main()
 				TulisIsi(T);
 				break;
 			}
-			case 8:
+			case 7:
 			{
 				cek = 1;
 				break;
