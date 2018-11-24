@@ -124,35 +124,42 @@ void EmptyTray(Stack * Tray)
   CreateEmptyStack(Tray);
 }
 
-//void CreateFood(Stack * Hand, Stack * Tray,  Bintree Resep)
+void CreateFood(Stack * Hand, Stack * Tray,  BinTree resep)
 /* Prosedur untuk Pop semua isi Stack Hand, membandingkan dengan tree, dan
 kemudian membuat makanan dengan Push ke Stack Tray*/
 /* I.S. Stack Hand terdefinisi, Bintree Resep terdefinisi*/
 /* F.S. Stack Tray terisi dengan daun makanan dari Tree, Stack Hand kosong */
-/*{
-  infotype X;
-  Bintree P = Resep;
-  InverseStack(Hand);
-  Pop(Hand, &X);
-  if(X != Akar(P)){
-    EmptyHand(Hand);
-  } else{
-    while(!IsOneElmt(temp)){
-      Pop(Hand, &X);
-      if(X == Akar(Left(P))){
-        P = Left(P);
-      } else if(X == Akar(Right(P))){
-        P = Right(P);
-      } else{
-        EmptyHand(Hand);
+{
+  if(!IsEmptyStack(*Hand)){
+    Stack Stemp;
+    CopyStack(*Hand, &Stemp); //Copy Stack Hand ke Stack Stemp untuk penyimpanan temporary
+    InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
+    BinTree temp;
+    MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
+    strcpy(Akar(temp), Akar(resep));
+    PrintTree(temp,2);
+    char * X;
+    X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
+    Pop(&Stemp, &X); //Pop Piring
+    while(!IsEmptyStack(Stemp)){
+      Pop(&Stemp, &X);
+      if(SearchTree(Left(temp), X)){ //Jika yang mau diambil ada di kiri
+        temp = Left(temp);
+      } else{ //Jika tidak, ke kanan
+        temp = Right(temp);
       }
     }
-    if(!IsEmpty(*Hand)){
-      Pop(Hand, &X);
-      Push(Tray, X);
+    if(strcmp(X, Akar(temp)) == 0 && IsTreeOneElmt(Left(temp))){
+      CreateEmptyStack(Hand);
+      printf("%s telah dibuat dan dimasukkan ke Tray\n", Akar(Left(temp)));
+      Push(Tray, Akar(Left(temp)));
+    } else{
+      printf("Tidak ada makanan yang bisa dibuat\n");
     }
+  } else{
+    printf("Tidak ada makanan yang bisa dibuat\n");
   }
-}*/
+}
 
 // ATURAN QUEUE DALAM GAME
 
