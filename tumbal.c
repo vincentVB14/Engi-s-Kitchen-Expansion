@@ -1,13 +1,7 @@
+//tumbal.c , implementasi tumbal.h
 #include <stdio.h>
 #include "boolean.h"
-
-int FakeStrCmp (char* str1, char* str2);
-
-int FakeStrNCmp (char* str1, char* str2, int N);
-
-void FakeStrCpy (char* str1, char* str2);
-
-int FakeAtoi (char* str1);
+#include "tumbal.h"
 
 int main()
 {
