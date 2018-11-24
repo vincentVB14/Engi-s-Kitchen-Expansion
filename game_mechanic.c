@@ -1,6 +1,8 @@
 /* File: game_mechanic.c */
 /* File ini berisi implementasi dari game_mechanic.h */
 
+#include "tumbal.h"
+#include "tumbal.c"
 #include "game_mechanic.h"
 #include <stdio.h>
 #include <stdlib.h>
@@ -23,7 +25,7 @@ void StartGame(char * playername)
 /*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
 /*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
 {
-  if(strcmp(playername,"") == 0){
+  if(FakeStrCmp(playername,"") == 0){
     printf("Nama player belum ada!\n");
     NewGame(playername);
   }
@@ -64,7 +66,7 @@ void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
   if(!IsFullStack(*Hand)){
     if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
       if(IsEmptyStack(*Hand)){
-        if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(resep)) == 0){
+        if(FakeStrCmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(resep)) == 0){
           printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
           Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
         } else{
@@ -76,12 +78,12 @@ void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
         InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
         BinTree temp;
         MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
-        strcpy(Akar(temp), Akar(resep));
+        FakeStrCpy(Akar(temp), Akar(resep));
         char * X;
         X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
         while(!IsEmptyStack(Stemp)){
           Pop(&Stemp, &X);
-          if(strcmp(X, Akar(temp)) == 0){
+          if(FakeStrCmp(X, Akar(temp)) == 0){
             if(SearchTree(Left(temp), MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)))){ //Jika yang mau diambil ada di kiri
               temp = Left(temp);
             } else{ //Jika tidak, ke kanan
@@ -89,7 +91,7 @@ void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
             }
           }
         }
-        if(strcmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
+        if(FakeStrCmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
           printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
           Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
         } else{
@@ -136,7 +138,7 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
     InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
     BinTree temp;
     MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
-    strcpy(Akar(temp), Akar(resep));
+    FakeStrCpy(Akar(temp), Akar(resep));
     PrintTree(temp,2);
     char * X;
     X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
@@ -149,7 +151,7 @@ kemudian membuat makanan dengan Push ke Stack Tray*/
         temp = Right(temp);
       }
     }
-    if(strcmp(X, Akar(temp)) == 0 && IsTreeOneElmt(Left(temp))){
+    if(FakeStrCmp(X, Akar(temp)) == 0 && IsTreeOneElmt(Left(temp))){
       CreateEmptyStack(Hand);
       printf("%s telah dibuat dan dimasukkan ke Tray\n", Akar(Left(temp)));
       Push(Tray, Akar(Left(temp)));
@@ -241,8 +243,8 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
     }
     else {
       int NoMeja;
-      i = SearchArray(*O,atoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
-      if (NoMeja != atoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
+      i = SearchArray(*O,FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
+      if (NoMeja != FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
       {
         printf("Pelanggan di meja tersebut belum memesan makanan\n");
       }
@@ -251,7 +253,7 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
         {
           infostack X;
           Pop(Tray, &X);
-          if (strcmp(X,Food(*O,i)) != 0){
+          if (FakeStrCmp(X,Food(*O,i)) != 0){
             printf("Meja ini tidak memesan makanan di atas tumpukan tray\n");
             Push(Tray, X);
           }
@@ -341,13 +343,13 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 		printf("Tidak dapat menerima pesanan\n");
     sleep(2);
 	}
-	else if (SearchNoMejaArray(*O,atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)))))
+	else if (SearchNoMejaArray(*O,FakeAtoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)))))
 	{
 		printf("Order sudah dilakukan\n");
     sleep(2);
 	} else {
 		i = GetLastIdxArray(*O) + 1;
-		No(*O,i) = atoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
+		No(*O,i) = FakeAtoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
     e = rand() % (8 + 1);
 		f = rand() % (8 + 1);
     g = (e * f) % 9;
@@ -355,42 +357,42 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 		{
 			case 1 :
 			{
-				strcpy(Food(*O,i),"Banana Split");
+				FakeStrCpy(Food(*O,i),"Banana Split");
 				break;
 			}
 			case 2 :
 			{
-				strcpy(Food(*O,i),"Sundae");
+				FakeStrCpy(Food(*O,i),"Sundae");
 				break;
 			}
 			case 3 :
 			{
-				strcpy(Food(*O,i),"Nasi Telur Dadar");
+				FakeStrCpy(Food(*O,i),"Nasi Telur Dadar");
 				break;
 			}
 			case 4 :
 			{
-				strcpy(Food(*O,i),"Nasi Ayam Goreng");
+				FakeStrCpy(Food(*O,i),"Nasi Ayam Goreng");
 				break;
 			}
 			case 5 :
 			{
-				strcpy(Food(*O,i),"Burger");
+				FakeStrCpy(Food(*O,i),"Burger");
 				break;
 			}
 			case 6 :
 			{
-				strcpy(Food(*O,i),"Hot Dog");
+				FakeStrCpy(Food(*O,i),"Hot Dog");
 				break;
 			}
 			case 7 :
 			{
-				strcpy(Food(*O,i),"Spaghetti Bolognese");
+				FakeStrCpy(Food(*O,i),"Spaghetti Bolognese");
 				break;
 			}
 			case 8 :
 			{
-				strcpy(Food(*O,i),"Spaghetti Carbonara");
+				FakeStrCpy(Food(*O,i),"Spaghetti Carbonara");
 				break;
 			}
 		}
