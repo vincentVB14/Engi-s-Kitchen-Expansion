@@ -1,19 +1,7 @@
 #include "modpohon.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include "../tumbal.h"
-
-/*int main()
-{
-  // KAMUS
-  BinTree P;
-
-  // ALGORITMA
-  printf("Creating tree\n");
-  CreateTreeMakanan(&P);
-  printf("Printing tree\n");
-  PrintTree(P,2);
-}*/
+#include "../fakestring.h"
 
 /* *** Konstruktor *** */
 BinTree Tree(infoTree Akar, BinTree L, BinTree R)

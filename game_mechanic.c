@@ -1,8 +1,8 @@
 /* File: game_mechanic.c */
 /* File ini berisi implementasi dari game_mechanic.h */
 
-#include "tumbal.h"
 #include "game_mechanic.h"
+#include "fakestring.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -56,18 +56,18 @@ void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q)
 
 // ATURAN STACK HAND DAN TRAY DALAM GAME
 
-void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
+void TakeFood(Stack * Hand, Gaddress room, POINT Player, BinTree resep)
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
 {
-  POINT Meja_dapur = MejaDapurDekatPlayer(room, Player);
+  POINT Meja_dapur = MejaDapurDekatPlayer(Ruangann(room), Player);
   if(!IsFullStack(*Hand)){
     if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
       if(IsEmptyStack(*Hand)){
-        if(FakeStrCmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(resep)) == 0){
-          printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
-          Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+        if(FakeStrCmp(MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(resep)) == 0){
+          printf("Anda mengambil %s\n", MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
+          Push(Hand, MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
         } else{
           printf("Anda belum mengambil Piring!\n");
         }
@@ -83,16 +83,16 @@ void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep)
         while(!IsEmptyStack(Stemp)){
           Pop(&Stemp, &X);
           if(FakeStrCmp(X, Akar(temp)) == 0){
-            if(SearchTree(Left(temp), MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)))){ //Jika yang mau diambil ada di kiri
+            if(SearchTree(Left(temp), MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)))){ //Jika yang mau diambil ada di kiri
               temp = Left(temp);
             } else{ //Jika tidak, ke kanan
               temp = Right(temp);
             }
           }
         }
-        if(FakeStrCmp(MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
-          printf("Anda mengambil %s\n", MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
-          Push(Hand, MElmt3(room, Absis(Meja_dapur), Ordinat(Meja_dapur)));
+        if(FakeStrCmp(MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
+          printf("Anda mengambil %s\n", MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
+          Push(Hand, MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
         } else{
           printf("Anda tidak bisa mengambil makanan ini!\n");
         }
@@ -120,45 +120,53 @@ void EmptyTray(Stack * Tray)
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Stack Tray kosong*/
 {
-  printf("Membuang makanan di tangan...\n");
+  printf("Membuang makanan di tray...\n");
   sleep(1);
   CreateEmptyStack(Tray);
 }
 
-void CreateFood(Stack * Hand, Stack * Tray,  BinTree resep)
+void CreateFood(Stack * Hand, Stack * Tray, Gaddress room, POINT Player, BinTree resep)
 /* Prosedur untuk Pop semua isi Stack Hand, membandingkan dengan tree, dan
 kemudian membuat makanan dengan Push ke Stack Tray*/
 /* I.S. Stack Hand terdefinisi, Bintree Resep terdefinisi*/
 /* F.S. Stack Tray terisi dengan daun makanan dari Tree, Stack Hand kosong */
 {
-  if(!IsEmptyStack(*Hand)){
-    Stack Stemp;
-    CopyStack(*Hand, &Stemp); //Copy Stack Hand ke Stack Stemp untuk penyimpanan temporary
-    InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
-    BinTree temp;
-    MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
-    FakeStrCpy(Akar(temp), Akar(resep));
-    PrintTree(temp,2);
-    char * X;
-    X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
-    Pop(&Stemp, &X); //Pop Piring
-    while(!IsEmptyStack(Stemp)){
-      Pop(&Stemp, &X);
-      if(SearchTree(Left(temp), X)){ //Jika yang mau diambil ada di kiri
-        temp = Left(temp);
-      } else{ //Jika tidak, ke kanan
-        temp = Right(temp);
+  POINT posisi_tray = TrayDekatPlayer(Ruangann(room), Player);
+  if(!IsFullStack(*Tray)){
+    if(Absis(posisi_tray) != 0 && Ordinat(posisi_tray) != 0){
+      if(!IsEmptyStack(*Hand)){
+        Stack Stemp;
+        CopyStack(*Hand, &Stemp); //Copy Stack Hand ke Stack Stemp untuk penyimpanan temporary
+        InverseStack(&Stemp); //Stack Stemp diinverse sehingga bisa dipop dari elemen pertama yang dimasukkan ke Stack
+        BinTree temp;
+        MakeTree(Akar(resep), Left(resep), Right(resep), &temp); //Copy BinTree resep ke BinTree temp
+        FakeStrCpy(Akar(temp), Akar(resep));
+        char * X;
+        X = (char *) malloc (34 * sizeof(char)); //Alokasi panjang string untuk X
+        Pop(&Stemp, &X); //Pop Piring
+        while(!IsEmptyStack(Stemp)){
+          Pop(&Stemp, &X);
+          if(SearchTree(Left(temp), X)){ //Jika yang mau diambil ada di kiri
+            temp = Left(temp);
+          } else{ //Jika tidak, ke kanan
+            temp = Right(temp);
+          }
+        }
+        if(FakeStrCmp(X, Akar(temp)) == 0 && IsTreeOneElmt(Left(temp))){
+          CreateEmptyStack(Hand);
+          printf("%s telah dibuat dan dimasukkan ke Tray\n", Akar(Left(temp)));
+          Push(Tray, Akar(Left(temp)));
+        } else{
+          printf("Tidak ada makanan yang bisa dibuat 1\n");
+        }
+      } else{
+        printf("Tidak ada makanan yang bisa dibuat 2\n");
       }
-    }
-    if(FakeStrCmp(X, Akar(temp)) == 0 && IsTreeOneElmt(Left(temp))){
-      CreateEmptyStack(Hand);
-      printf("%s telah dibuat dan dimasukkan ke Tray\n", Akar(Left(temp)));
-      Push(Tray, Akar(Left(temp)));
     } else{
-      printf("Tidak ada makanan yang bisa dibuat\n");
+      printf("Anda tidak berada di sebelah Tray\n");
     }
   } else{
-    printf("Tidak ada makanan yang bisa dibuat\n");
+    printf("Tray sudah penuh\n");
   }
 }
 

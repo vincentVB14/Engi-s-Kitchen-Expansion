@@ -1,7 +1,7 @@
 #include "interface.h"
 #include "game_mechanic.h"
 
-#include "tumbal.c"
+#include "fakestring.c"
 #include "Array/modarray.c"
 #include "Graph/modgraph.c"
 #include "Matriks/modmatriks.c"
@@ -27,7 +27,6 @@ void clrscr()
 {
     system("@cls||clear");
 }
-
 
 
 ////////////////////////////////////////////////////////////////////////////////////////
@@ -138,9 +137,10 @@ int main(){
           AddOrder(&current_room, mejap, &Order);
         }
       } else if(FakeStrCmp(command, "PUT") == 0){
-
+        CreateFood(&Hand, &Tray, current_room, player, resep);
+        sleep(1.5);
       } else if(FakeStrCmp(command, "TAKE") == 0){
-        TakeFood(&Hand, Ruangann(current_room), player);
+        TakeFood(&Hand, current_room, player, resep);
         sleep(1.5);
       } else if(FakeStrCmp(command, "CH") == 0){
         EmptyHand(&Hand);
@@ -168,16 +168,16 @@ int main(){
         exit(0);
       } else if (FakeStrCmp(command, "PTRAY") == 0){
         PrintStack(Tray);
-        sleep(5);
+        sleep(1);
       } else if (FakeStrCmp(command, "PHAND") == 0){
         PrintStack(Hand);
-        sleep(5);
+        sleep(1);
       } else if (FakeStrCmp(command, "PQUEUE") == 0){
         PrintQueue(antrian);
-        sleep(5);
+        sleep(1);
       } else if (FakeStrCmp(command, "PARRAY") == 0){
         TulisIsiArray(Order);
-        sleep(5);
+        sleep(1);
       }
 
       if(FakeStrCmp(command, "RECIPE") != 0 && FakeStrCmp(command, "SAVE") != 0 && FakeStrCmp(command, "LOAD") != 0 && FakeStrCmp(command, "LEGEND") != 0){

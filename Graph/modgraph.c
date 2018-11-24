@@ -2,9 +2,8 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "../fakestring.h"
 #include "modgraph.h"
-#include "../tumbal.h"
 
 // KONSTRUKTOR
 void CreateEmptyGraph (Graph *G)
@@ -403,7 +402,13 @@ void FileToMatriksDapur(Gaddress *P, char * filename)
         MElmt(Ruangann(*P),i,j) = 'M';            // Tipe meja dapur
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
         DelChar(CKata, 1);              // Useless
-        FakeStrCpy(MElmt3(Ruangann(*P),i,j), CKata);  // Jenis bahan di meja
+        if(FakeStrCmp(CKata, "AyamGoreng") == 0){
+          FakeStrCpy(MElmt3(Ruangann(*P),i,j), "Ayam Goreng");
+        } else if(FakeStrCmp(CKata, "EsKrim") == 0){
+          FakeStrCpy(MElmt3(Ruangann(*P),i,j), "Es Krim");
+        } else{
+          FakeStrCpy(MElmt3(Ruangann(*P),i,j), CKata);  // Jenis bahan di meja
+        }
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }

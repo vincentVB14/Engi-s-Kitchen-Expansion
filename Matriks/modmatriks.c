@@ -2,7 +2,7 @@
 
 #include "modmatriks.h"
 #include <stdio.h>
-#include "../tumbal.h"
+#include "../fakestring.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -339,6 +339,31 @@ POINT MejaDapurDekatPlayer (MATRIKS M, POINT Player)
     return (MakePOINT(i,(j-1)));
   }
   else if (MElmt(M,i,(j+1)) == 'M')
+  {
+    return (MakePOINT(i,(j+1)));
+  }
+  else
+  {
+    return (MakePOINT(0,0));
+  }
+}
+
+POINT TrayDekatPlayer (MATRIKS M, POINT Player)
+// Mencari tray yang dekat dengan player
+// Mengembalikan posisi tray di dekat player
+{
+  // KAMUS LOKAL
+  indeks i,j;
+
+  // ALGORITMA
+  i = Ordinat(Player);
+  j = Absis(Player);
+
+  if (MElmt(M,(i-1),j) == 'T')
+  {
+    return (MakePOINT((i-1), j));
+  }
+  else if (MElmt(M,i,(j+1)) == 'T')
   {
     return (MakePOINT(i,(j+1)));
   }

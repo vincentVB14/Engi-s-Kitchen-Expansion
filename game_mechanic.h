@@ -26,7 +26,7 @@ void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q);
 // Mengeluarkan setiap pelanggan yang kesabarannya mencapai 0
 // Megurangi kesabaran setiap pelanggan yang menunggu di Queue
 
-void TakeFood(Stack * Hand, MATRIKS room, POINT Player, BinTree resep);
+void TakeFood(Stack * Hand, Gaddress room, POINT Player, BinTree resep);
 /*Prosedur untuk mengambil makanan dan menambahkannya ke Stack Hand*/
 /*I.S. Stack Hand terdefinisi, tidak penuh*/
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
@@ -41,7 +41,8 @@ void EmptyTray(Stack * Tray);
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Stack Tray kosong*/
 
-void CreateFood(Stack * Hand, Stack * Tray,  BinTree Resep);
+void CreateFood(Stack * Hand, Stack * Tray, Gaddress room, POINT Player, BinTree resep);
+//void CreateFood(Stack * Hand, Stack * Tray,  BinTree resep);
 /* Prosedur untuk Pop semua isi Stack Hand, membandingkan dengan tree, dan
 kemudian membuat makanan dengan Push ke Stack Tray*/
 /* I.S. Stack Hand terdefinisi, Bintree Resep terdefinisi*/
