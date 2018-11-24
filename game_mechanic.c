@@ -201,7 +201,7 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain)
       }
       if (InfoJumlah(X) != 0)
       {
-        int Sabar = rand() % (50 + 1 - 40) + 40;
+        int Sabar = rand() % (100 + 1 - 80) + 80;
         MElmt5(Ruangann(*F), i, j) = Sabar;
         MElmt2(Ruangann(*F), i, j) = true;
         MElmt2(Ruangann(*F), i, j - 1) = true;
@@ -230,7 +230,7 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain)
   }
 }
 
-void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
+void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player, int *money)
 /*Prosedur untuk memberikan makan paling atas tumpukan*/
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Makanan paling atas di Stack Tray di-Pop*/
@@ -249,10 +249,11 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
       printf("Tidak ada pelanggan di meja tersebut\n");
     }
     else {
-      int NoMeja;
-      i = SearchArray(*O,FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
-      if (NoMeja != FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
+      int index;
+      index = SearchArray(*O,FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
+      if (No(*O,index) != FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
       {
+        printf("indeks %d\nno meja %d\n", index, No(*O,index));
         printf("Pelanggan di meja tersebut belum memesan makanan\n");
       }
       else {
@@ -260,7 +261,7 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
         {
           infostack X;
           Pop(Tray, &X);
-          if (FakeStrCmp(X,Food(*O,i)) != 0){
+          if (FakeStrCmp(X,Food(*O,index)) != 0){
             printf("Meja ini tidak memesan makanan di atas tumpukan tray\n");
             Push(Tray, X);
           }
@@ -271,6 +272,14 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player)
             if (MElmt4(Ruangann(*F),i,j) == 4){
               MElmt2(Ruangann(*F), i-1, j) = false;
               MElmt2(Ruangann(*F), i+1, j) = false;
+            }
+            ElType Temp;
+            DelEli(O,index,&Temp);
+            if (FakeStrCmp(X,"Spaghetti Bolognese") == 0){
+              *money += 200;
+            }
+            else {
+              *money += 100;
             }
           }
         }
@@ -359,7 +368,7 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 		No(*O,i) = FakeAtoi(MElmt3(Ruangann(*M),Ordinat(P),Absis(P)));
     e = rand() % (8 + 1);
 		f = rand() % (8 + 1);
-    g = (e * f) % 9;
+    g = ((e * f) % 8) + 1;
 		switch (g)
 		{
 			case 1 :
@@ -408,7 +417,7 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 	}
 }
 
-void DelOrder (POINT P, TabInt *O)
+void DelOrder (TabInt *O)
 /* Menerima pesanan customer */
 {
 	//Kamus

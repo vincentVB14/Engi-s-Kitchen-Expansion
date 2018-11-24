@@ -149,10 +149,11 @@ int main(){
       } else if(FakeStrCmp(command, "PLACE") == 0){
         PlaceCustomer(&current_room, &antrian, player);
       } else if(FakeStrCmp(command, "GIVE") == 0){
-
+        GiveFood(&current_room, &Tray, &Order, player,&money);
+        sleep(1.5);
       } else if(FakeStrCmp(command, "RECIPE") == 0){
         PrintTree(resep, 2);
-        sleep(5);
+        sleep(3);
       } else if(FakeStrCmp(command, "SAVE") == 0){
 
       } else if(FakeStrCmp(command, "LOAD") == 0){
