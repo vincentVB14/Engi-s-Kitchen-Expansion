@@ -41,7 +41,7 @@ void EmptyTray(Stack * Tray);
 /*I.S. Stack Tray terdefinisi, tidak kosong*/
 /*F.S. Stack Tray kosong*/
 
-//void CreateFood(Stack * Hand, Stack * Tray,  Bintree Resep);
+void CreateFood(Stack * Hand, Stack * Tray,  Bintree Resep);
 /* Prosedur untuk Pop semua isi Stack Hand, membandingkan dengan tree, dan
 kemudian membuat makanan dengan Push ke Stack Tray*/
 /* I.S. Stack Hand terdefinisi, Bintree Resep terdefinisi*/
