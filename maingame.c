@@ -58,6 +58,7 @@ int main(){
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
   playername = (char *) malloc (15 * sizeof(char)); //Alokasi nama player sepanjang 15 karakter
   FakeStrCpy(playername,""); //Inisialisasi string nama player
+  printf("player = %s1", playername);
 
   //Create Empties
   CreateEmptyStack(&Hand);
@@ -97,6 +98,17 @@ int main(){
       break;
     }
     case 4:{
+      clrscr();
+      printf(" ______________________________________________________________________ \n");
+      printf("|                                                                      |\n");
+      printf("|                                CREDIT                                |\n");
+      printf("|                                                                      |\n");
+      printf("|                    13516080 _ Putra Hardi Ramadhan                   |\n");
+      printf("|                       13517059 _ Nixon Andhika                       |\n");
+      printf("|                       13517116 _ Ferdy Santoso                       |\n");
+      printf("|                     13517131 _ Jan Meyer Saragih                     |\n");
+      printf("|                     13517137 _ Vincent Budianto                      |\n");
+      printf("|______________________________________________________________________|\n");
       exit(0);
     }
     default:{
@@ -107,6 +119,7 @@ int main(){
   sleep(1.5);
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
+      life = 3;
       clrscr();
       customer_chance = (rand() % 100) < 5;
       if(customer_chance){
@@ -163,10 +176,7 @@ int main(){
         sleep(2);
       } else if(FakeStrCmp(command, "EXIT") == 0){
         clrscr();
-        printf("GAME OVER\n");
-        //Credit();
-        sleep(1.5);
-        exit(0);
+        GameOver(playername, money, time);
       } else if (FakeStrCmp(command, "PTRAY") == 0){
         PrintStack(Tray);
         sleep(1);
@@ -185,8 +195,8 @@ int main(){
         EveryTurn(&MAP, &life, &time, &Order, &antrian);
       }
     }
-    printf("GAME OVER\n");
-    //Credit();
+    clrscr();
+    GameOver(playername, money, time);
     sleep(1.5);
     exit(0);
   }

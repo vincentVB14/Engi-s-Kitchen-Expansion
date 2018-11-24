@@ -9,7 +9,7 @@
 #include <time.h>
 #include "modqueue.h"
 
-/* Definisi Queue kosong: HEAD=Nil; TAIL=Nil. */
+/* Definisi Queue kosong: HEAD=NilQueue; TAIL=NilQueue. */
 /* Catatan implementasi: T[0] tidak pernah dipakai */
 
 /* ********* Prototype ********* */
@@ -18,7 +18,7 @@ boolean IsEmptyQueue (Queue Q){
 /* KAMUS LOKAL */
      /* Tidak menggunakan kamus lokal */
 /* ALGORITMA */
-     return ((Head(Q) == Nil) && (Tail(Q) == Nil));
+     return ((Head(Q) == NilQueue) && (Tail(Q) == NilQueue));
 }
 
 boolean IsFullQueue (Queue Q){
@@ -39,7 +39,7 @@ int NBElmtQueue (Queue Q){
 
 /* ALGORITMA */
      if (IsEmptyQueue(Q))
-          return Nil;
+          return NilQueue;
      else {
           position = Head(Q);
           count = 1;
@@ -64,8 +64,8 @@ void CreateEmptyQueue (Queue * Q, int Max){
      (*Q).T = (customer *) malloc ((Max+1) * sizeof(customer));
      if ((*Q).T != NULL) {
           MaxEl(*Q) = Max;
-          Head(*Q) = Nil;
-          Tail(*Q) = Nil;
+          Head(*Q) = NilQueue;
+          Tail(*Q) = NilQueue;
      } else /* alokasi gagal */ {
           MaxEl(*Q) = 0;
      }
@@ -164,18 +164,18 @@ void DelQueue2(Queue * Q, customer * X){
 // KAMUS LOKAL
      // Tidak menggunakan kamus lokal
 // ALGORITMA
-     InfoJumlah(*X) = Nil;
-     InfoSabar(*X) = Nil;
+     InfoJumlah(*X) = NilQueue;
+     InfoSabar(*X) = NilQueue;
      if (IsEmptyQueue(*Q)){
           printf("Antrian kosong.\n");
-          InfoJumlah(*X) = Nil;
-          InfoSabar(*X) = Nil;
+          InfoJumlah(*X) = NilQueue;
+          InfoSabar(*X) = NilQueue;
      }
      else {
           if (Head(*Q) == Tail(*Q) && InfoJumlah(ElmtQueue(*Q,Head(*Q))) == 2){
                *X = InfoHead(*Q);
-               Head(*Q) = Nil;
-               Tail(*Q) = Nil;
+               Head(*Q) = NilQueue;
+               Tail(*Q) = NilQueue;
           }
           else {
                int i = Head(*Q);
@@ -202,18 +202,18 @@ void DelQueue4(Queue * Q, customer * X){
 // KAMUS LOKAL
      // Tidak menggunakan kamus lokal
 // ALGORITMA
-     InfoJumlah(*X) = Nil;
-     InfoSabar(*X) = Nil;
+     InfoJumlah(*X) = NilQueue;
+     InfoSabar(*X) = NilQueue;
      if (IsEmptyQueue(*Q)){
           printf("Antrian kosong.\n");
-          InfoJumlah(*X) = Nil;
-          InfoSabar(*X) = Nil;
+          InfoJumlah(*X) = NilQueue;
+          InfoSabar(*X) = NilQueue;
      }
      else {
           if (Head(*Q) == Tail(*Q) && InfoJumlah(ElmtQueue(*Q,Head(*Q))) == 4){
                *X = InfoHead(*Q);
-               Head(*Q) = Nil;
-               Tail(*Q) = Nil;
+               Head(*Q) = NilQueue;
+               Tail(*Q) = NilQueue;
           }
           else {
                int i = Head(*Q);
@@ -242,14 +242,14 @@ void DelQueue (Queue * Q, customer * X){
 /* ALGORITMA */
      if (IsEmptyQueue(*Q)){
           printf("Antrian kosong.\n");
-          InfoJumlah(*X) = Nil;
-          InfoSabar(*X) = Nil;
+          InfoJumlah(*X) = NilQueue;
+          InfoSabar(*X) = NilQueue;
      }
      else {
           *X = InfoHead(*Q);
           if (Head(*Q) == Tail(*Q)){
-               Head(*Q) = Nil;
-               Tail(*Q) = Nil;
+               Head(*Q) = NilQueue;
+               Tail(*Q) = NilQueue;
           }
           else {
                int i = Head(*Q);
@@ -283,6 +283,15 @@ void KurangSabarQueue(Queue * Q, int * Life){
                *Life = *Life - 1;
           }
      }
+}
+
+void UpdateQueue (Queue *Q){
+// mengassign nilai Tabel Queue dengan indeks > Tail dengan nilai -1
+  int i;
+  for (i = Tail(*Q) + 1;i <= MaxEl(*Q);i++){
+    InfoJumlah(ElmtQueue(*Q,i)) = NilQueue;
+    InfoSabar(ElmtQueue(*Q,i)) = NilQueue;
+  }
 }
 
 void PrintQueue (Queue Q){

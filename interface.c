@@ -23,7 +23,7 @@ void MainMenu ()
 	char t6[90] = "| /_/    \\_\\|______||_____/    |_|   |_|  \\_\\ \\____/ |_|\\_\\|_____//_/    \\_\\|_|    |";
 
 	//Algoritma
-	for(i = 0; i < 7; i++)
+	for(i = 0; i < 4; i++)
 	{
 		printf("|----------------------------------------------------------------------------------|\n");
 		switch (i)
@@ -31,39 +31,18 @@ void MainMenu ()
 			case 1 :
 			{
 				printf("%s\n",t1);
+				printf("%s\n",t2);
 				break;
 			}
 			case 2 :
 			{
 				printf("%s\n",t1);
 				printf("%s\n",t2);
+				printf("%s\n",t3);
+				printf("%s\n",t4);
 				break;
 			}
 			case 3 :
-			{
-				printf("%s\n",t1);
-				printf("%s\n",t2);
-				printf("%s\n",t3);
-				break;
-			}
-			case 4 :
-			{
-				printf("%s\n",t1);
-				printf("%s\n",t2);
-				printf("%s\n",t3);
-				printf("%s\n",t4);
-				break;
-			}
-			case 5 :
-			{
-				printf("%s\n",t1);
-				printf("%s\n",t2);
-				printf("%s\n",t3);
-				printf("%s\n",t4);
-				printf("%s\n",t5);
-				break;
-			}
-			case 6 :
 			{
 				printf("%s\n",t1);
 				printf("%s\n",t2);
@@ -74,12 +53,12 @@ void MainMenu ()
 				break;
 			}
 		}
-		for(j = (7 - i); j > 0; j--)
+		for(j = (7 - (i*2)); j > 0; j--)
 		{
 			printf("|                                                                                  |\n");
 		}
 		printf("|----------------------------------------------------------------------------------|\n");
-		if(i != 6)
+		if(i != 3)
 		{
 			sleep(1);
 			system("cls");
@@ -195,29 +174,68 @@ void Info (Queue Q, Stack T, TabInt O, Stack H)
 	int i;
 	infostack X;
 	infostack Y;
+	Queue Qtemp;
 	Stack Htemp;
 	Stack Ttemp;
-	
+
 	//Algoritma
-	printf("| Hand :                                     |  Food Tray:                                 |\n");
+	printf("| Hand :                                    |  Food Tray:                                  |\n");
 	CopyStack(H, &Htemp);
 	CopyStack(T, &Ttemp);
+	UpdateQueue(&Q);
 	i = 1;
 	do
 	{
-		Pop(&Htemp, &X);
-		Pop(&Ttemp, &Y);
-		printf("|  %d. %-38s |   %d. %-38s |\n", i, X, i, Y);
+		if(!IsEmptyStack(Htemp)){
+			Pop(&Htemp, &X);
+		} else{
+			X = "";
+		}
+		if(!IsEmptyStack(Ttemp)){
+			Pop(&Ttemp, &Y);
+		} else{
+			Y = "";
+		}
+		printf("| %d. %-38s |  %d. %-38s   |\n", i, X, i, Y);
 		i++;
 	} while (i != 6);
 	printf("|------------------------------------------------------------------------------------------|\n");
-	printf("| Order :                                    |  Waiting Customer:                          |\n");
-	printf("|  1. Meja No %-2d - %-19s [%-3d] |   1. %d [%-2d]                                 |\n", No(O,1), Food(O,1), Kesabaran(O,1), Q.T[1].jumlahorang, Q.T[1].kesabaran);
-	printf("|  2. Meja No %-2d - %-19s [%-3d] |   2. %d [%-2d]                                 |\n", No(O,2), Food(O,2), Kesabaran(O,2), Q.T[2].jumlahorang, Q.T[2].kesabaran);
-	printf("|  3. Meja No %-2d - %-19s [%-3d] |   3. %d [%-2d]                                 |\n", No(O,3), Food(O,3), Kesabaran(O,3), Q.T[3].jumlahorang, Q.T[3].kesabaran);
-	printf("|  4. Meja No %-2d - %-19s [%-3d] |   4. %d [%-2d]                                 |\n", No(O,4), Food(O,4), Kesabaran(O,4), Q.T[4].jumlahorang, Q.T[4].kesabaran);
-	printf("|  5. Meja No %-2d - %-19s [%-3d] |   5. %d [%-2d]                                 |\n", No(O,5), Food(O,5), Kesabaran(O,5), Q.T[5].jumlahorang, Q.T[5].kesabaran);
+	printf("| Order :                                   | Waiting Customer:                            |\n");
+
+	i = 1;
+	do{
+		printf("| %d. ", i);
+		if(No(O,i) != -1){
+			printf("Meja no. %-2d-", No(O,i));
+		} else{
+			printf("            ");
+		}
+		if(FakeStrCmp(Food(O,i), "") != 0){
+			printf(" %-19s ", Food(O,i));
+		} else{
+			printf("                     ");
+		}
+		if(Kesabaran(O, i) != -1){
+			printf(" [%2d]", Kesabaran(O, i));
+		} else{
+			printf("     ");
+		}
+		printf(" | ");
+		printf(" %d. ", i);
+		if(Q.T[i].jumlahorang != -1){
+			printf("%d - ", Q.T[i].jumlahorang);
+		} else{
+			printf("  ");
+		}
+		if(Q.T[i].kesabaran != -1){
+			printf("[%2d]                                 |\n",Q.T[i].kesabaran);
+		} else{
+			printf("                                       |\n");
+		}
+		i++;
+	} while(i < IdxMax + 1);
 }
+
 
 void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H)
 /* Prosedur untuk tampilan saat permainan berlangsung */
@@ -256,7 +274,7 @@ void GameOver (char *name, int money, int time)
 	char t4[80] = "| | | |_ |  / /\\ \\  | |\\/| ||  __|   | |  | | \\ \\/ /  |  __|  |  _  /  |";
 	char t5[80] = "| | |__| | / ____ \\ | |  | || |____  | |__| |  \\  /   | |____ | | \\ \\  |";
 	char t6[80] = "|  \\_____//_/    \\_\\|_|  |_||______|  \\____/    \\/    |______||_|  \\_\\ |";
-	
+
 	//Algoritma
 	do
 	{
@@ -311,7 +329,7 @@ void GameOver (char *name, int money, int time)
 					break;
 				}
 			}
-			for(j = (7 - i); j > 0; j--)
+			for(j = (6 - i); j > 0; j--)
 			{
 				printf("|                                                                      |\n");
 			}
@@ -335,12 +353,12 @@ void Credit (char *name, int money, int time)
 	//Kamus
 
 	//Algoritma
-	printf(" ______________________________________________________________________ \n");
+	printf("|______________________________________________________________________|\n");
 	printf("|                                                                      |\n");
 	printf("|                              STATISTIC                               |\n");
 	printf("|                                                                      |\n");
-	printf("|               Name :           Money :          Time :               |\n");
-	printf("|               %-12s     %-12d     %-12d         |\n", name, money, time);
+	printf("|       Name :                   Money :                  Time :       |\n");
+	printf("|       %-20s     %-12d             %-12d |\n", name, money, time);
 	printf("|______________________________________________________________________|\n");
 	printf("|                                                                      |\n");
 	printf("|                                CREDIT                                |\n");

@@ -7,7 +7,7 @@
 
 #include "boolean.h"
 
-#define Nil 0
+#define NilQueue -1
 /* Konstanta untuk mendefinisikan address tak terdefinisi */
 
 /* Definisi elemen dan address */
@@ -87,6 +87,8 @@ void DelQueue (Queue * Q, customer * X);
 /* I.S. Q tidak mungkin kosong */
 /* F.S. X = nilai elemen HEAD pd I.S., HEAD "maju";
         Q mungkin kosong */
+
+void UpdateQueue (Queue *Q);
 
 void KurangSabarQueue(Queue * Q, int * Life);
 /* I.S. Q terdefinisi, mengurangi kesabaran sebanyak 1 satuan

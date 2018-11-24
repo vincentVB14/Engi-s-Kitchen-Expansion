@@ -15,8 +15,14 @@ void CreateEmptyArray (TabInt *T)
 /* F.S. Terbentuk tabel T kosong dengan kapasitas IdxMax-IdxMin+1 */
 {
 	//KAMUS LOKAL
+	int i = 0;
 
 	//ALGORITMA
+	for(i = 1; i < IdxMax+1; i++){
+		No(*T, i) = -1;
+		FakeStrCpy(Food(*T, i), "");
+		Kesabaran(*T, i) = -1;
+	}
 	Neff(*T) = 0;
 }
 
@@ -108,6 +114,9 @@ void DelEli (TabInt *T, IdxType i, ElType * X)
 			Elmt(*T, j) = Elmt(*T, (j + 1));
 		}
 		Neff(*T) -= 1;
+		No(*T,j) = -1;
+		FakeStrCpy(Food(*T,j),"");
+		Kesabaran(*T,j) = -1;
 	}
 }
 

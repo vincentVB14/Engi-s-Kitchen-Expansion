@@ -1,8 +1,8 @@
-Kursi Meja11 Kursi Lantai Pintu2 Lantai Kursi Lantai
+Lantai Kursi Lantai Lantai Pintu2 Kursi Meja13 Kursi
+Kursi Meja11 Kursi Lantai Lantai Lantai Lantai Lantai
+Lantai Kursi Lantai Lantai Lantai Lantai Lantai Lantai
 Lantai Lantai Lantai Lantai Lantai Kursi Meja14 Kursi
-Lantai Lantai Lantai Lantai Lantai Lantai Kursi Lantai
-Kursi Meja12 Kursi Lantai Lantai Lantai Lantai Lantai
 Pintu4 Lantai Lantai Lantai Lantai Lantai Lantai Lantai
-Lantai Lantai Lantai Lantai Lantai Lantai Kursi Lantai
-Kursi Meja13 Kursi Lantai Lantai Kursi Meja15 Kursi
-Lantai Lantai Lantai Lantai Lantai Lantai Kursi Lantai.
+Lantai Kursi Lantai Lantai Lantai Lantai Lantai Lantai
+Kursi Meja12 Kursi Lantai Lantai Kursi Meja15 Kursi
+Lantai Kursi Lantai Lantai Lantai Lantai Lantai Lantai.

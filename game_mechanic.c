@@ -62,6 +62,7 @@ void TakeFood(Stack * Hand, Gaddress room, POINT Player, BinTree resep)
 /*F.S. Top dari Stack Hand berupa makanan di samping player*/
 {
   POINT Meja_dapur = MejaDapurDekatPlayer(Ruangann(room), Player);
+  boolean check = true;
   if(!IsFullStack(*Hand)){
     if(Absis(Meja_dapur) != 0 && Ordinat(Meja_dapur) != 0){
       if(IsEmptyStack(*Hand)){
@@ -88,11 +89,18 @@ void TakeFood(Stack * Hand, Gaddress room, POINT Player, BinTree resep)
             } else{ //Jika tidak, ke kanan
               temp = Right(temp);
             }
+          } else{
+            check = false;
+            break;
           }
         }
-        if(FakeStrCmp(MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
-          printf("Anda mengambil %s\n", MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
-          Push(Hand, MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
+        if(check){
+          if(FakeStrCmp(MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)), Akar(temp)) == 0){ //Jika hasil yang dicari sama dengan akar pohon
+            printf("Anda mengambil %s\n", MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
+            Push(Hand, MElmt3(Ruangann(room), Absis(Meja_dapur), Ordinat(Meja_dapur)));
+          } else{
+            printf("Anda tidak bisa mengambil makanan ini!\n");
+          }
         } else{
           printf("Anda tidak bisa mengambil makanan ini!\n");
         }
@@ -199,9 +207,9 @@ void PlaceCustomer(Gaddress *F, Queue *Q, POINT Pemain)
       {
         DelQueue(Q, &X);
       }
-      if (InfoJumlah(X) != 0)
+      if (InfoJumlah(X) != -1)
       {
-        int Sabar = rand() % (100 + 1 - 80) + 80;
+        int Sabar = rand() % (99 + 1 - 80) + 80;
         MElmt5(Ruangann(*F), i, j) = Sabar;
         MElmt2(Ruangann(*F), i, j) = true;
         MElmt2(Ruangann(*F), i, j - 1) = true;
@@ -253,7 +261,6 @@ void GiveFood(Gaddress *F, Stack * Tray, TabInt *O, POINT Player, int *money)
       index = SearchArray(*O,FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))));
       if (No(*O,index) != FakeAtoi(MElmt3(Ruangann(*F),Ordinat(P),Absis(P))))
       {
-        printf("indeks %d\nno meja %d\n", index, No(*O,index));
         printf("Pelanggan di meja tersebut belum memesan makanan\n");
       }
       else {
@@ -352,7 +359,6 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
   int g;
 
 	//Algoritma
-  TulisPOINT(P);
 	if (IsFullArray(*O))
 	{
 		printf("Tidak dapat menerima pesanan\n");
