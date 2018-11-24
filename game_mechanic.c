@@ -347,7 +347,6 @@ void AddOrder (Gaddress *M, POINT P, TabInt *O)
 {
 	//Kamus
 	int i;
-	int N;
 	int f;
   int e;
   int g;

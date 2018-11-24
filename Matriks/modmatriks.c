@@ -287,7 +287,6 @@ POINT MejaDekatPlayer (MATRIKS M, POINT Player)
 {
   // KAMUS LOKAL
   indeks i, j;
-  POINT PMeja;
 
   // ALGORIMA
   i = Ordinat(Player);

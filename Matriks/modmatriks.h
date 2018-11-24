@@ -97,8 +97,4 @@ POINT MejaDapurDekatPlayer (MATRIKS M, POINT Player);
 // Mencari meja dapur yang dekat dengan player
 // Mengembalikan posisi meja dapur di dekat player
 
-POINT TrayDekatPlayer (MATRIKS M, POINT Player);
-// Mencari tray yang dekat dengan player
-// Mengembalikan posisi tray di dekat player
-
 #endif

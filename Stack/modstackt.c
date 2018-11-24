@@ -48,8 +48,11 @@ void Pop (Stack * S, infostack * X)
 /* I.S. S  tidak mungkin kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 {
-  *X = InfoTop(*S);
-  (*S).TOP--;
+  if (!IsEmptyStack(*S))
+  {
+	*X = InfoTop(*S);
+	(*S).TOP--;
+  }
 }
 
 void CopyStack(Stack Sin, Stack * Sout)

@@ -186,31 +186,40 @@ void Room (Gaddress P, Graph G)
 			}
 		}
 	}
-	printf("| ********************** |\n");
 }
 
-//void Info (Queue Q, TabInt T, TabInt O, TabInt H)
-/* Prosedur untuk tampilan informasi saat permainan berlangsung */
-/*{
-	s = '-';
-	printf("| Info : %-81s |", s);
+void Info (Queue Q, Stack T, TabInt O, Stack H)
+/* Prosedur untuk tampilan informasi Stack permainan berlangsung */
+{
+	//Kamus
+	int i;
+	infostack X;
+	infostack Y;
+	Stack Htemp;
+	Stack Ttemp;
+	
+	//Algoritma
+	printf("| Hand :                                     |  Food Tray:                                 |\n");
+	CopyStack(H, &Htemp);
+	CopyStack(T, &Ttemp);
+	i = 1;
+	do
+	{
+		Pop(&Htemp, &X);
+		Pop(&Ttemp, &Y);
+		printf("|  %d. %-38s |   %d. %-38s |\n", i, X, i, Y);
+		i++;
+	} while (i != 6);
 	printf("|------------------------------------------------------------------------------------------|\n");
-	printf("| Waiting Customer:                          |  Food Tray:                                 |\n");
-	printf("|  1. %-38s |   1. %-38s |\n", Q[1], T[1]);
-	printf("|  2. %-38s |   2. %-38s |\n", Q[2], T[2]);
-	printf("|  3. %-38s |   3. %-38s |\n", Q[3], T[3]);
-	printf("|  4. %-38s |   4. %-38s |\n", Q[4], T[4]);
-	printf("|  5. %-38s |   5. %-38s |\n", Q[5], T[5]);
-	printf("|------------------------------------------------------------------------------------------|\n");
-	printf("| Order :                                    |  Hand :                                     |\n");
-	printf("|  1. Meja No %-2d - %-20s [%-2d] |   1. %-38s |\n", No(O,1), Food(O,1), Kesabaran(O,1), H[1]);
-	printf("|  2. Meja No %-2d - %-20s [%-2d] |   2. %-38s |\n", No(O,2), Food(O,2), Kesabaran(O,2), H[2]);
-	printf("|  3. Meja No %-2d - %-20s [%-2d] |   3. %-38s |\n", No(O,3), Food(O,3), Kesabaran(O,3), H[3]);
-	printf("|  4. Meja No %-2d - %-20s [%-2d] |   4. %-38s |\n", No(O,4), Food(O,4), Kesabaran(O,4), H[4]);
-	printf("|  5. Meja No %-2d - %-20s [%-2d] |   5. %-38s |\n", No(O,5), Food(O,5), Kesabaran(O,5), H[5]);
-}*/
+	printf("| Order :                                    |  Waiting Customer:                          |\n");
+	printf("|  1. Meja No %-2d - %-19s [%-3d] |   1. %d [%-2d]                                 |\n", No(O,1), Food(O,1), Kesabaran(O,1), Q.T[1].jumlahorang, Q.T[1].kesabaran);
+	printf("|  2. Meja No %-2d - %-19s [%-3d] |   2. %d [%-2d]                                 |\n", No(O,2), Food(O,2), Kesabaran(O,2), Q.T[2].jumlahorang, Q.T[2].kesabaran);
+	printf("|  3. Meja No %-2d - %-19s [%-3d] |   3. %d [%-2d]                                 |\n", No(O,3), Food(O,3), Kesabaran(O,3), Q.T[3].jumlahorang, Q.T[3].kesabaran);
+	printf("|  4. Meja No %-2d - %-19s [%-3d] |   4. %d [%-2d]                                 |\n", No(O,4), Food(O,4), Kesabaran(O,4), Q.T[4].jumlahorang, Q.T[4].kesabaran);
+	printf("|  5. Meja No %-2d - %-19s [%-3d] |   5. %d [%-2d]                                 |\n", No(O,5), Food(O,5), Kesabaran(O,5), Q.T[5].jumlahorang, Q.T[5].kesabaran);
+}
 
-void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H)
 /* Prosedur untuk tampilan saat permainan berlangsung */
 {
 	//Kamus
@@ -231,14 +240,14 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 		printf("|------------------------------------------------------------------------------------------|\n");
 		Room(P, G);
 		printf("|------------------------------------------------------------------------------------------|\n");
-		//Info(Q,T,O,H);
+		Info(Q,T,O,H);
 		printf("|__________________________________________________________________________________________|\n");
 }
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */
-/*void GameOver (stat s)
+void GameOver (char *name, int money, int time)
 /* Prosedur untuk tampilan game over */
-/*{
+{
 	//Kamus
 	int i, j;
 	char t1[80] = "|   _____            __  __  ______    ____ __      __ ______  _____   |";
@@ -247,6 +256,7 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 	char t4[80] = "| | | |_ |  / /\\ \\  | |\\/| ||  __|   | |  | | \\ \\/ /  |  __|  |  _  /  |";
 	char t5[80] = "| | |__| | / ____ \\ | |  | || |____  | |__| |  \\  /   | |____ | | \\ \\  |";
 	char t6[80] = "|  \\_____//_/    \\_\\|_|  |_||______|  \\____/    \\/    |______||_|  \\_\\ |";
+	
 	//Algoritma
 	do
 	{
@@ -305,7 +315,7 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 			{
 				printf("|                                                                      |\n");
 			}
-			Credit(s);
+			Credit(name,money,time);
 			if(i != 6)
 			{
 				sleep(1);
@@ -319,18 +329,18 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G)
 		 }
 	} while(i != -1);
 }
-void Credit (Stat s) */
+void Credit (char *name, int money, int time)
 /* Prosedur untuk tampilan credit */
-//{
+{
 	//Kamus
 
 	//Algoritma
-/*	printf(" ______________________________________________________________________ \n");
+	printf(" ______________________________________________________________________ \n");
 	printf("|                                                                      |\n");
 	printf("|                              STATISTIC                               |\n");
 	printf("|                                                                      |\n");
 	printf("|               Name :           Money :          Time :               |\n");
-	printf("|               %_12s     %_12d     %_12d         |\n", Name(s), Money(s), Time(s));
+	printf("|               %-12s     %-12d     %-12d         |\n", name, money, time);
 	printf("|______________________________________________________________________|\n");
 	printf("|                                                                      |\n");
 	printf("|                                CREDIT                                |\n");
@@ -341,7 +351,7 @@ void Credit (Stat s) */
 	printf("|                     13517131 _ Jan Meyer Saragih                     |\n");
 	printf("|                     13517137 _ Vincent Budianto                      |\n");
 	printf("|______________________________________________________________________|\n");
-}*/
+}
 
 /* ********** Tampilan Lain ********** */
 void Legend ()
@@ -355,8 +365,8 @@ void Legend ()
 	printf("|                                                                      |\n");
 	printf("|                              LEGENDS                                 |\n");
 	printf("|                                                                      |\n");
-	printf("| P : player                       |   C  : customer                   |\n");
-	printf("| X : kursi kosong                 |   T  : tray                       |\n");
-	printf("| Ruangann(P) : meja bahan         |  'n' : meja no 'n' (n = integer)  |\n");
+	printf("|      P      : player             |   C  : customer                   |\n");
+	printf("|      X      : kursi kosong       |   T  : tray                       |\n");
+	printf("| Ruangan (P) : ruangan p          |  'n' : meja no 'n' (n = integer)  |\n");
 	printf("|______________________________________________________________________|\n");
 }

@@ -19,13 +19,15 @@ void Room (Gaddress P, Graph G);
 /* Prosedur untuk tampilan ruangan saat permainan berlangsung */
 //void Info (Queue Q, TabInt T, TabInt O, TabInt H);
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
-void Play (char *name, int money, int life, int time, Gaddress P, Graph G);
+void Info (Queue Q, Stack T, TabInt O, Stack H);
+/* Prosedur untuk tampilan informasi Stack permainan berlangsung */
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H);
 /* Prosedur untuk tampilan saat permainan berlangsung */
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */
-//void GameOver (Stat s);
+void GameOver (char *name, int money, int time);
 /* Prosedur untuk tampilan game over */
-//void Credit (Stat s);
+void Credit (char *name, int money, int time);
 /* Prosedur untuk tampilan credit */
 
 /* ********** Tampilan Lain ********** */

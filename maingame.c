@@ -113,7 +113,7 @@ int main(){
         AddQueue(&antrian);
       }
 
-      Play(playername, money, life, time, current_room, MAP);
+      Play(playername, money, life, time, current_room, MAP, antrian, Tray, Order, Hand);
 
       printf(">>> ");
       scanf("%s", command);
