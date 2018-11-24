@@ -1,7 +1,7 @@
 #include "modpohon.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
+#include "../tumbal.h"
 
 /*int main()
 {
@@ -113,7 +113,7 @@ addrNode AlokNode(infoTree X)
   P = (addrNode) malloc (sizeof(Node));
   if (P != TNil)
   {
-    strcpy(Akar(P), TrKata);
+    FakeStrCpy(Akar(P), TrKata);
     Left(P) = TNil;
     Right(P) = TNil;
   }
@@ -261,7 +261,7 @@ boolean SearchTree(BinTree P, infoTree X)
 {
   if(IsTreeEmpty(P)){
     return false;
-  } else if(strcmp(Akar(P), X) == 0){
+  } else if(FakeStrCmp(Akar(P), X) == 0){
     return true;
   } else{
     return SearchTree(Left(P), X) || SearchTree(Right(P), X);

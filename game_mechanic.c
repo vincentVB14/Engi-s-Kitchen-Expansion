@@ -2,7 +2,6 @@
 /* File ini berisi implementasi dari game_mechanic.h */
 
 #include "tumbal.h"
-#include "tumbal.c"
 #include "game_mechanic.h"
 #include <stdio.h>
 #include <stdlib.h>

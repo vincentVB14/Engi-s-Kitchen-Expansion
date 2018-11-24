@@ -4,6 +4,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include "modgraph.h"
+#include "../tumbal.h"
 
 // KONSTRUKTOR
 void CreateEmptyGraph (Graph *G)
@@ -253,57 +254,57 @@ void FileToMatriks (Gaddress *P, char * filename)
     if (!NewLine) {
       j++;
       // Kasus lantai
-      if (strcmp(CKata, "Lantai") == 0)
+      if (FakeStrCmp(CKata, "Lantai") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'L';            // Tipe lantai
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus player
-      else if (strcmp(CKata, "Player") == 0)
+      else if (FakeStrCmp(CKata, "Player") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'P';            // Tipe player
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus kursi
-      else if (strcmp(CKata, "Kursi") == 0)
+      else if (FakeStrCmp(CKata, "Kursi") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'X';            // Tipe kursi
         MElmt2(Ruangann(*P),i,j) = false;         // Belum ada Customer
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus meja pelanggan
-      else if (strncmp(CKata, "Meja", 4) == 0)
+      else if (FakeStrNCmp(CKata, "Meja", 4) == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'M';            // Tipe meja
         MElmt2(Ruangann(*P),i,j) = false;         // Belum ada Customer
         DelChar(CKata, 4);
-        strcpy(MElmt3(Ruangann(*P),i,j), CKata);  // Identitas Meja
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), CKata);  // Identitas Meja
         MElmt4(Ruangann(*P),i,j) = MNil;          // Jumlah kursi di sekitar meja
         MElmt5(Ruangann(*P),i,j) = MNil;          // Kesabaran
       }
       // Kasus kursi terisi pelanggan
-      else if (strcmp(CKata, "Customer") == 0)
+      else if (FakeStrCmp(CKata, "Customer") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'X';            // Tipe kursi
         MElmt2(Ruangann(*P),i,j) = true;          // Sudah ada Customer
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus pintu
-      else if (strncmp(CKata, "Pintu", 5) == 0)
+      else if (FakeStrNCmp(CKata, "Pintu", 5) == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'L';            // Tipe lantai
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
         // Memasukkan ruangan baru sebagai anak list
@@ -325,14 +326,14 @@ void FileToMatriks (Gaddress *P, char * filename)
         {
           Next = MakePOINT(GetFirstIdxKolMatrix(Ruangann(*P)), i);
         }
-        AddNextRuangan(P, atoi(CKata), Prev, Next);
+        AddNextRuangan(P, FakeAtoi(CKata), Prev, Next);
       }
       // Kasus lain
       else
       {
         MElmt(Ruangann(*P),i,j) = 'Z';            // Useless
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
@@ -370,48 +371,48 @@ void FileToMatriksDapur(Gaddress *P, char * filename)
     if (!NewLine) {
       j++;
       // Kasus lantai
-      if (strcmp(CKata, "Lantai") == 0)
+      if (FakeStrCmp(CKata, "Lantai") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'L';            // Tipe lantai
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus player
-      else if (strcmp(CKata, "Player") == 0)
+      else if (FakeStrCmp(CKata, "Player") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'P';            // Tipe player
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus tray
-      else if (strcmp(CKata, "Tray") == 0)
+      else if (FakeStrCmp(CKata, "Tray") == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'T';            // Tipe tray
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus meja dapur
-      else if (strncmp(CKata, "M", 1) == 0)
+      else if (FakeStrNCmp(CKata, "M", 1) == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'M';            // Tipe meja dapur
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
         DelChar(CKata, 1);              // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), CKata);  // Jenis bahan di meja
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), CKata);  // Jenis bahan di meja
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }
       // Kasus pintu
-      else if (strncmp(CKata, "Pintu", 5) == 0)
+      else if (FakeStrNCmp(CKata, "Pintu", 5) == 0)
       {
         MElmt(Ruangann(*P),i,j) = 'L';            // Tipe lantai
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
         // Memasukkan ruangan baru sebagai anak list
@@ -433,14 +434,14 @@ void FileToMatriksDapur(Gaddress *P, char * filename)
         {
           Next = MakePOINT(GetFirstIdxKolMatrix(Ruangann(*P)), i);
         }
-        AddNextRuangan(P, atoi(CKata), Prev, Next);
+        AddNextRuangan(P, FakeAtoi(CKata), Prev, Next);
       }
       // Kasus lain
       else
       {
         MElmt(Ruangann(*P),i,j) = 'Z';            // Useless
         MElmt2(Ruangann(*P),i,j) = false;         // Useless
-        strcpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
+        FakeStrCpy(MElmt3(Ruangann(*P),i,j), MNil2);  // Useless
         MElmt4(Ruangann(*P),i,j) = MNil;          // Useless
         MElmt5(Ruangann(*P),i,j) = MNil;          // Useless
       }

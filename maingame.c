@@ -1,6 +1,7 @@
 #include "interface.h"
 #include "game_mechanic.h"
 
+#include "tumbal.c"
 #include "Array/modarray.c"
 #include "Graph/modgraph.c"
 #include "Matriks/modmatriks.c"
@@ -17,7 +18,6 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 #include <unistd.h>
 #include <time.h>
 //srand(time(NULL));
@@ -58,7 +58,7 @@ int main(){
 
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
   playername = (char *) malloc (15 * sizeof(char)); //Alokasi nama player sepanjang 15 karakter
-  strcpy(playername,""); //Inisialisasi string nama player
+  FakeStrCpy(playername,""); //Inisialisasi string nama player
 
   //Create Empties
   CreateEmptyStack(&Hand);
@@ -118,15 +118,15 @@ int main(){
 
       printf(">>> ");
       scanf("%s", command);
-      if(strcmp(command, "GU") == 0){
+      if(FakeStrCmp(command, "GU") == 0){
         GoUP(&MAP, &current_room, &player, &validmove);
-      } else if(strcmp(command, "GD") == 0){
+      } else if(FakeStrCmp(command, "GD") == 0){
         GoDOWN(&MAP, &current_room, &player, &validmove);
-      } else if(strcmp(command, "GL") == 0){
+      } else if(FakeStrCmp(command, "GL") == 0){
         GoLEFT(&MAP, &current_room, &player, &validmove);
-      } else if(strcmp(command, "GR") == 0){
+      } else if(FakeStrCmp(command, "GR") == 0){
         GoRIGHT(&MAP, &current_room, &player, &validmove);
-      } else if(strcmp(command, "ORDER") == 0){
+      } else if(FakeStrCmp(command, "ORDER") == 0){
         mejap = MejaDekatPlayer(Ruangann(current_room), player);
         if((Ordinat(mejap) == 0)&&(Absis(mejap) == 0)) {
           printf("Tidak ada customer dekat player\n");
@@ -137,50 +137,50 @@ int main(){
         } else{
           AddOrder(&current_room, mejap, &Order);
         }
-      } else if(strcmp(command, "PUT") == 0){
+      } else if(FakeStrCmp(command, "PUT") == 0){
 
-      } else if(strcmp(command, "TAKE") == 0){
+      } else if(FakeStrCmp(command, "TAKE") == 0){
         TakeFood(&Hand, Ruangann(current_room), player);
         sleep(1.5);
-      } else if(strcmp(command, "CH") == 0){
+      } else if(FakeStrCmp(command, "CH") == 0){
         EmptyHand(&Hand);
-      } else if(strcmp(command, "CT") == 0){
+      } else if(FakeStrCmp(command, "CT") == 0){
         EmptyTray(&Tray);
-      } else if(strcmp(command, "PLACE") == 0){
+      } else if(FakeStrCmp(command, "PLACE") == 0){
         PlaceCustomer(&current_room, &antrian, player);
-      } else if(strcmp(command, "GIVE") == 0){
+      } else if(FakeStrCmp(command, "GIVE") == 0){
 
-      } else if(strcmp(command, "RECIPE") == 0){
+      } else if(FakeStrCmp(command, "RECIPE") == 0){
         PrintTree(resep, 2);
         sleep(5);
-      } else if(strcmp(command, "SAVE") == 0){
+      } else if(FakeStrCmp(command, "SAVE") == 0){
 
-      } else if(strcmp(command, "LOAD") == 0){
+      } else if(FakeStrCmp(command, "LOAD") == 0){
 
-      } else if(strcmp(command, "LEGEND") == 0){
+      } else if(FakeStrCmp(command, "LEGEND") == 0){
         Legend();
         sleep(2);
-      } else if(strcmp(command, "EXIT") == 0){
+      } else if(FakeStrCmp(command, "EXIT") == 0){
         clrscr();
         printf("GAME OVER\n");
         //Credit();
         sleep(1.5);
         exit(0);
-      } else if (strcmp(command, "PTRAY") == 0){
+      } else if (FakeStrCmp(command, "PTRAY") == 0){
         PrintStack(Tray);
         sleep(5);
-      } else if (strcmp(command, "PHAND") == 0){
+      } else if (FakeStrCmp(command, "PHAND") == 0){
         PrintStack(Hand);
         sleep(5);
-      } else if (strcmp(command, "PQUEUE") == 0){
+      } else if (FakeStrCmp(command, "PQUEUE") == 0){
         PrintQueue(antrian);
         sleep(5);
-      } else if (strcmp(command, "PARRAY") == 0){
+      } else if (FakeStrCmp(command, "PARRAY") == 0){
         TulisIsiArray(Order);
         sleep(5);
       }
 
-      if(strcmp(command, "RECIPE") != 0 && strcmp(command, "SAVE") != 0 && strcmp(command, "LOAD") != 0 && strcmp(command, "LEGEND") != 0){
+      if(FakeStrCmp(command, "RECIPE") != 0 && FakeStrCmp(command, "SAVE") != 0 && FakeStrCmp(command, "LOAD") != 0 && FakeStrCmp(command, "LEGEND") != 0){
         EveryTurn(&MAP, &life, &time, &Order, &antrian);
       }
     }

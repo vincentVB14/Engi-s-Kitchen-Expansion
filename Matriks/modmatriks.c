@@ -2,7 +2,7 @@
 
 #include "modmatriks.h"
 #include <stdio.h>
-#include <string.h>
+#include "../tumbal.h"
 
 /* ********** DEFINISI PROTOTIPE PRIMITIF ********** */
 /* *** Konstruktor membentuk MATRIKS *** */
@@ -96,22 +96,22 @@ void MejaKursi (MATRIKS *M)
         if (MElmt(*M,(i-1),j) == 'X')
         {
           count++;
-          strcpy(MElmt3(*M,(i-1),j), MElmt3(*M,i,j));
+          FakeStrCpy(MElmt3(*M,(i-1),j), MElmt3(*M,i,j));
         }
         if (MElmt(*M,(i+1),j) == 'X')
         {
           count++;
-          strcpy(MElmt3(*M,(i+1),j), MElmt3(*M,i,j));
+          FakeStrCpy(MElmt3(*M,(i+1),j), MElmt3(*M,i,j));
         }
         if (MElmt(*M,i,(j-1)) == 'X')
         {
           count++;
-          strcpy(MElmt3(*M,i,(j-1)), MElmt3(*M,i,j));
+          FakeStrCpy(MElmt3(*M,i,(j-1)), MElmt3(*M,i,j));
         }
         if (MElmt(*M,i,(j+1)) == 'X')
         {
           count++;
-          strcpy(MElmt3(*M,i,(j+1)), MElmt3(*M,i,j));
+          FakeStrCpy(MElmt3(*M,i,(j+1)), MElmt3(*M,i,j));
         }
         MElmt4(*M,i,j) = count;
       }
@@ -255,7 +255,7 @@ POINT PosisiMeja(MATRIKS M, char* str)
     while (j < GetLastIdxKolMatrix(M) && !found)
     {
       j++;
-      if ((strcmp(MElmt3(M,i,j),str) == 0) &&  MElmt(M,i,j) == 'M')
+      if ((FakeStrCmp(MElmt3(M,i,j),str) == 0) &&  MElmt(M,i,j) == 'M')
       {
         found = true;
       }
