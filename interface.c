@@ -237,7 +237,7 @@ void Info (Queue Q, Stack T, TabInt O, Stack H)
 }
 
 
-void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H)
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H, POINT player)
 /* Prosedur untuk tampilan saat permainan berlangsung */
 {
 	//Kamus
@@ -257,6 +257,14 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue
 		}
 		printf("|------------------------------------------------------------------------------------------|\n");
 		Room(P, G);
+		if(CurrentRoom(G) == 4){
+			POINT meja = MejaDapurDekatPlayer(Ruangann(P), player);
+			if(Absis(meja) != 0 && Ordinat(meja) != 0){
+				printf("| Info meja dapur = %-38s                                 |\n", MElmt3(Ruangann(P), Absis(meja), Ordinat(meja)));
+			} else{
+				printf("| Info meja dapur =                                                                        |\n");
+			}
+		}
 		printf("|------------------------------------------------------------------------------------------|\n");
 		Info(Q,T,O,H);
 		printf("|__________________________________________________________________________________________|\n");
@@ -363,11 +371,11 @@ void Credit (char *name, int money, int time)
 	printf("|                                                                      |\n");
 	printf("|                                CREDIT                                |\n");
 	printf("|                                                                      |\n");
-	printf("|                    13516080 _ Putra Hardi Ramadhan                   |\n");
-	printf("|                       13517059 _ Nixon Andhika                       |\n");
-	printf("|                       13517116 _ Ferdy Santoso                       |\n");
-	printf("|                     13517131 _ Jan Meyer Saragih                     |\n");
-	printf("|                     13517137 _ Vincent Budianto                      |\n");
+	printf("|                    13516080 - Putra Hardi Ramadhan                   |\n");
+	printf("|                    13517059 - Nixon Andhika                          |\n");
+	printf("|                    13517116 - Ferdy Santoso                          |\n");
+	printf("|                    13517131 - Jan Meyer Saragih                      |\n");
+	printf("|                    13517137 - Vincent Budianto                       |\n");
 	printf("|______________________________________________________________________|\n");
 }
 
@@ -386,5 +394,22 @@ void Legend ()
 	printf("|      P      : player             |   C  : customer                   |\n");
 	printf("|      X      : kursi kosong       |   T  : tray                       |\n");
 	printf("| Ruangan (P) : ruangan p          |  'n' : meja no 'n' (n = integer)  |\n");
+	printf("|______________________________________________________________________|\n");
+	printf("|                                                                      |\n");
+	printf("|                             COMMANDS                                 |\n");
+	printf("|                                                                      |\n");
+	printf("|     GU    : Gerak ke atas            CH    : Mengosongkan tangan     |\n");
+	printf("|     GD    : Gerak ke bawah           CT    : Mengosongkan tray       |\n");
+	printf("|     GL    : Gerak ke kiri            PLACE : Menaruh customer ke     |\n");
+	printf("|     GR    : Gerak ke kanan                   meja sebelah player     |\n");
+	printf("|     ORDER : Mengambil order dari     GIVE  : Memberi makanan paling  |\n");
+	printf("|             meja berisi customer             atas tray ke meja       |\n");
+	printf("|             sebelah player                   sebelah player          |\n");
+	printf("|     PUT   : Membuat dan menaruh      RECIPE: Menampilkan pohon resep |\n");
+	printf("|             makanan dari hand ke                                     |\n");
+	printf("|             tray                     EXIT  : Keluar dari program     |\n");
+	printf("|     TAKE  : Mengambil bahan di                                       |\n");
+	printf("|             meja dapur sebelah                                       |\n");
+	printf("|             player                                                   |\n");
 	printf("|______________________________________________________________________|\n");
 }

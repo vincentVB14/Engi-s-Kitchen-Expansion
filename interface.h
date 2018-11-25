@@ -19,7 +19,7 @@ void Room (Gaddress P, Graph G);
 /* Prosedur untuk tampilan ruangan saat permainan berlangsung */
 void Info (Queue Q, Stack T, TabInt O, Stack H);
 /* Prosedur untuk tampilan informasi saat permainan berlangsung */
-void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H);
+void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue Q, Stack T, TabInt O, Stack H, POINT player);
 /* Prosedur untuk tampilan saat permainan berlangsung */
 
 /* ********** Tampilan Setelah Permainan Berakhir ********** */

@@ -119,14 +119,13 @@ int main(){
   sleep(1.5);
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
-      life = 3;
       clrscr();
       customer_chance = (rand() % 100) < 5;
       if(customer_chance){
         AddQueue(&antrian);
       }
 
-      Play(playername, money, life, time, current_room, MAP, antrian, Tray, Order, Hand);
+      Play(playername, money, life, time, current_room, MAP, antrian, Tray, Order, Hand, player);
 
       printf(">>> ");
       scanf("%s", command);
@@ -142,10 +141,10 @@ int main(){
         mejap = MejaDekatPlayer(Ruangann(current_room), player);
         if((Ordinat(mejap) == 0)&&(Absis(mejap) == 0)) {
           printf("Tidak ada customer dekat player\n");
-          sleep(2);
+          sleep(1.5);
         } else if (!MElmt2(Ruangann(current_room), Ordinat(mejap), Absis(mejap))) {
           printf("Meja tersebut tidak memiliki pelanggan\n");
-          sleep(2);
+          sleep(1.5);
         } else{
           AddOrder(&current_room, mejap, &Order);
         }
@@ -157,8 +156,10 @@ int main(){
         sleep(1.5);
       } else if(FakeStrCmp(command, "CH") == 0){
         EmptyHand(&Hand);
+        sleep(1.5);
       } else if(FakeStrCmp(command, "CT") == 0){
         EmptyTray(&Tray);
+        sleep(1.5);
       } else if(FakeStrCmp(command, "PLACE") == 0){
         PlaceCustomer(&current_room, &antrian, player);
       } else if(FakeStrCmp(command, "GIVE") == 0){
@@ -166,29 +167,17 @@ int main(){
         sleep(1.5);
       } else if(FakeStrCmp(command, "RECIPE") == 0){
         PrintTree(resep, 2);
-        sleep(3);
+        sleep(5);
       } else if(FakeStrCmp(command, "SAVE") == 0){
 
       } else if(FakeStrCmp(command, "LOAD") == 0){
 
       } else if(FakeStrCmp(command, "LEGEND") == 0){
         Legend();
-        sleep(2);
+        sleep(5);
       } else if(FakeStrCmp(command, "EXIT") == 0){
         clrscr();
         GameOver(playername, money, time);
-      } else if (FakeStrCmp(command, "PTRAY") == 0){
-        PrintStack(Tray);
-        sleep(1);
-      } else if (FakeStrCmp(command, "PHAND") == 0){
-        PrintStack(Hand);
-        sleep(1);
-      } else if (FakeStrCmp(command, "PQUEUE") == 0){
-        PrintQueue(antrian);
-        sleep(1);
-      } else if (FakeStrCmp(command, "PARRAY") == 0){
-        TulisIsiArray(Order);
-        sleep(1);
       }
 
       if(FakeStrCmp(command, "RECIPE") != 0 && FakeStrCmp(command, "SAVE") != 0 && FakeStrCmp(command, "LOAD") != 0 && FakeStrCmp(command, "LEGEND") != 0){

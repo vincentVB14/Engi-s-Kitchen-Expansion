@@ -119,7 +119,6 @@ void EmptyHand(Stack * Hand)
 /*F.S. Stack Hand kosong*/
 {
   printf("Membuang makanan di tangan...\n");
-  sleep(1);
   CreateEmptyStack(Hand);
 }
 
@@ -129,7 +128,6 @@ void EmptyTray(Stack * Tray)
 /*F.S. Stack Tray kosong*/
 {
   printf("Membuang makanan di tray...\n");
-  sleep(1);
   CreateEmptyStack(Tray);
 }
 
