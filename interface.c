@@ -174,7 +174,6 @@ void Info (Queue Q, Stack T, TabInt O, Stack H)
 	int i;
 	infostack X;
 	infostack Y;
-	Queue Qtemp;
 	Stack Htemp;
 	Stack Ttemp;
 
@@ -261,11 +260,12 @@ void Play (char *name, int money, int life, int time, Gaddress P, Graph G, Queue
 			POINT meja = MejaDapurDekatPlayer(Ruangann(P), player);
 			if(Absis(meja) != 0 && Ordinat(meja) != 0){
 				printf("| Info meja dapur = %-38s                                 |\n", MElmt3(Ruangann(P), Absis(meja), Ordinat(meja)));
+				printf("|------------------------------------------------------------------------------------------|\n");
 			} else{
 				printf("| Info meja dapur =                                                                        |\n");
+				printf("|------------------------------------------------------------------------------------------|\n");
 			}
 		}
-		printf("|------------------------------------------------------------------------------------------|\n");
 		Info(Q,T,O,H);
 		printf("|__________________________________________________________________________________________|\n");
 }
@@ -391,9 +391,9 @@ void Legend ()
 	printf("|                                                                      |\n");
 	printf("|                              LEGENDS                                 |\n");
 	printf("|                                                                      |\n");
-	printf("|      P      : player             |   C  : customer                   |\n");
-	printf("|      X      : kursi kosong       |   T  : tray                       |\n");
-	printf("| Ruangan (P) : ruangan p          |  'n' : meja no 'n' (n = integer)  |\n");
+	printf("|      P      : player                 C  : customer                   |\n");
+	printf("|      X      : kursi kosong           T  : tray                       |\n");
+	printf("| Ruangan (P) : ruangan p             'n' : meja no 'n' (n = integer)  |\n");
 	printf("|______________________________________________________________________|\n");
 	printf("|                                                                      |\n");
 	printf("|                             COMMANDS                                 |\n");

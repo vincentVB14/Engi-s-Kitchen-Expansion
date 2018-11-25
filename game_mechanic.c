@@ -14,16 +14,21 @@ void NewGame(char * playername)
 /*I.S. Player belum memiliki nama*/
 /*F.S. Player memiliki nama dan memanggil StartGame()*/
 {
-  printf("Masukkan nama player (<12 karakter): ");
+  FILE *save;
+  
+  save = fopen("savefile.txt", "w");
+  printf("Masukkan nama player (<15 karakter): ");
   scanf("%s", playername);
+  fprintf(save, "%s", playername);
   printf("Selamat bermain, %s!", playername);
+  fclose(save);
 }
 
 void StartGame(char * playername)
 /*Prosedur untuk memulai permainan*/
 /*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
 /*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
-{
+{ 
   if(FakeStrCmp(playername,"") == 0){
     printf("Nama player belum ada!\n");
     NewGame(playername);

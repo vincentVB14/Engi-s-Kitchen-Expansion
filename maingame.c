@@ -52,11 +52,16 @@ int main(){
   Stack Tray;
 
   BinTree resep;
-
+  
+  FILE *save;
+  
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
   playername = (char *) malloc (15 * sizeof(char)); //Alokasi nama player sepanjang 15 karakter
   FakeStrCpy(playername,""); //Inisialisasi string nama player
-  printf("player = %s1", playername);
+  printf("player = %s1", playername);	
+  save = fopen("savefile.txt", "r");
+  fscanf(save, "%s", playername);
+  fclose(save);
 
   //Create Empties
   CreateEmptyStack(&Hand);
@@ -76,7 +81,7 @@ int main(){
   time = 0;
 
   clrscr();
-  MainMenu();
+  //MainMenu();
   printf(">>> ");
   //Membaca pilihan dari player
   scanf("%d", &choice);
