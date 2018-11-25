@@ -1,5 +1,4 @@
-/* NIM / Nama   : 13517131 / Jan Meyer Saragih
-   Nama file    : listrek.c
+/*   Nama file    : listrek.c
    Topik        : ADT List Rekursif
    Tanggal      : 8 November 2018
    Deskripsi    : Mengimplementasikan yang dimasukkan oleh listrek.h */

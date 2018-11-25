@@ -3,7 +3,7 @@
 /* Nama file 		: modarray.h */
 /* Topik			: Tugas Besar IF2110 - Algoritma dan Struktur Data */
 /* Tanggal			: 26 November 2018 */
-/* Deskripsi		: Definisi Modul Kamus */
+/* Deskripsi		: */
 
 /* Penempatan elemen selalu rapat kiri */
 /* Versi I : dengan banyaknya elemen didefinisikan secara eksplisit,

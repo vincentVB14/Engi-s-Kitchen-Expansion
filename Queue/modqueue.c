@@ -1,6 +1,3 @@
-// Nama / NIM : Ferdy Santoso / 13517116
-// Tanggal : 1 Oktober 2018
-/* File : queue.c */
 /* Body ADT Queue dengan representasi array secara eksplisit dan alokasi dinamik */
 /* Model Implementasi Versi I dengan Priority Queue (Orang dengan kesabaran lebih rendah diutamakan) */
 

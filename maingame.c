@@ -20,8 +20,6 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include <time.h>
-//srand(time(NULL));
-//rand() % (max_number + 1 - minimum_number) + minimum_number
 
 void clrscr()
 {
@@ -78,7 +76,7 @@ int main(){
   time = 0;
 
   clrscr();
-  //MainMenu();
+  MainMenu();
   printf(">>> ");
   //Membaca pilihan dari player
   scanf("%d", &choice);
@@ -94,10 +92,6 @@ int main(){
       break;
     }
     case 3:{
-      //LoadGame();
-      break;
-    }
-    case 4:{
       clrscr();
       printf(" ______________________________________________________________________ \n");
       printf("|                                                                      |\n");
@@ -168,10 +162,6 @@ int main(){
       } else if(FakeStrCmp(command, "RECIPE") == 0){
         PrintTree(resep, 2);
         sleep(5);
-      } else if(FakeStrCmp(command, "SAVE") == 0){
-
-      } else if(FakeStrCmp(command, "LOAD") == 0){
-
       } else if(FakeStrCmp(command, "LEGEND") == 0){
         Legend();
         sleep(5);

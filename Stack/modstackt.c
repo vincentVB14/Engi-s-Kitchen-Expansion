@@ -1,9 +1,3 @@
-/* NIM/Nama : 13517059/Nixon Andhika
-Nama file : stackt.c
-Topik : ADT Stack
-Tanggal : 3 Oktober 2018
-Deskripsi : File ini berisi implementasi dari stackt.h*/
-
 #include <stdio.h>
 #include "modstackt.h"
 

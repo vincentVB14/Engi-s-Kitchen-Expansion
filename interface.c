@@ -93,8 +93,8 @@ void MainMenu ()
 	printf("|       /////////////__\\                                Main Menu :                |\n");
 	printf("|       |   ENGI'S  |  |                                1. New Game                |\n");
 	printf("|       |     _     |  |                                2. Start Game              |\n");
-	printf("|       | [] | | [] |[]|                                3. Load Game               |\n");
-	printf("|       |    | |    |  |                                4. Exit                    |\n");
+	printf("|       | [] | | [] |[]|                                3. Exit                    |\n");
+	printf("|       |    | |    |  |                                                           |\n");
 	printf("|       `````) )`````                                                              |\n");
 	printf("|----------------------------------------------------------------------------------|\n");
 }

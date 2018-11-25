@@ -469,11 +469,6 @@ void BacaPeta (Graph *G, POINT *Player)
 
   // Ruangan 1
   printf("Membaca ruang 1...\n");
-  /*if( access("../File Eksternal/Ruang1.txt", F_OK ) != -1 ) {
-      printf("File 1 ada\n");
-  } else {
-      printf("File 1 tidak ada\n");
-  }*/
 
   AddRuangan(G, 1, "File Eksternal/Ruang1.txt");
   P = FirstG(*G);
@@ -564,37 +559,3 @@ void ReduceKesabaranG (Graph *G, int *life)
     P = NextP(P);
   }
 }
-
-
-
-/*
-// TESTER
-int main()
-{
-  Graph Ruangans;
-  POINT Player;
-  Gaddress P;
-
-  CreateEmptyGraph(&Ruangans);
-  BacaPeta(&Ruangans, &Player);
-
-  P = FirstG(Ruangans);
-  printf("\n Ruangan 1 \n");
-  modTulisMATRIKS(Ruangann(P));
-
-  printf("\n Ruangan 2 \n");
-  P = NextP(P);
-  modTulisMATRIKS(Ruangann(P));
-
-  printf("\n Ruangan 3 \n");
-  P = NextP(P);
-  modTulisMATRIKS(Ruangann(P));
-
-  printf("\n Ruangan Dapur \n");
-  P = NextP(P);
-  modTulisMATRIKSDapur(Ruangann(P));
-
-  printf("\n Sekarang player berada di : Ruangan %d \n", CurrentRoom(Ruangans));
-
-}
-*/
