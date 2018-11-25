@@ -136,6 +136,10 @@ void ReduceKesabaranM (MATRIKS *M, int *life)
         MElmt5(*M,i,j)--;
         if (MElmt5(*M,i,j) == 0)
         {
+          if((MElmt(*M,i,j)) == 'M' && MElmt2(*M,i,j)){
+            MElmt2(*M,i,j) = false;
+            MElmt5(*M,i,j) = MNil;
+          }
           if ((MElmt(*M,(i-1),j) == 'X') && (MElmt2(*M,(i-1),j)))
           {
             MElmt2(*M,(i-1),j) = false;
@@ -307,6 +311,14 @@ POINT MejaDekatPlayer (MATRIKS M, POINT Player)
   else if (MElmt(M,i,(j+1)) == 'X')
   {
     return (PosisiMeja(M, MElmt3(M,i,(j+1))));
+  }
+  else if(MElmt(M,i+1,j) == 'M')
+  {
+    return (PosisiMeja(M, MElmt3(M,i+1,j)));
+  }
+  else if(MElmt(M,i-1,j) == 'M')
+  {
+    return (PosisiMeja(M, MElmt3(M,i-1,j)));
   }
   else
   {
