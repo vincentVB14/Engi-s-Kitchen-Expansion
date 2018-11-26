@@ -4,7 +4,7 @@
    Deskripsi    : Mengimplementasikan yang dimasukkan oleh listrek.h */
 
 #include "boolean.h"
-#include "listrek.h"
+#include "modlistrek.h"
 #include <stdio.h>
 #include <stdlib.h>
 

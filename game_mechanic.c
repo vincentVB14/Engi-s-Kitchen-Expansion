@@ -15,7 +15,7 @@ void NewGame(char * playername)
 /*F.S. Player memiliki nama dan memanggil StartGame()*/
 {
   FILE *save;
-  
+
   save = fopen("savefile.txt", "w");
   printf("Masukkan nama player (<15 karakter): ");
   scanf("%s", playername);
@@ -28,18 +28,12 @@ void StartGame(char * playername)
 /*Prosedur untuk memulai permainan*/
 /*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
 /*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
-{ 
+{
   if(FakeStrCmp(playername,"") == 0){
     printf("Nama player belum ada!\n");
     NewGame(playername);
   }
 }
-
-void LoadGame();
-/*Prosedur untuk load permainan dari file eksternal*/
-/*I.S. Permainan belum dimulai*/
-/*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
-
 
 // ATURAN-ATURAN REGULASI GAME
 void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q)

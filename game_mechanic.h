@@ -14,11 +14,6 @@ void StartGame();
 /*I.S. Mengecek apakah player sudah memiliki nama. Jika belum, memanggil NewGame(). Jika sudah, memulai permainan*/
 /*F.S. Game selesai dengan life player == 0, kemudian menampilkan Credit()*/
 
-void LoadGame();
-/*Prosedur untuk load permainan dari file eksternal*/
-/*I.S. Permainan belum dimulai*/
-/*F.S. Permainan dimulai dengan kondisi yang sesuai dengan hasil simpanan di file eksternal*/
-
 void EveryTurn (Graph *G, int *Life, int *Time, TabInt*O, Queue*Q);
 // Melakukan apa yang dilakukan pada setiap turn
 // Mengurangi kesabaran setiap orang di meja

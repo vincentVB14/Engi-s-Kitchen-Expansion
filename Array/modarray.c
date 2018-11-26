@@ -6,6 +6,7 @@
 /* Deskripsi		: */
 
 #include "modarray.h"
+#include <string.h>
 #include <stdio.h>
 
 /* ********** KONSTRUKTOR ********** */

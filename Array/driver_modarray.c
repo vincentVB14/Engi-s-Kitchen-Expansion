@@ -5,7 +5,7 @@
  * Deskripsi : Driver ADT ARRAY */
 
 #include <stdio.h>
-#include <string.h>
+#include <fakestring.h>
 #include "modarray.c"
 
 int main()
@@ -37,7 +37,7 @@ int main()
 		{
 			case 1:
 			{
-				TulisIsi(T);
+				TulisIsiArray(T);
 				break;
 			}
 			case 2:

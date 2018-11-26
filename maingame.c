@@ -52,13 +52,13 @@ int main(){
   Stack Tray;
 
   BinTree resep;
-  
+
   FILE *save;
-  
+
   command = (char *) malloc (6 * sizeof(char)); //Alokasi string command sepanjang 6 karakter
   playername = (char *) malloc (15 * sizeof(char)); //Alokasi nama player sepanjang 15 karakter
   FakeStrCpy(playername,""); //Inisialisasi string nama player
-  printf("player = %s1", playername);	
+  printf("player = %s1", playername);
   save = fopen("savefile.txt", "r");
   fscanf(save, "%s", playername);
   fclose(save);
@@ -81,7 +81,7 @@ int main(){
   time = 0;
 
   clrscr();
-  //MainMenu();
+  MainMenu();
   printf(">>> ");
   //Membaca pilihan dari player
   scanf("%d", &choice);
@@ -102,11 +102,11 @@ int main(){
       printf("|                                                                      |\n");
       printf("|                                CREDIT                                |\n");
       printf("|                                                                      |\n");
-      printf("|                    13516080 _ Putra Hardi Ramadhan                   |\n");
-      printf("|                       13517059 _ Nixon Andhika                       |\n");
-      printf("|                       13517116 _ Ferdy Santoso                       |\n");
-      printf("|                     13517131 _ Jan Meyer Saragih                     |\n");
-      printf("|                     13517137 _ Vincent Budianto                      |\n");
+      printf("|                     13516080 - Putra Hardi Ramadhan                  |\n");
+      printf("|                     13517059 - Nixon Andhika                         |\n");
+      printf("|                     13517116 - Ferdy Santoso                         |\n");
+      printf("|                     13517131 - Jan Meyer Saragih                     |\n");
+      printf("|                     13517137 - Vincent Budianto                      |\n");
       printf("|______________________________________________________________________|\n");
       exit(0);
     }
