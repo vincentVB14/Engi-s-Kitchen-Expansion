@@ -81,7 +81,7 @@ int main(){
   time = 0;
 
   clrscr();
-  MainMenu();
+//  MainMenu();
   printf(">>> ");
   //Membaca pilihan dari player
   scanf("%d", &choice);
@@ -119,6 +119,7 @@ int main(){
   if(choice == 1 || choice == 2 || choice == 3){
     while(life > 0){
       clrscr();
+      validmove = true;
       customer_chance = (rand() % 100) < 5;
       if(customer_chance){
         AddQueue(&antrian);
@@ -173,9 +174,13 @@ int main(){
       } else if(FakeStrCmp(command, "EXIT") == 0){
         clrscr();
         GameOver(playername, money, time);
+      } else {
+        validmove = false;
+        printf("Move tidak valid\n");
+        sleep(2);
       }
 
-      if(FakeStrCmp(command, "RECIPE") != 0 && FakeStrCmp(command, "SAVE") != 0 && FakeStrCmp(command, "LOAD") != 0 && FakeStrCmp(command, "LEGEND") != 0){
+      if(validmove && FakeStrCmp(command, "RECIPE") != 0 && FakeStrCmp(command, "SAVE") != 0 && FakeStrCmp(command, "LOAD") != 0 && FakeStrCmp(command, "LEGEND") != 0){
         EveryTurn(&MAP, &life, &time, &Order, &antrian);
       }
     }
